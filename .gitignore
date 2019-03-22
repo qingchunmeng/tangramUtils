@@ -1,0 +1,13 @@
+.project
+.projectile
+/node_modules/*
+/dist/*
+*.DS_Store
+.idea
+te.iml
+dist
+libraries
+*.demo.js
+config/mock.js
+start.sh
+output.log
