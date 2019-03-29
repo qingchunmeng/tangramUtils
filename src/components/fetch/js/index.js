@@ -29,6 +29,7 @@ class FetchClass {
     }
 
     this.defaultConfig = {
+      code: 1,
       method: 'get',
       credentials: 'include',
       // TODO 考虑是否需要在头部加入cookie 和 Authorization（用来处理身份认证），可以参考zlFetch库，github
@@ -302,7 +303,7 @@ class FetchClass {
                     }
                   }
                 });
-              } else if (res.code != 1) {
+              } else if (res.code != self.opt.code) {
                 // TODO 需要兼容调用方法提供的错误处理方法
                 self.handleError(res);
               }

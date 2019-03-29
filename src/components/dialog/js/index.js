@@ -74,8 +74,8 @@ class M {
    */
     complie (options) {
         let btnTpl = this.generateBtns(options.btns);
-        let tpl = `<div class="dialog-wrapper fadeIn">
-                          <div class="dialog${options.skinClass} ${this.animaArr[this.currAnimation][0]}">
+        let tpl = `<div class="fetch-dialog-wrapper fadeIn">
+                          <div class="fetch-dialog dialog${options.skinClass} ${this.animaArr[this.currAnimation][0]}">
                               <div class="header">
                                   <div class="title">${options.title}</div>
                                   <div class="close-btn">×</div>
@@ -98,8 +98,8 @@ class M {
     * 获取所需的节点信息
     */
     getElement () {
-        this.elem = document.querySelector('.dialog-wrapper');
-        this.dialog = this.elem.querySelector('.dialog');
+        this.elem = document.querySelector('.fetch-dialog-wrapper');
+        this.dialog = document.querySelector('.fetch-dialog');
     }
 
   /**
