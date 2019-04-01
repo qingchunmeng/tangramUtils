@@ -1,29 +1,43 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
-    "extends": "airbnb",
+    "globals": {
+        "process": true
+    },
+    "extends": [
+        "airbnb"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
-          "experimentalObjectRestSpread": true,
-          "experimentalDecorators": true,
-          "jsx": true
+            "experimentalObjectRestSpread": true,
+            "legacyDecorators": true,
+            "jsx": true
         },
-        "sourceType": "module"
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
     },
     "parser": "babel-eslint",
-    "plugins": [
-        "react"
-    ],
     "rules": {
         "no-console": "warn",
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "class-methods-use-this": ["off"],
         "no-use-before-define": ["error", { "functions": false, "classes": false }],
         "no-param-reassign": ["off"],
-        "max-len": ["error", { "code": 150 }],
+        "max-len": ["error", { "code": 120, "ignoreStrings": true }],
+        "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "never"
+        }],
+        "eqeqeq": "off",
         "react/jsx-indent": ["error", 4, { "checkAttributes": true }],
+        "react/destructuring-assignment": ["off"],
         "react/jsx-indent-props": ["error", 4],
         "react/no-array-index-key": ["warn"],
         "react/button-has-type": ["off"],
@@ -33,6 +47,9 @@
         "react/jsx-filename-extension": ["off"],
         "no-plusplus": ["off"],
         "jsx-a11y/click-events-have-key-events": ["off"],
-        "jsx-a11y/no-static-element-interactions": ["off"]
+        "jsx-a11y/no-static-element-interactions": ["off"],
+        "jsx-a11y/label-has-for": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "jsx-a11y/anchor-is-valid": "off"
     }
 }

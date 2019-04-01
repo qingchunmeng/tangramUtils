@@ -14,26 +14,23 @@ const defaultOptions = {
     body: null,
     btns: {
         cancel: {
-        text: '取消',
-        handler: function() {
-              console.info('cancel');
-              alert('取消')
-            }
+            text: '取消',
+            handler() {
+            },
         },
         confirm: {
             text: '确定',
-            handler: function() {
-              alert('确定')
-              console.info('confirm');
-            }
-        }
-    }
+            handler() {
+                // console.info('confirm');
+            },
+        },
+    },
 };
 
 class M {
-    constructor () {
+    constructor() {
         // 动画函数数组
-        this.animaArr = new Array(['fadeIn', 'fadeOut'], ['slideDown', 'slideUp'], ['scaleIn', 'scaleOut']);
+        this.animaArr = [['fadeIn', 'fadeOut'], ['slideDown', 'slideUp'], ['scaleIn', 'scaleOut']];
         // 当前动画类型
         this.currAnimation = 0;
         // 是否打开点击遮罩层关闭弹窗
@@ -44,37 +41,36 @@ class M {
         this.bindEvent();
     }
 
-  /**
+    /**
    * 生成按钮模版
    * @param btns 按钮的配置信息
    * @returns {string} 返回生成的按钮模版
    */
-    generateBtns (btns) {
-
+    generateBtns(btns) {
         let btnsTpl = '';
         // TODO 这里需要修改为根据数据对象生成按钮
         if (btns.confirm) {
             btnsTpl += `<button class="btn confirm-btn" data-btn-type="confirm">${btns.confirm.text}</button>`;
         }
         if (btns.cancel) {
-          btnsTpl += `<button class="btn cancel-btn" data-btn-type="cancel">${btns.cancel.text}</button>`;
+            btnsTpl += `<button class="btn cancel-btn" data-btn-type="cancel">${btns.cancel.text}</button>`;
         }
-        for (let o in btns) {
+        Object.keys(btns).forEach((o) => {
             if (o != 'confirm' && o != 'cancel') {
-              btnsTpl += `<button class="btn ${btns[o].cls}" data-btn-type="${o}">${btns[o].text || '自定义2'}</button>`;
+                btnsTpl += `<button class="btn ${btns[o].cls}" data-btn-type="${o}">${btns[o].text || '自定义2'}</button>`;
             }
-        }
+        });
         return btnsTpl;
     }
 
-  /**
+    /**
    * 编译生成弹窗的模版信息
    * @param options 弹窗的配置信息
    * @returns {string} 生成弹窗的模版
    */
-    complie (options) {
-        let btnTpl = this.generateBtns(options.btns);
-        let tpl = `<div class="fetch-dialog-wrapper fadeIn">
+    complie(options) {
+        const btnTpl = this.generateBtns(options.btns);
+        const tpl = `<div class="fetch-dialog-wrapper fadeIn">
                           <div class="fetch-dialog dialog${options.skinClass} ${this.animaArr[this.currAnimation][0]}">
                               <div class="header">
                                   <div class="title">${options.title}</div>
@@ -97,45 +93,45 @@ class M {
     /**
     * 获取所需的节点信息
     */
-    getElement () {
+    getElement() {
         this.elem = document.querySelector('.fetch-dialog-wrapper');
         this.dialog = document.querySelector('.fetch-dialog');
     }
 
-  /**
+    /**
    * 显示dialog组件
    * @param options 弹窗的配置信息
    * @returns {*} 当前的dialog节点
    */
-    show (options) {
+    show(options) {
         // 默认参数
-        let {
-          title = '',
-          content = '',
-          skin = '',
-          cls = '',
-          btns = defaultOptions.btns,
-          shadeClose = true,
-          animation = 1
+        const {
+            // title = '',
+            // content = '',
+            skin = '',
+            // cls = '',
+            // btns = defaultOptions.btns,
+            shadeClose = true,
+            animation = 1,
         } = options;
 
-        this.options = Object.assign({}, this.options, options)
+        this.options = Object.assign({}, this.options, options);
         // 皮肤类名
-        let skinClass = skin ? ` ${skin}` : '';
+        const skinClass = skin ? ` ${skin}` : '';
 
         // 给当前动画类型赋值
         this.currAnimation = animation;
         this.shadeClose = shadeClose;
-        let config = Object.assign({
-          skinClass: skinClass,
+        const config = Object.assign({
+            skinClass,
         }, options);
 
         // 最终生成的HTML
-        let html = this.complie(config);
+        const html = this.complie(config);
 
         // 只能添加一个dialog节点到Body
         if (!this.elem) {
-          document.body.innerHTML += html;
+            document.body.innerHTML += html;
         }
 
         // 获取所需要的节点
@@ -147,7 +143,7 @@ class M {
     /**
      * 关闭弹窗组件
      */
-    hide () {
+    hide() {
         // 最外层执行显示动画(固定)
         this.elem.classList.add('fadeOut');
         // 内容层执行关闭动画
@@ -155,90 +151,90 @@ class M {
 
         // 最终移除
         setTimeout(() => {
-          // 移除弹窗组件
-          this.elem.remove();
+            // 移除弹窗组件
+            this.elem.remove();
         }, 200);
     }
 
-   /**
+    /**
    * 显示普通的提示信息
    * @param {Object} options 一系列配置信息
    */
-    info (options) {
-      this.show(Object.assign({cls: 'info'}, options));
+    info(options) {
+        this.show(Object.assign({ cls: 'info' }, options));
     }
 
     /**
     * 显示成功的提示信息
     * @param {Object} options 一系列配置信息
     */
-    success (options) {
-      this.show(Object.assign({cls: 'success'}, options));
+    success(options) {
+        this.show(Object.assign({ cls: 'success' }, options));
     }
+
     /**
     * 显示警告提示信息
     * @param {Object} options 一系列配置信息
     */
-    warning (options) {
-      this.show(Object.assign({cls: 'warning'}, options));
+    warning(options) {
+        this.show(Object.assign({ cls: 'warning' }, options));
     }
+
     /**
     * 显示错误提示信息
     * @param {Object} options 一系列配置信息
     */
-    error (options) {
-      this.show(Object.assign({cls: 'error'}, options));
+    error(options) {
+        this.show(Object.assign({ cls: 'error' }, options));
     }
 
     /**
     * 绑定事件
     */
-    bindEvent () {
-        document.body.addEventListener('click', e => {
-            let target = e.target || e.srcElement;
+    bindEvent() {
+        document.body.addEventListener('click', (e) => {
+            const target = e.target || e.srcElement;
             // 是否开启点击遮罩关闭
             if (this.shadeClose) {
                 if (/dialog-wrapper/.test(target.className)) {
                     this.hide();
                 }
             }
-            if (/btn/.test(target.className)){
+            if (/btn/.test(target.className)) {
                 // 按钮回调函数的处理
                 this.hide();
-                let btnType = target.getAttribute('data-btn-type');
-                let btn = this.options.btns[btnType];
+                const btnType = target.getAttribute('data-btn-type');
+                const btn = this.options.btns[btnType];
                 // 处理回调
                 btn && btn.handler && btn.handler();
             }
-
         });
     }
 }
 
-let dialog = (function (options) {
-  let data = Object.assign({}, defaultOptions, options)
-  // 保证当前只有一个弹窗实例
-  if ( !instance) {
-    instance = new M();
-  }
-  return {
-    info: function (options) {
-      let config = Object.assign({}, data, options);
-      instance.info(config);
-    },
-    success: function (options) {
-      let config = Object.assign({}, data, options);
-      instance.success(options);
-    },
-    error: function (options) {
-      let config = Object.assign({}, data, options);
-      instance.error(config);
-    },
-    warning: function (options) {
-      let config = Object.assign({}, data, options);
-      instance.warning(config);
+const dialog = (function (options) {
+    const data = Object.assign({}, defaultOptions, options);
+    // 保证当前只有一个弹窗实例
+    if (!instance) {
+        instance = new M();
     }
-  };
-})();
+    return {
+        info(opt) {
+            const config = Object.assign({}, data, opt);
+            instance.info(config);
+        },
+        success(opt) {
+            const config = Object.assign({}, data, opt);
+            instance.success(config);
+        },
+        error(opt) {
+            const config = Object.assign({}, data, opt);
+            instance.error(config);
+        },
+        warning(opt) {
+            const config = Object.assign({}, data, opt);
+            instance.warning(config);
+        },
+    };
+}());
 export default dialog;
-

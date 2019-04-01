@@ -4,8 +4,8 @@ import Loading from './components/loading/js/index.js';
 import Cookie from './components/cookie/js/index.js';
 
 export {
-  Fetch,
-  Dialog,
-  Loading,
-  Cookie
+    Fetch,
+    Dialog,
+    Loading,
+    Cookie,
 };
