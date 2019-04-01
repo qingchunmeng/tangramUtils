@@ -12,9 +12,9 @@
     ],
     "parserOptions": {
         "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "legacyDecorators": true,
-            "jsx": true
+          "experimentalObjectRestSpread": true,
+          "legacyDecorators": true,
+          "jsx": true
         },
         "sourceType": "module",
         "allowImportExportEverywhere": true
@@ -22,6 +22,8 @@
     "parser": "babel-eslint",
     "rules": {
         "no-console": "warn",
+        "no-restricted-globals": "off",
+        "func-names": "off",
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "class-methods-use-this": ["off"],
         "no-use-before-define": ["error", { "functions": false, "classes": false }],
