@@ -38,18 +38,18 @@ class M {
         if (this.elem.className.includes('fetch-spin-loading')) {
             return '';
         }
-        this.elem.classList.add('ant-spin-nested-loading');
+        this.elem.classList.add('fetch-spin-nested-loading');
         this.elem.classList.add('fetch-spin-loading');
         const docContainer = document.createElement('div');
         const defaultText = this.options.text;
-        const _innerHTML = `<div class="ant-spin ant-spin-show-text ant-spin-spinning">
-                          <span class="ant-spin-dot ant-spin-dot-spin">
+        const _innerHTML = `<div class="fetch-spin fetch-spin-show-text fetch-spin-spinning">
+                          <span class="fetch-spin-dot fetch-spin-dot-spin">
                               <i></i>
                               <i></i>
                               <i></i>
                               <i></i>
                           </span>
-                          <div class="ant-spin-text">${defaultText}</div>
+                          <div class="fetch-spin-text">${defaultText}</div>
                       </div>`;
         docContainer.innerHTML = _innerHTML;
         this.elem.appendChild(docContainer);
@@ -63,7 +63,7 @@ class M {
 
     close() {
         this.spinContainer.remove();
-        this.elem.classList.remove('ant-spin-nested-loading');
+        this.elem.classList.remove('fetch-spin-nested-loading');
         this.elem.classList.remove('fetch-spin-loading');
     // this.spinContainer.style.display = 'none';
     }

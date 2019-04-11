@@ -50,14 +50,17 @@ class M {
         let btnsTpl = '';
         // TODO 这里需要修改为根据数据对象生成按钮
         if (btns.confirm) {
-            btnsTpl += `<button class="btn confirm-btn" data-btn-type="confirm">${btns.confirm.text}</button>`;
+            /* eslint-disable */
+            btnsTpl += `<button class="fetch-btn fetch-confirm-btn" data-btn-type="confirm">${btns.confirm.text}</button>`;
         }
         if (btns.cancel) {
-            btnsTpl += `<button class="btn cancel-btn" data-btn-type="cancel">${btns.cancel.text}</button>`;
+            /* eslint-disable */
+            btnsTpl += `<button class="fetch-btn fetch-cancel-btn" data-btn-type="cancel">${btns.cancel.text}</button>`;
         }
         Object.keys(btns).forEach((o) => {
             if (o != 'confirm' && o != 'cancel') {
-                btnsTpl += `<button class="btn ${btns[o].cls}" data-btn-type="${o}">${btns[o].text || '自定义2'}</button>`;
+                /* eslint-disable */
+                btnsTpl += `<button class="fetch-btn ${btns[o].cls}" data-btn-type="${o}">${btns[o].text || '自定义2'}</button>`;
             }
         });
         return btnsTpl;
@@ -71,19 +74,19 @@ class M {
     complie(options) {
         const btnTpl = this.generateBtns(options.btns);
         const tpl = `<div class="fetch-dialog-wrapper fadeIn">
-                          <div class="fetch-dialog dialog${options.skinClass} ${this.animaArr[this.currAnimation][0]}">
-                              <div class="header">
-                                  <div class="title">${options.title}</div>
-                                  <div class="close-btn">×</div>
+                          <div class="fetch-dialog ${options.skinClass} ${this.animaArr[this.currAnimation][0]}">
+                              <div class="fetch-header">
+                                  <div class="fetch-title">${options.title}</div>
+                                  <div class="fetch-close-btn">×</div>
                               </div>
-                              <div class="body">
-                                  <span class= "${options.cls}"}><i class="icon icon-${options.cls}"></i></span>
-                                  <div class="content">
+                              <div class="fetch-body">
+                                  <span class= "${options.cls}"}><i class="fetch-icon fetch-icon-${options.cls}"></i></span>
+                                  <div class="fetch-content">
                                     ${options.content}
                                   </div>
                               </div>
-                              <div class="footer">
-                                  <div class="buttons">${btnTpl}</div>
+                              <div class="fetch-footer">
+                                  <div class="fetch-buttons">${btnTpl}</div>
                               </div>
                           </div>
                       </div>`;
@@ -200,7 +203,7 @@ class M {
                     this.hide();
                 }
             }
-            if (/btn/.test(target.className)) {
+            if (/fetch-btn/.test(target.className)) {
                 // 按钮回调函数的处理
                 this.hide();
                 const btnType = target.getAttribute('data-btn-type');

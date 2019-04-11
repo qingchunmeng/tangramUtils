@@ -1,19 +1,19 @@
 /**
  * @file loading样式文件
- * 样式来自https://ng.ant.design/components/spin/zh
+ * 样式来自https://ng.fetch.design/components/spin/zh
  * @author mengqingchun002@ke.com
  * @date 2019/3/28 07:07
  */
 
 .fetch-spin-loading {
-    &.ant-spin-nested-loading {
+    &.fetch-spin-nested-loading {
         position: relative;
     }
 
-    .ant-spin {
+    .fetch-spin {
         font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         font-size: 14px;
-        font-variant: tabular-nums;
+        font-varifetch: tabular-nums;
         line-height: 1.5;
         box-sizing: border-box;
         margin: 0;
@@ -30,15 +30,15 @@
         display: none;
     }
 
-    .ant-spin-spinning {
+    .fetch-spin-spinning {
         opacity: 1;
         position: static;
         display: inline-block;
     }
 
-    .ant-spin-nested-loading {
+    .fetch-spin-nested-loading {
         >div {
-            .ant-spin {
+            .fetch-spin {
                 display: block;
                 /* position: absolute; */
                 height: 100%;
@@ -49,7 +49,7 @@
         }
     }
 
-    .ant-spin-nested-loading>div>.ant-spin {
+    .fetch-spin-nested-loading>div>.fetch-spin {
         display: block;
         /* position: absolute; */
         height: 100%;
@@ -58,25 +58,25 @@
         z-index: 4;
     }
 
-    .ant-spin-nested-loading>div>.ant-spin.ant-spin-show-text .ant-spin-dot {
+    .fetch-spin-nested-loading>div>.fetch-spin.fetch-spin-show-text .fetch-spin-dot {
         /* margin-top: -20px; */
     }
 
-    .ant-spin-nested-loading>div>.ant-spin .ant-spin-dot {
+    .fetch-spin-nested-loading>div>.fetch-spin .fetch-spin-dot {
         position: absolute;
         top: 50%;
         left: 50%;
         margin: -10px;
     }
 
-    .ant-spin-dot-spin {
+    .fetch-spin-dot-spin {
         -webkit-transform: rotate(45deg);
         transform: rotate(45deg);
-        -webkit-animation: 1.2s linear infinite antRotate;
-        animation: 1.2s linear infinite antRotate;
+        -webkit-animation: 1.2s linear infinite fetchRotate;
+        animation: 1.2s linear infinite fetchRotate;
     }
 
-    .ant-spin-dot {
+    .fetch-spin-dot {
         position: relative;
         display: inline-block;
         font-size: 20px;
@@ -84,33 +84,33 @@
         height: 20px;
     }
 
-    .ant-spin-dot i:nth-child(1) {
+    .fetch-spin-dot i:nth-child(1) {
         left: 0;
         top: 0;
     }
 
-    .ant-spin-dot i:nth-child(2) {
+    .fetch-spin-dot i:nth-child(2) {
         right: 0;
         top: 0;
         -webkit-animation-delay: .4s;
         animation-delay: .4s;
     }
 
-    .ant-spin-dot i:nth-child(3) {
+    .fetch-spin-dot i:nth-child(3) {
         right: 0;
         bottom: 0;
         -webkit-animation-delay: .8s;
         animation-delay: .8s;
     }
 
-    .ant-spin-dot i:nth-child(4) {
+    .fetch-spin-dot i:nth-child(4) {
         left: 0;
         bottom: 0;
         -webkit-animation-delay: 1.2s;
         animation-delay: 1.2s;
     }
 
-    .ant-spin-dot i {
+    .fetch-spin-dot i {
         width: 9px;
         height: 9px;
         border-radius: 100%;
@@ -120,13 +120,13 @@
         display: block;
         position: absolute;
         opacity: .3;
-        -webkit-animation: 1s linear infinite alternate antSpinMove;
-        animation: 1s linear infinite alternate antSpinMove;
+        -webkit-animation: 1s linear infinite alternate fetchSpinMove;
+        animation: 1s linear infinite alternate fetchSpinMove;
         -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
     }
 
-    .ant-spin-nested-loading>div>.ant-spin .ant-spin-text {
+    .fetch-spin-nested-loading>div>.fetch-spin .fetch-spin-text {
         position: absolute;
         top: 50%;
         width: 100%;
@@ -134,18 +134,18 @@
         text-shadow: 0 1px 2px #fff;
     }
 
-    .ant-spin.ant-spin-show-text .ant-spin-text {
+    .fetch-spin.fetch-spin-show-text .fetch-spin-text {
         display: block;
     }
 }
 
-@keyframes antSpinMove {
+@keyframes fetchSpinMove {
     to {
         opacity: 1;
     }
 }
 
-@keyframes antRotate {
+@keyframes fetchRotate {
     to {
         transform: rotate(405deg);
     }
