@@ -319,7 +319,7 @@ class FetchClass {
                                     },
                                 },
                             });
-                        } else if (res.code != self.opt.code) {
+                        } else if ((self.opt.code != null && self.opt.code != undefined) && res.code != self.opt.code) {
                             // TODO 需要兼容调用方法提供的错误处理方法
                             self.handleError(res);
                         }
