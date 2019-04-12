@@ -39,9 +39,7 @@ class M {
       if (this.elem.className.includes('fetch-spin-loading')) {
           return '';
       }
-      if (!this.hasShow) {
-          return '';
-      }
+
       this.elem.classList.add('fetch-spin-nested-loading');
       this.elem.classList.add('fetch-spin-loading');
       const docContainer = document.createElement('div');
@@ -57,13 +55,13 @@ class M {
                         </div>`;
       docContainer.classList.add('fetch-spin-container');
       docContainer.innerHTML = _innerHTML;
-      this.elem.appendChild(docContainer);
 
       return docContainer;
     }
 
     show() {
         this.hasShow = true;
+        this.elem.appendChild(this.spinContainer);
         this.spinContainer.style.display = 'block';
     }
 
