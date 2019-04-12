@@ -23,49 +23,57 @@ class M {
             opt = elem;
             this.elem = document.body;
         } else {
-        // TODO 需要兼容class 一般的选择器
+            // TODO 需要兼容class 一般的选择器
             this.elem = document.getElementById(elem);
             /* eslint-disable */
             this.elem = this.elem ? this.elem
                 : document.querySelector(elem) ? document.querySelector(elem) : document.getElementsByName(elem);
         }
-
-        this.options = Object.assign({}, defaultOptions, opt); // 配置参数
-        this.spinContainer = this.complie();
+      // 初始状态时，loading不展示
+      this.hasShow = false;
+      this.options = Object.assign({}, defaultOptions, opt); // 配置参数
+      this.spinContainer = this.complie();
     }
 
     complie() {
-        if (this.elem.className.includes('fetch-spin-loading')) {
-            return '';
-        }
-        this.elem.classList.add('fetch-spin-nested-loading');
-        this.elem.classList.add('fetch-spin-loading');
-        const docContainer = document.createElement('div');
-        const defaultText = this.options.text;
-        const _innerHTML = `<div class="fetch-spin fetch-spin-show-text fetch-spin-spinning">
-                          <span class="fetch-spin-dot fetch-spin-dot-spin">
-                              <i></i>
-                              <i></i>
-                              <i></i>
-                              <i></i>
-                          </span>
-                          <div class="fetch-spin-text">${defaultText}</div>
-                      </div>`;
-        docContainer.innerHTML = _innerHTML;
-        this.elem.appendChild(docContainer);
+      if (this.elem.className.includes('fetch-spin-loading')) {
+          return '';
+      }
+      if (!this.hasShow) {
+          return '';
+      }
+      this.elem.classList.add('fetch-spin-nested-loading');
+      this.elem.classList.add('fetch-spin-loading');
+      const docContainer = document.createElement('div');
+      const defaultText = this.options.text;
+      const _innerHTML = `<div class="fetch-spin fetch-spin-show-text fetch-spin-spinning">
+                            <span class="fetch-spin-dot fetch-spin-dot-spin">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                            <div class="fetch-spin-text">${defaultText}</div>
+                        </div>`;
+      docContainer.classList.add('fetch-spin-container');
+      docContainer.innerHTML = _innerHTML;
+      this.elem.appendChild(docContainer);
 
-        return docContainer;
+      return docContainer;
     }
 
     show() {
+        this.hasShow = true;
         this.spinContainer.style.display = 'block';
     }
 
     close() {
-        this.spinContainer.remove();
-        this.elem.classList.remove('fetch-spin-nested-loading');
-        this.elem.classList.remove('fetch-spin-loading');
-    // this.spinContainer.style.display = 'none';
+        if (this.hasShow) {
+            this.spinContainer.remove();
+            this.elem.classList.remove('fetch-spin-nested-loading');
+            this.elem.classList.remove('fetch-spin-loading');
+            // this.spinContainer.style.display = 'none';
+        }
     }
 }
 

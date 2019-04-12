@@ -32,6 +32,7 @@ class FetchClass {
         this.defaultConfig = {
             code: 1,
             method: 'get',
+            isShowLoading: true,
             credentials: 'include',
             // TODO 考虑是否需要在头部加入cookie 和 Authorization（用来处理身份认证），可以参考zlFetch库，github
             headers: {
@@ -222,7 +223,10 @@ class FetchClass {
         }, this.defaultConfig, options);
         // TODO 将get重的函数实体抄写进来
         // TODO 判断是否已经有一个loading了，如果是，则不再创建新的loading，此部分需要
-        Loading.showLoading();
+        if (config.isShowLoading) {
+            Loading.showLoading();
+        }
+
         // TODO 什么时候将loading进行关闭呢，如果已经关闭了该怎么处理呢 ，各种各样的关闭loading的情况
         return new Promise(((resolve) => {
             const prevFetch = window.fetch;

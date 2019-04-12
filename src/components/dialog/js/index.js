@@ -77,7 +77,7 @@ class M {
                           <div class="fetch-dialog ${options.skinClass} ${this.animaArr[this.currAnimation][0]}">
                               <div class="fetch-header">
                                   <div class="fetch-title">${options.title}</div>
-                                  <div class="fetch-close-btn">×</div>
+                                  <div class="fetch-btn-close">×</div>
                               </div>
                               <div class="fetch-body">
                                   <span class= "${options.cls}"}><i class="fetch-icon fetch-icon-${options.cls}"></i></span>
