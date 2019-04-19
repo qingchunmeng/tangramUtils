@@ -11,7 +11,10 @@ const dom = {
     contains: () => {
 
     },
-    event: () => {
+    on: () => {
+
+    },
+    off: () => {
 
     },
     /**

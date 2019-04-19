@@ -3,7 +3,7 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 16:33
  */
-const paramsProcess = {
+const params = {
     getParams: () => {
 
     },
@@ -15,4 +15,4 @@ const paramsProcess = {
     },
 };
 
-export default paramsProcess;
+export default params;

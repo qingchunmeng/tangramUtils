@@ -3,7 +3,7 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 16:32
  */
-const cacheUtil = {
+const cache = {
     getStorage: () => {
 
     },
@@ -13,4 +13,4 @@ const cacheUtil = {
 
 };
 
-export default cacheUtil;
+export default cache;

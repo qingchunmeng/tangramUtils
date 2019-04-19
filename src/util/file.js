@@ -3,11 +3,11 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 15:26
  */
-const fileUtil = {
+const file = {
     downloadRename: () => {
 
     },
 
 };
 
-export default fileUtil;
+export default file;

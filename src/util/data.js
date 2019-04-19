@@ -3,7 +3,7 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 16:31
  */
-const dataProcess = {
+const data = {
     loadMore: () => {
 
     },
@@ -16,4 +16,4 @@ const dataProcess = {
 
 };
 
-export default dataProcess;
+export default data;

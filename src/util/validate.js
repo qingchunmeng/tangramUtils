@@ -4,7 +4,7 @@
  * @date 2019/4/16 16:40
  */
 
-const validateUtil = {
+const validate = {
     isEmpty: () => {
 
     },
@@ -29,4 +29,4 @@ const validateUtil = {
 
 };
 
-export default validateUtil;
+export default validate;

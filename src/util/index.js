@@ -1,21 +1,21 @@
 import moment from 'moment';
 import debounce from './debounce.js';
-import cache from './cacheUtil.js';
-import dataProcess from './dataProcess';
+import cache from './cache.js';
+import data from './data';
 import dom from './dom.js';
-import file from './fileUtil.js';
-import paramsProcess from './paramsProcess.js';
-import validate from './validateUtil.js';
+import file from './file.js';
+import params from './params.js';
+import validate from './validate.js';
 import dict from './dict.js';
 
 export default {
     debounce,
     dict,
     cache,
-    dataProcess,
+    dataProcess: data,
     dom,
     file,
     validate,
-    paramsProcess,
+    paramsProcess: params,
     moment,
 };
