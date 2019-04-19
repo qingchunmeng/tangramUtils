@@ -1,3 +1,4 @@
+import moment from 'moment';
 import debounce from './debounce.js';
 import cache from './cacheUtil.js';
 import dataProcess from './dataProcess';
@@ -16,4 +17,5 @@ export default {
     file,
     validate,
     paramsProcess,
+    moment,
 };
