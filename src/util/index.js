@@ -7,15 +7,17 @@ import file from './file.js';
 import params from './params.js';
 import validate from './validate.js';
 import dict from './dict.js';
+import cookie from './cookie.js';
 
 export default {
     debounce,
     dict,
     cache,
-    dataProcess: data,
+    data,
     dom,
     file,
     validate,
-    paramsProcess: params,
+    params,
     moment,
+    cookie,
 };
