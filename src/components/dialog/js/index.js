@@ -134,7 +134,9 @@ class M {
 
         // 只能添加一个dialog节点到Body
         if (!this.elem) {
-            document.body.innerHTML += html;
+            let element = document.createElement('div');
+            element.innerHTML = html;
+            document.body.appendChild(element);
         }
 
         // 获取所需要的节点
@@ -154,7 +156,8 @@ class M {
 
         // 最终移除
         setTimeout(() => {
-            // 移除弹窗组件
+          this.dialog.classList.remove(`${this.animaArr[this.currAnimation][1]}`);
+          // 移除弹窗组件
             this.elem.remove();
         }, 200);
     }
