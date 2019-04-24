@@ -21,9 +21,14 @@
     },
     "parser": "babel-eslint",
     "rules": {
+        "radix": "off",
+        "no-script-url": "off",
         "no-console": "warn",
         "no-restricted-globals": "off",
         "func-names": "off",
+        "consistent-return":"off",
+        "no-return-assign": "off",
+        "global-require": "off",
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "class-methods-use-this": ["off"],
         "no-use-before-define": ["error", { "functions": false, "classes": false }],
@@ -47,11 +52,13 @@
         "import/extensions": ["off"],
         "no-underscore-dangle": ["off"],
         "react/jsx-filename-extension": ["off"],
+        "react/require-default-props": "off",
         "no-plusplus": ["off"],
         "jsx-a11y/click-events-have-key-events": ["off"],
         "jsx-a11y/no-static-element-interactions": ["off"],
         "jsx-a11y/label-has-for": "off",
         "jsx-a11y/label-has-associated-control": "off",
-        "jsx-a11y/anchor-is-valid": "off"
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off"
     }
 }
