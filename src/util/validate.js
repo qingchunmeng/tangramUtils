@@ -22,24 +22,36 @@ const validate = {
         }
         return returnValue;
     },
-    isEmpty: () => {
-
+    /**
+     * arg为空(null, undefined or ‘’)返回true
+     * @param {*} arg
+     */
+    isEmpty(arg) {
+        return arg === null || arg === undefined || arg === '';
     },
-    isMobile: () => {
-
+    /**
+     * 简单校验手机号，String(mobile)是1开头的11位数字返回true
+     * @param {*} mobile
+     */
+    isMobile(mobile) {
+        return /^1\d{10}$/.test(String(mobile));
     },
+    /**
+     * 微信中打开返回true
+     */
     isWeiXin: () => {
-
+        const ua = navigator.userAgent.toLowerCase();
+        return ua.match(/MicroMessenger/i) === 'micromessenger';
     },
     /**
      * 返回android,ios,pc
      */
     deviceType: () => {
         let type = 'pc';
-        let u = navigator.userAgent;
-        if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1){
+        const u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
             type = 'android';
-        }else if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+        } else if (u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
             type = 'ios';
         }
         return type;
@@ -48,14 +60,14 @@ const validate = {
      * 判断是否为android终端
      */
     isAndroid: () => {
-        let u = navigator.userAgent;
+        const u = navigator.userAgent;
         return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
     },
     /**
      * 判断是否为ios终端
      */
     isIOS: () => {
-        let u = navigator.userAgent;
+        const u = navigator.userAgent;
         return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     },
 
