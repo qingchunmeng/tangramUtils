@@ -18,15 +18,28 @@ const validate = {
      * 返回android,ios,pc
      */
     deviceType: () => {
-
+        let type = 'pc';
+        let u = navigator.userAgent;
+        if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1){
+            type = 'android';
+        }else if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+            type = 'ios';
+        }
+        return type;
     },
+    /**
+     * 判断是否为android终端
+     */
     isAndroid: () => {
         let u = navigator.userAgent;
-        return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
     },
+    /**
+     * 判断是否为ios终端
+     */
     isIOS: () => {
         let u = navigator.userAgent;
-        return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     },
 
 };
