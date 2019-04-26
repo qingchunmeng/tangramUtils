@@ -6,6 +6,7 @@
 
 const validate = {
     isReturnValue: (judge, value) => {
+        // judge为空值时返回'',其它情况下返回value
         let returnValue;
         if (typeof judge === 'string' || Array.isArray(judge)) {
             returnValue = judge.length > 0 ? value : '';
