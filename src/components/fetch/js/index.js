@@ -7,7 +7,6 @@
 // TODO 需要处理cors
 // TODO 需要处理其他的数据类型
 // TODO 需要在前端做一次提交数据的转换
-// TODO queryToJson函数封装
 // 需要进行测试
 import Dialog from '../../dialog/js/index';
 import Loading from '../../loading/js/index';
@@ -134,13 +133,16 @@ class FetchClass {
         const { data } = this.opt;
         if (data) {
             const paramsArray = [];
-            // 拼接参数
-            Object.keys(data).forEach(key => paramsArray.push(`${key}=${data[key]}`));
+            const keys = Object.keys(data);
+            // 拼接参数,当data为空对象时不进行字符串拼接
+            /* eslint-disable */
+            keys.length > 0 && keys.forEach(key => paramsArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`));
             if (this.url.search(/\?/) === -1) {
                 this.url += `?${paramsArray.join('&')}`;
             } else {
                 this.url += `&${paramsArray.join('&')}`;
             }
+            this.url = this.url.slice(0, -1);
         }
     }
 
