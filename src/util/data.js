@@ -35,6 +35,30 @@ const data = {
         }
         return returnValue;
     },
+    /**
+    * 判断组件是否展示
+    * @param fieldsValue  所有的表单元素
+    * @param displayCondition 该表单元素的展示配置条件
+    * @returns {boolean}  是否展示该组件
+    */
+    shouldFieldDisplay(fieldsValue, displayCondition) {
+        if (displayCondition.indexOf('==') != -1) {
+            // 增加复合字段展示控制
+
+            const conditionsArray = displayCondition.replace(/[(\\/() | (\\/))]/g, '').split('&&');
+            let flag = true;
+
+            conditionsArray.forEach((item) => {
+                const [key, value] = item.split('==');
+                if (fieldsValue[key] != value) {
+                    flag = false;
+                }
+            });
+            return flag;
+        }
+
+        return true;
+    },
 
 };
 
