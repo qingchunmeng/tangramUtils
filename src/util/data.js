@@ -7,8 +7,22 @@ const data = {
     loadMore: () => {
 
     },
-    deepClone: () => {
-
+    /**
+     * 深拷贝（注意无法复制原型链上的方法，例如 Array.slice）
+     * @param sourceData 源数据
+     * @return {object}
+     */
+    deepClone: (sourceData) => {
+        const result = Array.isArray(sourceData) ? [] : {};
+        const keys = Object.keys(sourceData); // 无法复制原型链上的方法
+        keys.forEach((key) => {
+            if (typeof sourceData[key] === 'object') {
+                result[key] = data.deepClone(sourceData[key]);
+            } else {
+                result[key] = sourceData[key];
+            }
+        });
+        return result;
     },
     randomNum: () => {
 
