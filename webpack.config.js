@@ -1,7 +1,7 @@
-var path = require('path');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // import path from 'path';
 // import HtmlWebpackPlugin from 'html-webpack-plugin';
 // import CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -9,10 +9,10 @@ var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-var config = {
+const config = {
     mode: 'production',
     entry: {
-        index: './src/js/index.js',
+        index: './src/index.js',
     },
     output: {
         publicPath: '',
@@ -93,11 +93,11 @@ var config = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
-                      options: {
+                    options: {
                         presets: [
-                          "env", "es2015"
-                        ]
-                      }
+                            'env', 'es2015',
+                        ],
+                    },
                 },
             },
             {
@@ -136,7 +136,7 @@ var config = {
                 ],
             },
         ],
-    }
+    },
     // resolve: {
     //     alias: {
     //         containers: path.join(paths.src, 'containers'),
