@@ -8,6 +8,7 @@ import params from './params.js';
 import validate from './validate.js';
 import dict from './dict.js';
 import cookie from './cookie.js';
+import share from './share.js';
 
 export default {
     debounce,
@@ -20,4 +21,5 @@ export default {
     params,
     moment,
     cookie,
+    share,
 };
