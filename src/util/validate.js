@@ -60,7 +60,12 @@ const validate = {
         const u = navigator.userAgent;
         return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     },
-
+    /**
+     * 判断是否是window对象
+     * @param {Node} elem - dom元素
+     * @return {Boolean}
+     */
+    isWindow: el => el != null && el === el.window,
 };
 
 export default validate;
