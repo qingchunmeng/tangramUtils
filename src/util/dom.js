@@ -3,6 +3,7 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 16:29
  */
+import validate from './validate.js';
 
 const dom = {
     /**
@@ -55,18 +56,32 @@ const dom = {
 
     },
     /**
+     * document元素方法兼容
+     * @param {String} attr - 方法名称
+     * @return {Number}
+     */
+    getDocumentAttr: (attr) => {
+        if (!attr) {
+            console.log('请传递attr属性');
+            return false;
+        }
+        const doc = document.documentElement;
+
+        return Math.max(document.body[attr], doc[attr]);
+    },
+    /**
      * 获取dom元素scrollWidth
      * @param {Node} elem - dom元素
      * @return {Number}
      */
     scrollWidth: (elem) => {
-        if (!elem) return false;
-        const isWindow = o => o != null && o === o.window;
+        if (!elem) {
+            console.log('请传递dom元素');
+            return false;
+        }
 
-        if (isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
-            const bw = document.body ? document.body.scrollWidth : 0;
-            const dw = document.documentElement ? document.documentElement.scrollWidth : 0;
-            return Math.max(bw, dw);
+        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+            return dom.getDocumentAttr('scrollWidth');
         }
 
         return elem.scrollWidth;
@@ -77,13 +92,13 @@ const dom = {
      * @return {Number}
      */
     scrollHeight: (elem) => {
-        if (!elem) return false;
-        const isWindow = o => o != null && o === o.window;
+        if (!elem) {
+            console.log('请传递dom元素');
+            return false;
+        }
 
-        if (isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
-            const bh = document.body ? document.body.scrollHeight : 0;
-            const dh = document.documentElement ? document.documentElement.scrollHeight : 0;
-            return Math.max(bh, dh);
+        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+            return dom.getDocumentAttr('scrollHeight');
         }
 
         return elem.scrollHeight;
@@ -94,13 +109,13 @@ const dom = {
      * @return {Number}
      */
     clientWidth: (elem) => {
-        if (!elem) return false;
-        const isWindow = o => o != null && o === o.window;
+        if (!elem) {
+            console.log('请传递dom元素');
+            return false;
+        }
 
-        if (isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
-            const bw = document.body ? document.body.clientWidth : 0;
-            const dw = document.documentElement ? document.documentElement.clientWidth : 0;
-            return Math.max(bw, dw);
+        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+            return dom.getDocumentAttr('clientWidth');
         }
 
         return elem.clientWidth;
@@ -111,13 +126,13 @@ const dom = {
      * @return {Number}
      */
     clientHeight: (elem) => {
-        if (!elem) return false;
-        const isWindow = o => o != null && o === o.window;
+        if (!elem) {
+            console.log('请传递dom元素');
+            return false;
+        }
 
-        if (isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
-            const bh = document.body ? document.body.clientHeight : 0;
-            const dh = document.documentElement ? document.documentElement.clientHeight : 0;
-            return Math.max(bh, dh);
+        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+            return dom.getDocumentAttr('clientHeight');
         }
 
         return elem.clientHeight;
@@ -135,15 +150,13 @@ const dom = {
      */
     windowWidth: (elem) => {
         if (!elem) elem = window;
-        const isWindow = o => o != null && o === o.window;
 
-        if (isWindow(elem)) { // 如果是window元素
+        if (validate.isWindow(elem)) { // 如果是window元素
             return elem.document.documentElement.clientWidth;
         }
 
         if (elem.nodeType === 9) { // 如果是document元素
-            const doc = elem.documentElement;
-            return Math.max(elem.body.clientWidth, doc.clientWidth);
+            return dom.getDocumentAttr('clientWidth');
         }
 
         return elem.clientWidth;
@@ -155,15 +168,13 @@ const dom = {
      */
     windowHeight: (elem) => {
         if (!elem) elem = window;
-        const isWindow = o => o != null && o === o.window;
 
-        if (isWindow(elem)) { // 如果是window元素
+        if (validate.isWindow(elem)) { // 如果是window元素
             return elem.document.documentElement.clientHeight;
         }
 
         if (elem.nodeType === 9) { // 如果是document元素
-            const doc = elem.documentElement;
-            return Math.max(elem.body.clientHeight, doc.clientHeight);
+            return dom.getDocumentAttr('clientHeight');
         }
 
         return elem.clientHeight;
