@@ -14,19 +14,31 @@
  * @date 2019/5/7
  */
 import validate from './validate.js';
+
+// 生成默认分享配置
+const setDefaultConfig = () => {
+    return {
+        link: document.location.href,
+        title: document.title,
+        description: '',
+        imgUrl: '',
+    }
+};
+// 分享配置异常提示
+const errorTip = '分享配置应为一个配置对象,包括分享回调链接link，分享标题title，分享描述信息description，分享时展示的小图标imgUrl';
+
 const share = {
     // 是否在link app环境中， return boolean
     isInAppAsyn: () => {
         if(!$ljBridge){
-            return;
+            console.info('没有检测到$ljBridge');
+            return false;
         }
         const webStatus = $ljBridge && $ljBridge.webStatus;
         if(webStatus && (webStatus.isLinkApp || webStatus.isDeyou)){
             return true;
         }
-        else{
-            return false;
-        }
+        return false;
     },
     /**
      *  @func link里分享设置
@@ -39,8 +51,11 @@ const share = {
         };
      */
     setJsbridgeShare: (config) => {
-        if(!$ljBridge || !config){
-            return;
+        if(!$ljBridge){
+            throw Error('没有检测到$ljBridge');
+        }
+        if(!config){
+            throw Error(errorTip);
         }
         let url = `${config.link}&psource=share_link`;
         $ljBridge && $ljBridge.ready(function (bridge, webStatus) {
@@ -49,7 +64,7 @@ const share = {
                 articleTitle: config.title,
                 articleDiscription: config.description,
                 requestUrl: url,
-                headImageUrl: configo.imgUrl
+                headImageUrl: config.imgUrl
             };
             bridge.setShareConfigWithString(JSON.stringify(shareconfig));        
         });
@@ -65,8 +80,8 @@ const share = {
         };
      */
     setShareInfo: (config) => {
-        if (!config) {
-            return;
+        if(!config){
+            throw Error(errorTip);
         }
         if(validate.isWeiXin()){
           //这里调用公司通用微信sdk封装js，暴露weixinUtil
@@ -95,18 +110,18 @@ const share = {
         };
         */
       actionShare: (config) => {
-        if (!config) {
-            return;
+        if(!config){
+            throw Error(errorTip);
         }
         if(this.isInAppAsyn()){
           $ljBridge.ready(function (bridge, webStatus) {
             let url = `${config.link}&psource=share_link`;
             var shareconfig = {
-                articleTitle: shareinfo.title,
-                articleDiscription: shareinfo.description,
+                articleTitle: config.title,
+                articleDiscription: config.description,
                 requestUrl: url,
                 smsContent: url,
-                headImageUrl: shareinfo.imgUrl
+                headImageUrl: config.imgUrl
             };
             bridge.actionShareWithString(JSON.stringify(shareconfig));
           });
