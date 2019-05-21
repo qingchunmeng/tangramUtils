@@ -15,15 +15,6 @@
  */
 import validate from './validate.js';
 
-// 生成默认分享配置
-const setDefaultConfig = () => {
-    return {
-        link: document.location.href,
-        title: document.title,
-        description: '',
-        imgUrl: '',
-    }
-};
 // 分享配置异常提示
 const errorTip = '分享配置应为一个配置对象,包括分享回调链接link，分享标题title，分享描述信息description，分享时展示的小图标imgUrl';
 
@@ -31,7 +22,6 @@ const share = {
     // 是否在link app环境中， return boolean
     isInAppAsyn: () => {
         if(!$ljBridge){
-            console.info('没有检测到$ljBridge');
             return false;
         }
         const webStatus = $ljBridge && $ljBridge.webStatus;
