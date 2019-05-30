@@ -1,5 +1,5 @@
 /**
- * @file 文件说明 
+ * @file 文件说明
  * @author mengqingchun002@ke.com
  * @date 2019/3/19 11:21
  */
@@ -111,6 +111,10 @@ html {
                     font-style: normal;
                     font-size: 18px;
                     color: #fff;
+                    height: 100%;
+                    width: 100%;
+                    vertical-align: middle;
+                    position: relative;
                 }
             }
             .success {
@@ -148,6 +152,15 @@ html {
             }
             .fetch-icon-error:after {
                 content: '×';
+                display: inline-block;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                text-align: center;
+                line-height: 100%;
+
             }
             .fetch-icon-warning:after {
                 content: '!';
