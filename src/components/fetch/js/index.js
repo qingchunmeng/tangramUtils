@@ -142,7 +142,9 @@ class FetchClass {
             } else {
                 this.url += `&${paramsArray.join('&')}`;
             }
-            this.url = this.url.slice(0, -1);
+            if (Object.keys(data).length === 0) {
+              this.url = this.url.slice(0, -1);
+            }
         }
     }
 
