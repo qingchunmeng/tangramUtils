@@ -271,9 +271,10 @@ class FetchClass {
 
                     if (config.errorHandler) {
                         // 需要处理this指针的问题
-                        config.errorHandler.apply(self, res);
+                        config.errorHandler.call(self, res, reject);
                     } else {
                         return new Promise((resolve2) => {
+                            reject(res);
                             // 此处预留调用了系统的错误处理信息，但是还可以添加特殊的错误处理逻辑
                             if (res.status === 401 || res.status === 403 || res.status === 405) {
                                 // do something about 401
@@ -301,32 +302,6 @@ class FetchClass {
                             // TODO with 401,404,408
                             console.error(error);
                         });
-                    }
-
-                    return res;
-                })
-            // 以下部分可以抛出留给用户进行调用，用于特殊的容错处理
-                .then((res) => {
-                    // 此处预留调用了系统的错误处理信息，但是还可以添加特殊的错误处理逻辑
-                    // TODO 如果请求类型为json，返回的数据为非json，则视为错误
-                    // TODO 需要处理返回数据为非json的情况
-                    if (res.code || res.code == 0) {
-                        if (res.code === 99999) {
-                            Dialog.warning({
-                                title: '警告',
-                                content: '您没有权限执行该操作！',
-                                btns: {
-                                    confirm: {
-                                        text: '关闭',
-                                        handler() {
-                                        },
-                                    },
-                                },
-                            });
-                        } else if ((self.opt.code != null && self.opt.code != undefined) && res.code != self.opt.code) {
-                            // TODO 需要兼容调用方法提供的错误处理方法
-                            self.handleError(res);
-                        }
                     }
 
                     return res;
