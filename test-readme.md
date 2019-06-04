@@ -18,8 +18,6 @@
 4、对单元测试的要求：
  
      1）查看单测的覆盖率是否为100%，代码行数执行是否有未执行到的行数
-     2）如果覆盖率未100%，代码行数全部执行，进行单测文件的提交即可，如下图为复合条件
-     	![Image text](http://git.lianjia.com/transaction/Tangram/blob/feature-unitTest/test/images/test.png)
+     2）如果覆盖率未100%，代码行数全部执行，进行单测文件的提交即可，如下图为符合条件
+   ![image](http://git.lianjia.com/transaction/Tangram/blob/feature-unitTest/test/images/test.png)
      	
-     
-     
