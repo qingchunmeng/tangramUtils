@@ -1,12 +1,14 @@
 {
   "name": "@jiaoyi/tangram",
-  "version": "0.0.13",
+  "version": "0.0.0001",
   "description": "",
-  "main": "./src/index.js",
+  "main": "lib/index.js",
+  "files": ["lib"],
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config ./webpack.config.js",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepublish": "./node_modules/.bin/babel src --copy-files --source-maps --extensions .js --out-dir lib"
   },
   "lint-staged": {
     "*.js": [
