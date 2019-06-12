@@ -22,9 +22,8 @@ const validate = {
     /**
      * 微信中打开返回true
      */
-    isWeiXin: () => {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.match(/MicroMessenger/i) === 'micromessenger';
+    isWeiXin() {
+        return (/MicroMessenger/i).test(navigator.userAgent);
     },
     /**
      * 返回设备的浏览器类型
