@@ -11,3 +11,4 @@ libraries
 config/mock.js
 start.sh
 output.log
+coverage

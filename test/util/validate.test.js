@@ -4,10 +4,7 @@ import obj from '../../src/util/validate';
 /* eslint-disable */
 describe('validate', () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
-    beforeEach(() => {
-        document.cookie = '';
-    });
-
+    
     test('isEmpty', () => {
         expect(obj.isEmpty()).toBeTruthy();
         expect(obj.isEmpty('')).toBeTruthy();

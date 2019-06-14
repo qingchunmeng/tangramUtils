@@ -105,17 +105,21 @@ const data = {
     */
     formatReturnValue: (judge, value) => {
         let returnValue;
-        if (typeof judge === 'string' || Array.isArray(judge)) {
+        const type = Object.prototype.toString.call(judge).slice(8, -1);
+        if (type === 'Array' || type === 'String') {
             returnValue = judge.length > 0 ? value : '';
         }
-        if (typeof judge === 'object') {
+        if (type === 'Object') {
             returnValue = JSON.stringify(judge) !== '{}' ? value : '';
         }
-        if (typeof judge === 'number') {
-            returnValue = judge > 0 ? value : '';
+        if (type === 'Number') {
+            returnValue = value;
         }
-        if (typeof judge === 'boolean') {
+        if (type === 'Boolean') {
             returnValue = judge ? value : '';
+        }
+        if (type === 'Null' || type === 'Undefined') {
+            returnValue = '';
         }
         return returnValue;
     },
