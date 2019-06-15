@@ -46,8 +46,15 @@ describe('deepClone', () => {
     const keys = Object.keys(objects);
 
     keys.forEach((key) => {
-        test(`${key} 深拷贝`, () => {
-            expect(deepClone(objects[key])).toEqual(objects[key]);
+        describe(`${key} 深拷贝`, () => {
+            const orginalData = objects[key];
+            const result = deepClone(orginalData);
+            test('拷贝结果与源对象不相等', () => {
+                expect(result).not.toBe(orginalData);
+            });
+            test('遍历比较各项字段值是否相等', () => {
+                expect(result).toEqual(orginalData);
+            });
         });
     });
 });
