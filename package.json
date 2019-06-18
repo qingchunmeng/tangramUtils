@@ -1,9 +1,11 @@
 {
   "name": "@jiaoyi/tangram",
-  "version": "0.0.16",
+  "version": "0.0.21",
   "description": "",
   "main": "lib/index.js",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config ./webpack.config.js",

@@ -182,18 +182,43 @@ class FetchClass {
             },
         }, this.opt);
         delete (options.data);
-        if (options.headers['Content-Type'].includes('application/x-www-form-urlencoded')) {
+        const contentType = options.headers['Content-Type'];
+        if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
             const formData = new FormData();
             // for (let key in Object.keys(data)) {
             //     formData.append(key, data[key]);
             // }
-            Object.keys(data).forEach((key) => {
-                formData.append(key, data[key]);
-            });
+
+          Object.keys(data).forEach((key) => {
+            const type = Object.prototype.toString.call(data[key]);
+            formData.append(key, data[key]);
+          });
+
             config = Object.assign({
                 body: formData,
             }, this.defaultConfig, options);
-        } else {
+        } else if (options.formData == 'key-value'){
+          var formData = new window.FormData();
+          Object.keys(data).forEach(function (key) {
+            var type = Object.prototype.toString.call(data[key]);
+            // formData.append(key, data[key]);
+            if (type == '[object Array]' || type == '[object Object]') {
+              formData.append(key, JSON.stringify(data[key]));
+            } else {
+              formData.append(key, data[key]);
+            }
+          });
+
+          config = Object.assign({
+
+          }, this.defaultConfig, options, {
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              Accept: 'application/json',
+            },
+            body: formData
+          });
+        }else {
             // 默认处理json数据格式的情况
             config = Object.assign({
                 body: JSON.stringify(data),
@@ -257,6 +282,8 @@ class FetchClass {
                             contentType.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
                         ) {
                             data = self.handleFileResponse(res);
+                        } else if (contentType.includes('multipart/form-data')) {
+                          data = self.handleJSONResponse(res);
                         } else {
                             // return self.handleStreamResponse(res);
                             // Handle other responses accordingly...
