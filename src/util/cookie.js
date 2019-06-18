@@ -11,9 +11,9 @@ const Cookie = {
    * @param value  cookie值,可以为string,int,object
    * @param expire 过期时间,默认超时时间是以秒为纬度的
    * 使用方法：
-   * setCookie('usrName', 'test', '1s'); //设置userName的cookie值为test,超时时间为1秒
-   * setCookie('usrName', 'test', '1h'); //设置userName的cookie值为test,超时时间为1小时
-   * setCookie('usrName', 'test', '1d'); //设置userName的cookie值为test,超时时间为1天
+   * setCookie('usrName', 'test', 's1'); //设置userName的cookie值为test,超时时间为1秒
+   * setCookie('usrName', 'test', 'h1'); //设置userName的cookie值为test,超时时间为1小时
+   * setCookie('usrName', 'test', 'd1'); //设置userName的cookie值为test,超时时间为1天
    */
     setCookie(name, value, expire) {
         const expDate = new Date();
@@ -29,11 +29,10 @@ const Cookie = {
     * getCookie('usrName'); //获取usrName对应的cookie值
     */
     getCookie(name) {
-        let arr; const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-        if (arr == document.cookie.match(reg)) {
-            return unescape(arr[2]);
-        }
-        return null;
+        let arr;
+        const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+        /* eslint-disable */
+        return (arr = document.cookie.match(reg)) ? unescape(arr[2]) : null;
     },
     /**
     * 检查给定名字的cookie是否有值
@@ -67,9 +66,9 @@ const Cookie = {
     * 获取指定字符串名str对应的毫秒数
     * @param str 要获取的字符串名
     * 使用方法：
-    * getSec('10s'); //返回'10s'(10秒)字符串对应的毫秒数
-    * getSec('10h'); //返回'10h'(10小时)字符串对应的毫秒数
-    * getSec('10d'); //返回'10d'(10天)字符串对应的毫秒数
+    * getSec('s10'); //返回'10s'(10秒)字符串对应的毫秒数
+    * getSec('h10'); //返回'10h'(10小时)字符串对应的毫秒数
+    * getSec('d10'); //返回'10d'(10天)字符串对应的毫秒数
     */
     getSec(str) {
         str = str || '';
@@ -79,7 +78,7 @@ const Cookie = {
             case 's': return str1 * 1000;
             case 'h': return str1 * 60 * 60 * 1000;
             case 'd': return str1 * 24 * 60 * 60 * 1000;
-            default: return str1 ? str1 * 1000 : 1000;
+            default: return isNaN(str2) && str1 ? str1 * 1000 : (str ? str * 1000 : 1000);
         }
     },
 };
