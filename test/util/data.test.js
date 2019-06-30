@@ -7,24 +7,24 @@
 import data from '../../src/util/data';
 
 const {
-    formatReturnValue, deepClone, randomNum,
+    formatReturnValue, deepClone, randomNum, shouldFieldDisplay,
 } = data;
 
 /* eslint-disable */
 describe('formatReturnValue', () => {
     test('格式化返回值', () => {
-        expect(formatReturnValue('', "显示文案")).toEqual('');
-        expect(formatReturnValue('姓名', "显示文案")).toEqual("显示文案");
-        expect(formatReturnValue([], "显示文案")).toEqual('');
-        expect(formatReturnValue([1,2], "显示文案")).toEqual("显示文案");
-        expect(formatReturnValue({a:1}, "显示文案")).toEqual("显示文案");
-        expect(formatReturnValue({}, "显示文案")).toEqual("");
-        expect(formatReturnValue(1, "显示文案")).toEqual("显示文案");
-        expect(formatReturnValue(0, "显示文案")).toEqual("显示文案");
-        expect(formatReturnValue(true, "显示文案")).toEqual("显示文案");
-        expect(formatReturnValue(false, "显示文案")).toEqual("");
-        expect(formatReturnValue(null, "显示文案")).toEqual("");
-        expect(formatReturnValue(undefined, "显示文案")).toEqual("");
+        expect(formatReturnValue('', '显示文案')).toEqual('');
+        expect(formatReturnValue('姓名', '显示文案')).toEqual('显示文案');
+        expect(formatReturnValue([], '显示文案')).toEqual('');
+        expect(formatReturnValue([1,2], '显示文案')).toEqual('显示文案');
+        expect(formatReturnValue({a:1}, '显示文案')).toEqual('显示文案');
+        expect(formatReturnValue({}, '显示文案')).toEqual('');
+        expect(formatReturnValue(1, '显示文案')).toEqual('显示文案');
+        expect(formatReturnValue(0, '显示文案')).toEqual('显示文案');
+        expect(formatReturnValue(true, '显示文案')).toEqual('显示文案');
+        expect(formatReturnValue(false, '显示文案')).toEqual('');
+        expect(formatReturnValue(null, '显示文案')).toEqual('');
+        expect(formatReturnValue(undefined, '显示文案')).toEqual('');
     });
 });
 
@@ -128,5 +128,138 @@ describe('randomNum', () => {
         const num = randomNum(min, max);
         expect(num).toBe(0);
     });
+});
+
+describe('shouldFieldDisplay', () => {
+  // 后端给的页面配置
+  const fields = [
+    {
+      
+      'dataDict': '',
+      'dataType': 'string',
+      'defaultValue': '',
+      'desc': '姓名',
+      'displayCondition': '',
+      'id': 241,
+      'inputType': 'input',
+      'name': 'BUYER_XING_MING',
+      'required': true,
+      'unit': '',
+      'validator': '',
+      'value': '张三',
+      'variableOrder': 1
+    },
+    {
+      'dataDict': 'ZHENG_JIAN_LEI_XING',
+      'dataType': 'string',
+      'defaultValue': '1',
+      'desc': '证件类型',
+      'displayCondition': '',
+      'id': 242,
+      'inputType': 'select',
+      'name': 'BUYER_ZHENG_JIAN_LEI_XING',
+      'required': true,
+      'unit': '',
+      'validator': '',
+      'value': '1',
+      'variableOrder': 2
+    },
+    {
+      
+      'dataDict': '',
+      'dataType': 'string',
+      'defaultValue': '',
+      'desc': '证件号码',
+      'displayCondition': 'BUYER_ZHENG_JIAN_LEI_XING==2',
+      'id': 244,
+      'inputType': 'input',
+      'name': 'BUYER_ZHENG_JIAN_HAO_MA',
+      'required': true,
+      'unit': '',
+      'validator': '',
+      'value': '11111',
+      'variableOrder': 3
+    },
+    {
+      
+      'dataDict': '',
+      'dataType': 'string',
+      'defaultValue': '',
+      'desc': '联系方式',
+      'displayCondition': '',
+      'id': 245,
+      'inputType': 'input',
+      'name': 'BUYER_LIAN_XI_DIAN_HUA',
+      'required': true,
+      'unit': '',
+      'validator': '',
+      'value': '13500000004',
+      'variableOrder': 4
+    },
+    {
+      
+      'dataDict': '',
+      'dataType': 'string',
+      'defaultValue': '',
+      'desc': '入金银行卡号',
+      'displayCondition': 'BUYER_BANK_CARD_TYPE==1',
+      'id': 243,
+      'inputType': 'input',
+      'name': 'BUYER_BANK_CARD',
+      'required': true,
+      'unit': '',
+      'validator': '',
+      'value': '1',
+      'variableOrder': 5
+    },
+    {
+      
+      'dataDict': 'BANK_CARD_TYPE',
+      'dataType': 'string',
+      'defaultValue': '1',
+      'desc': '银行卡类型',
+      'displayCondition': '',
+      'id': 258,
+      'inputType': 'select',
+      'name': 'BUYER_BANK_CARD_TYPE',
+      'required': true,
+      'unit': '',
+      'validator': '',
+      'value': '1',
+      'variableOrder': 6
+    }
+  ];
+  const fieldsValue = {
+    'BUYER_XING_MING': '张三',
+    'ZHENG_JIAN_LEI_XING': 1,
+    'BUYER_ZHENG_JIAN_HAO_MA': '110120',
+    'BUYER_BANK_CARD': '6228480482178345120',
+    'BUYER_BANK_CARD_TYPE': 1,
+    'BUYER_LIAN_XI_DIAN_HUA': '18583768189',
+  };
+  test('单一条件测试', () => {
+      
+      // 当证件类型不为2时，返回false
+      expect(shouldFieldDisplay(fieldsValue, 'ZHENG_JIAN_LEI_XING==2')).toBeFalsy();
+      
+      // 展示银行卡类型为1时，返回true
+      expect(shouldFieldDisplay(fieldsValue, 'BUYER_BANK_CARD_TYPE==1')).toBeTruthy();
+  });
+  test('复合条件测试', () => {
+    
+    // 当证件类型为1，姓名为张三时，返回tue
+    expect(shouldFieldDisplay(fieldsValue, 'ZHENG_JIAN_LEI_XING==1&&BUYER_XING_MING==张三')).toBeTruthy();
+  
+    // 当证件类型为2，姓名为张三时，返回false
+    expect(shouldFieldDisplay(fieldsValue, 'ZHENG_JIAN_LEI_XING==2&&BUYER_XING_MING==张三')).toBeFalsy();
+  });
+  
+  test('没有条件时，默认返回true', () => {
+    
+    // 当displayCondition为''时，返回tue
+    expect(shouldFieldDisplay(fieldsValue, '')).toBeTruthy();
+    
+  });
+  
 });
 /* eslint-enable */
