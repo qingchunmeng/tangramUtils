@@ -65,6 +65,9 @@ const data = {
         // 强制类型控制
         lower = Number(lower);
         upper = Number(upper);
+        if (isNaN(lower) || isNaN(upper)) {
+            return 0;
+        }
         // 强制大小控制
         if (upper < lower) {
             const temp = lower;

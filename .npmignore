@@ -4,7 +4,6 @@
 /dist/*
 *.DS_Store
 .idea
-te.iml
 dist
 libraries
 *.demo.js
@@ -12,3 +11,13 @@ config/mock.js
 start.sh
 output.log
 coverage
+src
+gulpfile.js
+eslint.sh
+test
+.babelrc
+.eslintignore
+.eslintrc.json
+.gitignore
+.npmignore
+
