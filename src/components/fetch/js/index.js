@@ -142,7 +142,9 @@ class FetchClass {
             } else {
                 this.url += `&${paramsArray.join('&')}`;
             }
-            this.url = this.url.slice(0, -1);
+            if (Object.keys(data).length === 0) {
+              this.url = this.url.slice(0, -1);
+            }
         }
     }
 
@@ -180,18 +182,43 @@ class FetchClass {
             },
         }, this.opt);
         delete (options.data);
-        if (options.headers['Content-Type'].includes('application/x-www-form-urlencoded')) {
+        const contentType = options.headers['Content-Type'];
+        if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
             const formData = new FormData();
             // for (let key in Object.keys(data)) {
             //     formData.append(key, data[key]);
             // }
-            Object.keys(data).forEach((key) => {
-                formData.append(key, data[key]);
-            });
+
+          Object.keys(data).forEach((key) => {
+            const type = Object.prototype.toString.call(data[key]);
+            formData.append(key, data[key]);
+          });
+
             config = Object.assign({
                 body: formData,
             }, this.defaultConfig, options);
-        } else {
+        } else if (options.formData == 'key-value'){
+          var formData = new window.FormData();
+          Object.keys(data).forEach(function (key) {
+            var type = Object.prototype.toString.call(data[key]);
+            // formData.append(key, data[key]);
+            if (type == '[object Array]' || type == '[object Object]') {
+              formData.append(key, JSON.stringify(data[key]));
+            } else {
+              formData.append(key, data[key]);
+            }
+          });
+
+          config = Object.assign({
+
+          }, this.defaultConfig, options, {
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              Accept: 'application/json',
+            },
+            body: formData
+          });
+        }else {
             // 默认处理json数据格式的情况
             config = Object.assign({
                 body: JSON.stringify(data),
@@ -230,7 +257,7 @@ class FetchClass {
         }
 
         // TODO 什么时候将loading进行关闭呢，如果已经关闭了该怎么处理呢 ，各种各样的关闭loading的情况
-        return new Promise(((resolve) => {
+        return new Promise(((resolve, reject) => {
             const prevFetch = window.fetch;
             prevFetch(self.url, config)
                 .then((res) => {
@@ -255,6 +282,8 @@ class FetchClass {
                             contentType.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
                         ) {
                             data = self.handleFileResponse(res);
+                        } else if (contentType.includes('multipart/form-data')) {
+                          data = self.handleJSONResponse(res);
                         } else {
                             // return self.handleStreamResponse(res);
                             // Handle other responses accordingly...
@@ -269,9 +298,10 @@ class FetchClass {
 
                     if (config.errorHandler) {
                         // 需要处理this指针的问题
-                        config.errorHandler.apply(self, res);
+                        config.errorHandler.call(self, res, reject);
                     } else {
                         return new Promise((resolve2) => {
+
                             // 此处预留调用了系统的错误处理信息，但是还可以添加特殊的错误处理逻辑
                             if (res.status === 401 || res.status === 403 || res.status === 405) {
                                 // do something about 401
@@ -295,9 +325,11 @@ class FetchClass {
                             }
                             // alert('promise 处理错误信息');
                             resolve2(res);
+                            reject(res);
                         }).catch((error) => {
                             // TODO with 401,404,408
                             console.error(error);
+                            reject(error);
                         });
                     }
 
@@ -334,6 +366,7 @@ class FetchClass {
                     // 处理错误信息
                     // TODO 如果已经把loading关掉了该怎么办？
                     Loading.hideLoading();
+                    reject(e);
                     throw Error(e);
                     // Loading.hideLoading(self.opt);
                 });

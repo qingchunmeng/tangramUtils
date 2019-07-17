@@ -158,7 +158,8 @@ class M {
         setTimeout(() => {
           this.dialog.classList.remove(`${this.animaArr[this.currAnimation][1]}`);
           // 移除弹窗组件
-            this.elem.remove();
+            this.elem.parentNode.remove();
+            this.elem = undefined;
         }, 200);
     }
 
