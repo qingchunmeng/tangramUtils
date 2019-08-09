@@ -41,6 +41,10 @@ describe('deepClone', () => {
         'Foo instances': new Foo(),
         'objects': { 'a': 0, 'b': 1, 'c': 2 },
         'objects with object values': { 'a': 'a', 'b': ['B'], 'c': { 'C': 1 }, 'd': {'e': ['F'] }},
+        'null': null,
+        'undefined': undefined,
+        'objects with null': { 'a': '123', 'b': { 'c' : null } },
+        'objects with undefined': { 'a': '123', 'b': { 'c' : undefined } },
     };
 
     const keys = Object.keys(objects);

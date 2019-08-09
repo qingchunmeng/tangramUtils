@@ -14,6 +14,9 @@ const data = {
      */
     deepClone: (sourceData) => {
         const result = Array.isArray(sourceData) ? [] : {};
+        if (sourceData === null || sourceData === undefined) { // 特殊类型的处理
+            return sourceData;
+        }
         const keys = Object.keys(sourceData); // 无法复制原型链上的方法
         keys.forEach((key) => {
             if (typeof sourceData[key] === 'object') {
