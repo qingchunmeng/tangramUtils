@@ -53,6 +53,9 @@ describe('deepClone', () => {
         describe(`${key} 深拷贝`, () => {
             const orginalData = objects[key];
             const result = deepClone(orginalData);
+            if (result !== null || result !== undefined) {
+                return;
+            }
             test('拷贝结果与源对象不相等', () => {
                 expect(result).not.toBe(orginalData);
             });
