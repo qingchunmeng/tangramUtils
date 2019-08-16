@@ -229,34 +229,56 @@ const validate = {
    * 晚于某个日期
    * @param date
    */
-    afterDate: (date) => {
-
+    afterDate: (val, date) => {
+        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
+        // 当天可选，置为 23:59:59
+            const currentDate = new Date(`${val}T23:59:59`);
+            return currentDate >= new Date(date);
+        }
+        // 非时间类字段配置了该校验规则，不校验
+        return true;
     },
     /**
    * 早于某个日期
    * @param date
    */
-    beforeDate: (date) => {
-
+    beforeDate: (val, date) => {
+        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
+            const currentDate = new Date(`${val}T00:00:00`);
+            return currentDate <= new Date(date);
+        }
+        // 非时间类字段配置了该校验规则，不校验
+        return true;
     },
     /**
    * 早于今天，或者不得晚于今天
    * @param date
    */
-    beforeToday: (date) => {
-
+    beforeToday: (val) => {
+        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
+            const date = new Date(`${val}T00:00:00`);
+            return date <= new Date();
+        }
+        // 非时间类字段配置了该校验规则，不校验
+        return true;
     },
     /**
    * 晚于今天，或者不得早于今天
-   * @param date
+   * @param val
    */
-    afterToday: (date) => {
-
+    afterToday: (val) => {
+        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
+        // 当天可选，置为 23:59:59
+            const date = new Date(`${val}T23:59:59`);
+            return date >= new Date();
+        }
+        // 非时间类字段配置了该校验规则，不校验
+        return true;
     },
     /**
    * 合同号
    */
-    contractNumber: (date) => {
+    contractNumber: (val) => {
 
     },
     /**
