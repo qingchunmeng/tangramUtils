@@ -191,19 +191,26 @@ const validate = {
         return val < maxValue;
     },
     /**
-   * 等于某个值
-   * @param val
+   * 遍历比较两个值是否“相等”，支持对象的遍历比较，但是暂不支持复杂类型的属性，例如 function、Date 等等
+   * @param val1
+   * @param val2
    */
-    equal: (val) => {
-
+    equal: (val1, val2) => {
+        try {
+            if (val1 === val2) {
+                return true;
+            }
+            // 简单处理，使用 stringify 覆盖常用场景
+            return JSON.stringify(val1) == JSON.stringify(val2);
+        } catch (e) {
+            return false; // 出错强制按 不相等 处理
+        }
     },
     /**
    * 是否相同
    * @param val
    */
-    same: (val) => {
-
-    },
+    same: (val1, val2) => val1 == val2,
     /**
    *不允许输入中文
    */
@@ -217,13 +224,20 @@ const validate = {
    *至少含有两个汉字
    */
     haveTwoChineseChar: (val) => {
-
+        if (!val) {
+            return false;
+        }
+        const reg = /.*?[\u4e00-\u9fa5].*?[\u4e00-\u9fa5].*/;
+        return reg.test(val);
     },
     /**
    * 非法字符校验,，禁止包含 `<`  `>`
    */
-    illegalChar: () => {
-
+    illegalChar: (val) => {
+        if (!val) {
+            return true;
+        }
+        return val.indexOf('>') < 0 && val.indexOf('<') < 0;
     },
     /**
    * 晚于某个日期
@@ -279,7 +293,13 @@ const validate = {
    * 合同号
    */
     contractNumber: (val) => {
-
+        if (!val) {
+            return false;
+        }
+        if (/^C.{7}$/.test(val)) {
+            return true;
+        }
+        return false;
     },
     /**
    * 身份证号
