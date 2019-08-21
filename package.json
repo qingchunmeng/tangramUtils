@@ -1,6 +1,6 @@
 {
   "name": "@jiaoyi/tangram",
-  "version": "0.0.21",
+  "version": "0.0.24",
   "description": "",
   "main": "lib/index.js",
   "files": [
@@ -10,7 +10,7 @@
     "start": "webpack-dev-server",
     "build": "webpack --config ./webpack.config.js",
     "precommit": "lint-staged",
-    "test": "jest --config=.jest.js --no-cache --coverage --u",
+    "test": "jest  --watchAll --coverage",
     "prepub": "./node_modules/.bin/gulp build",
     "pub": "npm run build:npm && npm run prepub && npm publish"
   },
