@@ -13,13 +13,6 @@ const validate = {
         return arg === null || arg === undefined || arg === '';
     },
     /**
-     * 简单校验手机号，String(mobile)是1开头的11位数字返回true
-     * @param {*} mobile
-     */
-    isMobile(mobile) {
-        return /^1\d{10}$/.test(String(mobile));
-    },
-    /**
      * 微信中打开返回true
      */
     isWeiXin() {
@@ -331,13 +324,21 @@ const validate = {
         }
     },
     /**
+     * 简单校验手机号，String(mobile)是1开头的11位数字返回true
+     * @param {*} val
+     */
+    isMobile(val) {
+        const reg = /^1\d{10}$/;
+        return reg.test(val);
+    },
+    /**
    * 手机号
    * @param val
    * @returns {boolean}
    */
     mobile: (val) => {
         if (!val) {
-            return true;
+            return false;
         }
         const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9]|19[0-9]|166)\d{8}$/;
         return reg.test(val);
@@ -348,9 +349,10 @@ const validate = {
    */
     telOrPhone: (val) => {
       if (!val) {
-            return true;
+            return false;
       }
-      return this.mobile(val) || this.homeTel(val);
+     // console.log(validate)
+      return validate.mobile(val) || validate.homeTel(val);
     },
     /**
    * 固话
@@ -358,7 +360,7 @@ const validate = {
    */
     homeTel: (val) => {
       if (!val) {
-        return true;
+        return false;
       }
       const reg = /^(\d{3,4}(-)?)?[0-9]{7,8}$/;
       return reg.test(val);
@@ -369,7 +371,7 @@ const validate = {
    */
     phoneNum: (val) => {
         if (!val) {
-            return true;
+            return false;
         }
         const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9])((\*{4}\d{4})|(\d{8}))$/;
         return reg.test(val);
@@ -381,7 +383,7 @@ const validate = {
    */
     isTelLoose(val) {
         if (!val) {
-            return true;
+            return false;
         }
         const reg = /^1\d{10}$/;
         return reg.test(val) || '电话格式不正确';
