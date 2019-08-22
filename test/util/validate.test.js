@@ -1,10 +1,9 @@
-
 import obj from '../../src/util/validate';
 
 /* eslint-disable */
 describe('validate', () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
-    
+
     test('isEmpty', () => {
         expect(obj.isEmpty()).toBeTruthy();
         expect(obj.isEmpty('')).toBeTruthy();
@@ -238,5 +237,91 @@ test('telOrPhone', () => {
         expect(!obj.isWindow(document.createElement('div'))).toBeTruthy();
         expect(obj.isWindow(window)).toBeTruthy();
     });
+
+    test('beforeToday',() => {
+        expect(obj.beforeToday('ddddd')).toBeFalsy();
+        expect(obj.beforeToday('1231233')).toBeFalsy();
+        expect(obj.beforeToday('2019/2/3')).toBeTruthy();
+        expect(obj.beforeToday('2019-2-3')).toBeTruthy();
+        expect(obj.beforeToday(new Date())).toBeTruthy();
+        expect(obj.beforeToday('2033-12-4')).toBeFalsy();
+        expect(obj.beforeToday('Thu Aug 22 2019 17:29:46 GMT+0800 (中国标准时间)')).toBeTruthy();
+        // 非法输入校验 指不是字符串、数字
+        expect(obj.beforeToday([])).toBeFalsy();
+        expect(obj.beforeToday({})).toBeFalsy();
+        expect(obj.beforeToday(Symbol('123444324'))).toBeFalsy();
+        expect(obj.beforeToday(Symbol('2019/2/3'))).toBeFalsy();
+        expect(obj.beforeToday(' ')).toBeFalsy();
+    })
+
+    test('afterToday',() => {
+        expect(obj.afterToday('ddddd')).toBeFalsy();
+        expect(obj.afterToday('1231233')).toBeFalsy();
+        expect(obj.afterToday('2019/2/3')).toBeFalsy();
+        expect(obj.afterToday('2019-2-3')).toBeFalsy();
+        expect(obj.afterToday(new Date())).toBeTruthy();
+        expect(obj.afterToday('2033-12-4')).toBeTruthy();
+        expect(obj.afterToday('Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)')).toBeFalsy();
+
+        expect(obj.afterToday([])).toBeFalsy();
+        expect(obj.afterToday({})).toBeFalsy();
+        expect(obj.afterToday(Symbol('123444324'))).toBeFalsy();
+        expect(obj.afterToday(Symbol('2019/2/3'))).toBeFalsy();
+        expect(obj.afterToday(' ')).toBeFalsy();
+    })
+
+    test('beforeDate',() => {
+        expect(obj.beforeDate('','2010-2-3')).toBeFalsy();
+        expect(obj.beforeDate('2010-2-3')).toBeFalsy();
+        expect(obj.beforeDate(new Date() - 1,new Date())).toBeTruthy();
+        expect(obj.beforeDate('2019-2-3','2019-2-4')).toBeTruthy();
+        expect(obj.beforeDate(new Date(),new Date())).toBeTruthy();
+        expect(obj.beforeDate('2033-12-4','2013-12-4')).toBeFalsy();
+        expect(obj.beforeDate('2010-2-3','2010/02/3')).toBeTruthy();
+        expect(obj.beforeDate('2019-03-02T23:59:59','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.beforeDate('2019-03-02T23:59:59','2019-03-02')).toBeTruthy();
+        expect(obj.beforeDate('2019-03-03T00:00:00','2019-03-02T23:59:59')).toBeFalsy();
+        expect(obj.beforeDate('Thu Aug 22 2019 17:29:46 GMT+0800 (中国标准时间)','Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)' )).toBeFalsy();
+        expect(obj.beforeDate([],"2033-12-4")).toBeFalsy();
+        expect(obj.beforeDate({},[])).toBeFalsy();
+        expect(obj.beforeDate('2010-2-3','2010/2/3')).toBeTruthy();
+        expect(obj.beforeDate(Symbol('2019/2/3'), '')).toBeFalsy();
+        expect(obj.beforeDate(' ', '2019-2-3')).toBeFalsy();
+    })
+
+    test('afterDate',() => {
+        expect(obj.afterDate('ddddd')).toBeFalsy();
+        expect(obj.afterDate('1231233','')).toBeFalsy();
+        expect(obj.afterDate('2019/2/3','2019/2/3')).toBeTruthy();
+        expect(obj.afterDate('2019/2/4','2019/2/3')).toBeTruthy();
+        expect(obj.afterDate('2019/2/2','2019/2/3')).toBeFalsy();
+        expect(obj.afterDate('2019-03-02','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.afterDate('2019-03-02T23:59:59','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.afterDate('2019-03-03T00:00:00','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.afterDate('Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)','Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)')).toBeTruthy();
+        expect(obj.afterDate('2019-2-3',null)).toBeFalsy();
+        expect(obj.afterDate(new Date(),new Date())).toBeTruthy();
+        expect(obj.afterDate(new Date() + 2,new Date())).toBeTruthy();
+        expect(obj.afterDate([],{})).toBeFalsy();
+        expect(obj.afterDate(Symbol('123444324'),new Date())).toBeFalsy();
+    })
+
+    test('contractNumber',() => {
+        expect(obj.contractNumber('ddddd')).toBeFalsy();
+        expect(obj.contractNumber([0])).toBeFalsy();
+        expect(obj.contractNumber([1])).toBeFalsy();
+        expect(obj.contractNumber({})).toBeFalsy();
+        expect(obj.contractNumber(null)).toBeFalsy();
+        expect(obj.contractNumber(Date)).toBeFalsy();
+        expect(obj.contractNumber(['C1234568'])).toBeFalsy();
+
+        expect(obj.contractNumber('C1234568')).toBeTruthy();
+        expect(obj.contractNumber('Cdfasdf7')).toBeTruthy();
+        expect(obj.contractNumber('C123df92')).toBeTruthy();
+        expect(obj.contractNumber('C1dd9812')).toBeTruthy();
+        expect(obj.contractNumber('c1234568')).toBeFalsy();
+        expect(obj.contractNumber('C12345682')).toBeFalsy();
+
+    })
 
 });
