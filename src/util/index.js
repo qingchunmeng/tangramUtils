@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from './moment.js';
 import debounce from './debounce.js';
 import cache from './cache.js';
 import data from './data';
