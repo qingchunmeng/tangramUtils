@@ -321,7 +321,85 @@ test('telOrPhone', () => {
         expect(obj.contractNumber('C1dd9812')).toBeTruthy();
         expect(obj.contractNumber('c1234568')).toBeFalsy();
         expect(obj.contractNumber('C12345682')).toBeFalsy();
+    });
 
+    test('dataRange', () => {
+        expect(obj.dataRange('',[1,4])).toBeTruthy();
+        expect(obj.dataRange(null,[2,4])).toBeTruthy(); 
+        expect(obj.dataRange(undefined,[2,3])).toBeTruthy(); 
+        expect(obj.dataRange(NaN,[2,3])).toBeTruthy();
+        expect(!obj.dataRange('ll',[2,4])).toBeTruthy(); 
+        expect(!obj.dataRange({},[3,7])).toBeTruthy(); 
+        expect(!obj.dataRange(-2,[2,8])).toBeTruthy();
+        expect(obj.dataRange(2,[2,8])).toBeTruthy();
+        expect(obj.dataRange(5,[2,8])).toBeTruthy();
+        expect(!obj.dataRange(20,[2,8])).toBeTruthy();
+        expect(!obj.dataRange('3',[2,8])).toBeTruthy(); 
+        expect(!obj.dataRange('A',[2,800])).toBeTruthy();
+    });
+
+    test('positiveInteger', () => {
+        expect(obj.positiveInteger('')).toBeTruthy();
+        expect(obj.positiveInteger(null)).toBeTruthy(); 
+        expect(obj.positiveInteger(undefined)).toBeTruthy();
+        expect(!obj.positiveInteger(0)).toBeTruthy();  
+        expect(!obj.positiveInteger('ll')).toBeTruthy();  
+        expect(!obj.positiveInteger({})).toBeTruthy(); 
+        expect(!obj.positiveInteger(-2)).toBeTruthy();
+        expect(obj.positiveInteger(5)).toBeTruthy();
+        expect(!obj.positiveInteger(20.5)).toBeTruthy();
+        expect(!obj.positiveInteger('3')).toBeTruthy();   
+        expect(!obj.positiveInteger('A')).toBeTruthy();
+        expect(!obj.positiveInteger('@')).toBeTruthy();
+        expect(!obj.positiveInteger('*')).toBeTruthy();
+        expect(!obj.positiveInteger('^')).toBeTruthy();
+
+
+    });
+
+    test('positiveFloat', () => {
+        expect(obj.positiveFloat('')).toBeTruthy();
+        expect(obj.positiveFloat(null)).toBeTruthy(); 
+        expect(obj.positiveFloat(undefined)).toBeTruthy(); 
+        expect(!obj.positiveFloat('ll')).toBeTruthy();  
+        expect(!obj.positiveFloat({})).toBeTruthy(); 
+        expect(!obj.positiveFloat(-2)).toBeTruthy();
+        expect(!obj.positiveFloat(5)).toBeTruthy();
+        expect(obj.positiveFloat(20.5)).toBeTruthy();
+        expect(!obj.positiveFloat('3')).toBeTruthy();   
+        expect(!obj.positiveFloat('A')).toBeTruthy();
+        expect(!obj.positiveFloat('...')).toBeTruthy();
+    })
+
+    test('minValue', () => {
+        expect(obj.minValue('',3)).toBeTruthy();
+        expect(obj.minValue('',0)).toBeTruthy();
+        expect(obj.minValue(null,4)).toBeTruthy(); 
+        expect(obj.minValue(undefined,0)).toBeTruthy(); 
+        expect(!obj.minValue('ll',6)).toBeTruthy();  
+        expect(!obj.minValue({},'a')).toBeTruthy(); 
+        expect(!obj.minValue(-2,5)).toBeTruthy();
+        expect(!obj.minValue(5,3)).toBeTruthy();
+        expect(obj.minValue(20.5,0.5)).toBeTruthy();
+        expect(obj.minValue(20,50)).toBeTruthy();
+        expect(!obj.minValue('3',4)).toBeTruthy();   
+        expect(!obj.minValue('A','a')).toBeTruthy();
+        expect(!obj.minValue('a','A')).toBeTruthy();
+    })
+
+    test('maxValue', () => {
+        expect(obj.maxValue('',3)).toBeTruthy();
+        expect(obj.maxValue('',-1)).toBeTruthy();
+        expect(obj.maxValue(null,4)).toBeTruthy(); 
+        expect(obj.maxValue(undefined,-1)).toBeTruthy(); 
+        expect(!obj.maxValue('ll',3)).toBeTruthy();  
+        expect(obj.maxValue(-2,4)).toBeTruthy();
+        expect(obj.maxValue(5,6)).toBeTruthy();
+        expect(obj.maxValue(20.5,20.5)).toBeTruthy();
+        expect(!obj.maxValue('3',-3)).toBeTruthy();   
+        expect(!obj.maxValue('A',5)).toBeTruthy();
+        expect(!obj.maxValue('A','a')).toBeTruthy();
+        expect(!obj.maxValue('a','A')).toBeTruthy();
     })
 
 });
