@@ -230,7 +230,7 @@ const validate = {
         if (!val) {
             return true;
         }
-        return val.indexOf('>') < 0 && val.indexOf('<') < 0;
+        return val.toString().indexOf('>') < 0 && val.toString().indexOf('<') < 0;
     },
     /**
      * 判断是否是合法的时间
@@ -425,5 +425,5 @@ const validate = {
     },
 };
 
-// console.log(validate.afterDate('2019-03-02','2019-03-02T:23:59:59')) 
+// console.log(validate.afterDate('2019-03-02','2019-03-02T:23:59:59'))
 export default validate;

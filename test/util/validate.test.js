@@ -156,7 +156,7 @@ test('phoneNum', () => {
     expect(obj.phoneNum('17302058901')).toBeTruthy();
     expect(obj.phoneNum('18911148901')).toBeTruthy();
     expect(!obj.phoneNum('19996267901')).toBeTruthy();
-  
+
 });
 
 //判断测试是否为电话号码或座机
@@ -444,5 +444,112 @@ test('telOrPhone', () => {
         expect(obj.bankCardNumber(undefined)).toBeTruthy();
         expect(!obj.bankCardNumber(6216635555555555555)).toBeTruthy();
 
+    })
+
+    test('equal', () => {
+        expect(obj.equal(123, 123)).toBeTruthy();
+        expect(obj.equal(123, 321)).toBeFalsy();
+        expect(obj.equal(123, '123')).toBeFalsy();
+        expect(obj.equal(123, [123])).toBeFalsy();
+        expect(obj.equal(123, { a: 123 })).toBeFalsy();
+        expect(obj.equal(123, null)).toBeFalsy();
+        expect(obj.equal(123, undefined)).toBeFalsy();
+        expect(obj.equal('123', '123')).toBeTruthy();
+        expect(obj.equal('123', '321')).toBeFalsy();
+        expect(obj.equal('', '')).toBeTruthy();
+        expect(obj.equal(' ', ' ')).toBeTruthy();
+        expect(obj.equal('', ' ')).toBeFalsy();
+        expect(obj.equal('123', [123])).toBeFalsy();
+        expect(obj.equal('123', { a: 123 })).toBeFalsy();
+        expect(obj.equal('123', null)).toBeFalsy();
+        expect(obj.equal('123', undefined)).toBeFalsy();
+        expect(obj.equal([123], [123])).toBeTruthy();
+        expect(obj.equal([123], [321])).toBeFalsy();
+        expect(obj.equal([], [])).toBeTruthy();
+        expect(obj.equal([], {})).toBeFalsy();
+        expect(obj.equal([], null)).toBeFalsy();
+        expect(obj.equal([], undefined)).toBeFalsy();
+        expect(obj.equal({}, {})).toBeTruthy();
+        expect(obj.equal({ a: 123 }, { a: 123 })).toBeTruthy();
+        expect(obj.equal({ a: 123 }, { a: 321 })).toBeFalsy();
+        expect(obj.equal({}, null)).toBeFalsy();
+        expect(obj.equal({}, undefined)).toBeFalsy();
+        expect(obj.equal(null, null)).toBeTruthy();
+        expect(obj.equal(undefined, null)).toBeFalsy();
+        expect(obj.equal(undefined, undefined)).toBeTruthy();
+    });
+
+    test('same', () => {
+        expect(obj.same(123, 123)).toBeTruthy();
+        expect(obj.same(123, 321)).toBeFalsy();
+        expect(obj.same(123, '123')).toBeTruthy();
+        expect(obj.same(123, [123])).toBeTruthy();
+        expect(obj.same(123, { a: 123 })).toBeFalsy();
+        expect(obj.same(123, null)).toBeFalsy();
+        expect(obj.same(123, undefined)).toBeFalsy();
+        expect(obj.same('123', '123')).toBeTruthy();
+        expect(obj.same('123', '321')).toBeFalsy();
+        expect(obj.same('', '')).toBeTruthy();
+        expect(obj.same(' ', ' ')).toBeTruthy();
+        expect(obj.same('', ' ')).toBeFalsy();
+        expect(obj.same('123', [123])).toBeTruthy();
+        expect(obj.same('123', { a: 123 })).toBeFalsy();
+        expect(obj.same('123', null)).toBeFalsy();
+        expect(obj.same('123', undefined)).toBeFalsy();
+        expect(obj.same([123], [123])).toBeFalsy();
+        expect(obj.same([123], [321])).toBeFalsy();
+        expect(obj.same([], [])).toBeFalsy();
+        expect(obj.same([], {})).toBeFalsy();
+        expect(obj.same([], null)).toBeFalsy();
+        expect(obj.same([], undefined)).toBeFalsy();
+        expect(obj.same({}, {})).toBeFalsy();
+        expect(obj.same({ a: 123 }, { a: 123 })).toBeFalsy();
+        expect(obj.same({ a: 123 }, { a: 321 })).toBeFalsy();
+        expect(obj.same({}, null)).toBeFalsy();
+        expect(obj.same({}, undefined)).toBeFalsy();
+        expect(obj.same(null, null)).toBeTruthy();
+        expect(obj.same(undefined, null)).toBeTruthy();
+        expect(obj.same(undefined, undefined)).toBeTruthy();
+    });
+
+    test('char', () => {
+        expect(obj.char(123)).toBeTruthy();
+        expect(obj.char('123')).toBeTruthy();
+        expect(obj.char('')).toBeTruthy();
+        expect(obj.char('   ')).toBeFalsy();
+        expect(obj.char('!@#$%^&*()')).toBeFalsy();
+        expect(obj.char('中文')).toBeFalsy();
+        expect(obj.char([])).toBeFalsy();
+        expect(obj.char({})).toBeFalsy();
+        expect(obj.char(undefined)).toBeTruthy();
+        expect(obj.char(null)).toBeTruthy();
+    });
+
+    test('haveTwoChineseChar', () => {
+        expect(obj.haveTwoChineseChar(123)).toBeFalsy();
+        expect(obj.haveTwoChineseChar(null)).toBeFalsy();
+        expect(obj.haveTwoChineseChar(undefined)).toBeFalsy();
+        expect(obj.haveTwoChineseChar([])).toBeFalsy();
+        expect(obj.haveTwoChineseChar({})).toBeFalsy();
+        expect(obj.haveTwoChineseChar('')).toBeFalsy();
+        expect(obj.haveTwoChineseChar('123')).toBeFalsy();
+        expect(obj.haveTwoChineseChar('123字')).toBeFalsy();
+        expect(obj.haveTwoChineseChar('123汉字')).toBeTruthy();
+        expect(obj.haveTwoChineseChar('123中国汉字')).toBeTruthy();
+    });
+
+    test('illegalChar', () => {
+        expect(obj.illegalChar(123)).toBeTruthy();
+        expect(obj.illegalChar('123<')).toBeFalsy();
+        expect(obj.illegalChar('123>')).toBeFalsy();
+        expect(obj.illegalChar('123<>')).toBeFalsy();
+        expect(obj.illegalChar('<')).toBeFalsy();
+        expect(obj.illegalChar('>')).toBeFalsy();
+        expect(obj.illegalChar('<>')).toBeFalsy();
+        expect(obj.illegalChar(' ')).toBeTruthy();
+        expect(obj.illegalChar(null)).toBeTruthy();
+        expect(obj.illegalChar(undefined)).toBeTruthy();
+        expect(obj.illegalChar([])).toBeTruthy();
+        expect(obj.illegalChar({})).toBeTruthy();
     })
 });
