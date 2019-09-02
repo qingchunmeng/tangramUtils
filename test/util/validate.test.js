@@ -1,10 +1,9 @@
-
 import obj from '../../src/util/validate';
 
 /* eslint-disable */
 describe('validate', () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
-    
+
     test('isEmpty', () => {
         expect(obj.isEmpty()).toBeTruthy();
         expect(obj.isEmpty('')).toBeTruthy();
@@ -207,7 +206,7 @@ test('telOrPhone', () => {
         expect(obj.telOrPhone('04457323206')).toBeTruthy();
         expect(obj.telOrPhone('67162855')).toBeTruthy(); //不带区号8位座机
         expect(obj.telOrPhone('5982076')).toBeTruthy(); //不带区号7位座机
-});
+    });
 
     test('isWeiXin isAndroid isIOS', () => {
         expect(!obj.isWeiXin()).toBeTruthy();
@@ -239,4 +238,211 @@ test('telOrPhone', () => {
         expect(obj.isWindow(window)).toBeTruthy();
     });
 
+    test('beforeToday',() => {
+        expect(obj.beforeToday('ddddd')).toBeFalsy();
+        expect(obj.beforeToday('1231233')).toBeFalsy();
+        expect(obj.beforeToday('2019/2/3')).toBeTruthy();
+        expect(obj.beforeToday('2019-2-3')).toBeTruthy();
+        expect(obj.beforeToday(new Date())).toBeTruthy();
+        expect(obj.beforeToday('2033-12-4')).toBeFalsy();
+        expect(obj.beforeToday('Thu Aug 22 2019 17:29:46 GMT+0800 (中国标准时间)')).toBeTruthy();
+        // 非法输入校验 指不是字符串、数字
+        expect(obj.beforeToday([])).toBeFalsy();
+        expect(obj.beforeToday({})).toBeFalsy();
+        expect(obj.beforeToday(Symbol('123444324'))).toBeFalsy();
+        expect(obj.beforeToday(Symbol('2019/2/3'))).toBeFalsy();
+        expect(obj.beforeToday(' ')).toBeFalsy();
+    })
+
+    test('afterToday',() => {
+        expect(obj.afterToday('ddddd')).toBeFalsy();
+        expect(obj.afterToday('1231233')).toBeFalsy();
+        expect(obj.afterToday('2019/2/3')).toBeFalsy();
+        expect(obj.afterToday('2019-2-3')).toBeFalsy();
+        expect(obj.afterToday(new Date())).toBeTruthy();
+        expect(obj.afterToday('2033-12-4')).toBeTruthy();
+        expect(obj.afterToday('Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)')).toBeFalsy();
+
+        expect(obj.afterToday([])).toBeFalsy();
+        expect(obj.afterToday({})).toBeFalsy();
+        expect(obj.afterToday(Symbol('123444324'))).toBeFalsy();
+        expect(obj.afterToday(Symbol('2019/2/3'))).toBeFalsy();
+        expect(obj.afterToday(' ')).toBeFalsy();
+    })
+
+    test('beforeDate',() => {
+        expect(obj.beforeDate('','2010-2-3')).toBeFalsy();
+        expect(obj.beforeDate('2010-2-3')).toBeFalsy();
+        expect(obj.beforeDate(new Date() - 1,new Date())).toBeTruthy();
+        expect(obj.beforeDate('2019-2-3','2019-2-4')).toBeTruthy();
+        expect(obj.beforeDate(new Date(),new Date())).toBeTruthy();
+        expect(obj.beforeDate('2033-12-4','2013-12-4')).toBeFalsy();
+        expect(obj.beforeDate('2010-2-3','2010/02/3')).toBeTruthy();
+        expect(obj.beforeDate('2019-03-02T23:59:59','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.beforeDate('2019-03-02T23:59:59','2019-03-02')).toBeTruthy();
+        expect(obj.beforeDate('2019-03-03T00:00:00','2019-03-02T23:59:59')).toBeFalsy();
+        expect(obj.beforeDate('Thu Aug 22 2019 17:29:46 GMT+0800 (中国标准时间)','Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)' )).toBeFalsy();
+        expect(obj.beforeDate([],"2033-12-4")).toBeFalsy();
+        expect(obj.beforeDate({},[])).toBeFalsy();
+        expect(obj.beforeDate('2010-2-3','2010/2/3')).toBeTruthy();
+        expect(obj.beforeDate(Symbol('2019/2/3'), '')).toBeFalsy();
+        expect(obj.beforeDate(' ', '2019-2-3')).toBeFalsy();
+    })
+
+    test('afterDate',() => {
+        expect(obj.afterDate('ddddd')).toBeFalsy();
+        expect(obj.afterDate('1231233','')).toBeFalsy();
+        expect(obj.afterDate('2019/2/3','2019/2/3')).toBeTruthy();
+        expect(obj.afterDate('2019/2/4','2019/2/3')).toBeTruthy();
+        expect(obj.afterDate('2019/2/2','2019/2/3')).toBeFalsy();
+        expect(obj.afterDate('2019-03-02','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.afterDate('2019-03-02T23:59:59','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.afterDate('2019-03-03T00:00:00','2019-03-02T23:59:59')).toBeTruthy();
+        expect(obj.afterDate('Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)','Wed Aug 21 2019 17:29:46 GMT+0800 (中国标准时间)')).toBeTruthy();
+        expect(obj.afterDate('2019-2-3',null)).toBeFalsy();
+        expect(obj.afterDate(new Date(),new Date())).toBeTruthy();
+        expect(obj.afterDate(new Date() + 2,new Date())).toBeTruthy();
+        expect(obj.afterDate([],{})).toBeFalsy();
+        expect(obj.afterDate(Symbol('123444324'),new Date())).toBeFalsy();
+    })
+
+    test('contractNumber',() => {
+        expect(obj.contractNumber('ddddd')).toBeFalsy();
+        expect(obj.contractNumber([0])).toBeFalsy();
+        expect(obj.contractNumber([1])).toBeFalsy();
+        expect(obj.contractNumber({})).toBeFalsy();
+        expect(obj.contractNumber(null)).toBeFalsy();
+        expect(obj.contractNumber(Date)).toBeFalsy();
+        expect(obj.contractNumber(['C1234568'])).toBeFalsy();
+
+        expect(obj.contractNumber('C1234568')).toBeTruthy();
+        expect(obj.contractNumber('Cdfasdf7')).toBeTruthy();
+        expect(obj.contractNumber('C123df92')).toBeTruthy();
+        expect(obj.contractNumber('C1dd9812')).toBeTruthy();
+        expect(obj.contractNumber('c1234568')).toBeFalsy();
+        expect(obj.contractNumber('C12345682')).toBeFalsy();
+    });
+
+    test('dataRange', () => {
+        expect(obj.dataRange('',[1,4])).toBeTruthy();
+        expect(obj.dataRange(null,[2,4])).toBeTruthy();
+        expect(obj.dataRange(undefined,[2,3])).toBeTruthy();
+        expect(obj.dataRange(NaN,[2,3])).toBeTruthy();
+        expect(!obj.dataRange('ll',[2,4])).toBeTruthy();
+        expect(!obj.dataRange({},[3,7])).toBeTruthy();
+        expect(!obj.dataRange(-2,[2,8])).toBeTruthy();
+        expect(obj.dataRange(2,[2,8])).toBeTruthy();
+        expect(obj.dataRange(5,[2,8])).toBeTruthy();
+        expect(!obj.dataRange(20,[2,8])).toBeTruthy();
+        expect(!obj.dataRange('3',[2,8])).toBeTruthy();
+        expect(!obj.dataRange('A',[2,800])).toBeTruthy();
+    });
+
+    test('positiveInteger', () => {
+        expect(obj.positiveInteger('')).toBeTruthy();
+        expect(obj.positiveInteger(null)).toBeTruthy();
+        expect(obj.positiveInteger(undefined)).toBeTruthy();
+        expect(!obj.positiveInteger(0)).toBeTruthy();
+        expect(!obj.positiveInteger('ll')).toBeTruthy();
+        expect(!obj.positiveInteger({})).toBeTruthy();
+        expect(!obj.positiveInteger(-2)).toBeTruthy();
+        expect(obj.positiveInteger(5)).toBeTruthy();
+        expect(!obj.positiveInteger(20.5)).toBeTruthy();
+        expect(!obj.positiveInteger('3')).toBeTruthy();
+        expect(!obj.positiveInteger('A')).toBeTruthy();
+        expect(!obj.positiveInteger('@')).toBeTruthy();
+        expect(!obj.positiveInteger('*')).toBeTruthy();
+        expect(!obj.positiveInteger('^')).toBeTruthy();
+
+
+    });
+
+    test('positiveFloat', () => {
+        expect(obj.positiveFloat('')).toBeTruthy();
+        expect(obj.positiveFloat(null)).toBeTruthy();
+        expect(obj.positiveFloat(undefined)).toBeTruthy();
+        expect(!obj.positiveFloat('ll')).toBeTruthy();
+        expect(!obj.positiveFloat({})).toBeTruthy();
+        expect(!obj.positiveFloat(-2)).toBeTruthy();
+        expect(!obj.positiveFloat(5)).toBeTruthy();
+        expect(obj.positiveFloat(20.5)).toBeTruthy();
+        expect(!obj.positiveFloat('3')).toBeTruthy();
+        expect(!obj.positiveFloat('A')).toBeTruthy();
+        expect(!obj.positiveFloat('...')).toBeTruthy();
+    })
+
+    test('minValue', () => {
+        expect(obj.minValue('',3)).toBeTruthy();
+        expect(obj.minValue('',0)).toBeTruthy();
+        expect(obj.minValue(null,4)).toBeTruthy();
+        expect(obj.minValue(undefined,0)).toBeTruthy();
+        expect(!obj.minValue('ll',6)).toBeTruthy();
+        expect(!obj.minValue({},'a')).toBeTruthy();
+        expect(!obj.minValue(-2,5)).toBeTruthy();
+        expect(!obj.minValue(5,3)).toBeTruthy();
+        expect(obj.minValue(20.5,0.5)).toBeTruthy();
+        expect(obj.minValue(20,50)).toBeTruthy();
+        expect(!obj.minValue('3',4)).toBeTruthy();
+        expect(!obj.minValue('A','a')).toBeTruthy();
+        expect(!obj.minValue('a','A')).toBeTruthy();
+    })
+
+    test('maxValue', () => {
+        expect(obj.maxValue('',3)).toBeTruthy();
+        expect(obj.maxValue('',-1)).toBeTruthy();
+        expect(obj.maxValue(null,4)).toBeTruthy();
+        expect(obj.maxValue(undefined,-1)).toBeTruthy();
+        expect(!obj.maxValue('ll',3)).toBeTruthy();
+        expect(obj.maxValue(-2,4)).toBeTruthy();
+        expect(obj.maxValue(5,6)).toBeTruthy();
+        expect(obj.maxValue(20.5,20.5)).toBeTruthy();
+        expect(!obj.maxValue('3',-3)).toBeTruthy();
+        expect(!obj.maxValue('A',5)).toBeTruthy();
+        expect(!obj.maxValue('A','a')).toBeTruthy();
+        expect(!obj.maxValue('a','A')).toBeTruthy();
+    })
+
+    //对比大于某个数字
+    test('greaterThan', () => {
+        expect(obj.greaterThan(2, 1)).toBeTruthy();
+        expect(!obj.greaterThan(2, 2)).toBeTruthy();
+    })
+    //对比小于某个数字
+    test('lessThan', () => {
+        expect(obj.lessThan(2, 3)).toBeTruthy();
+        expect(!obj.lessThan(2, 2)).toBeTruthy();
+    })
+    //数字，年份(1800-3000之间)
+    test('year', () => {
+        //expect(!obj.year(null)).toBeTruthy();
+        //expect(!obj.year(undefined)).toBeTruthy();
+        expect(!obj.year(' ')).toBeTruthy();
+        expect(!obj.year(1799)).toBeTruthy();
+        expect(!obj.year(3001)).toBeTruthy();
+        expect(obj.year(1800)).toBeTruthy();
+        expect(obj.year(3000)).toBeTruthy();
+        expect(obj.year(2000)).toBeTruthy();
+    })
+    // 特殊号码，校验身份证
+    test('identityCard', () => {
+        //expect(!obj.identityCard(undefined)).toBeTruthy();
+        //expect(!obj.identityCard(' ')).toBeTruthy();
+        expect(!obj.identityCard('123')).toBeTruthy();
+        expect(!obj.identityCard(123)).toBeTruthy();
+        expect(!obj.identityCard([])).toBeTruthy();
+        expect(!obj.identityCard({})).toBeTruthy();
+        expect(!obj.identityCard(22345678901)).toBeTruthy();
+        expect(!obj.identityCard(421022122222220000)).toBeTruthy();
+        expect(obj.identityCard('411325199303242508')).toBeTruthy();
+        // expect(obj.identityCard(421022450101123)).toBeTruthy();
+        // expect(obj.identityCard('421022199303242508x')).toBeTruthy();
+    })
+    // 特殊字符-银行卡号
+    test('bankCardNumber', () => {
+        expect(obj.bankCardNumber('')).toBeTruthy();
+        expect(obj.bankCardNumber(null)).toBeTruthy();
+        expect(obj.bankCardNumber(undefined)).toBeTruthy();
+        expect(!obj.bankCardNumber(6216635555555555555)).toBeTruthy();
+
+    })
 });
