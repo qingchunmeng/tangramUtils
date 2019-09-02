@@ -319,6 +319,7 @@ const validate = {
         if (!reg.test(val)) {
             return false;
         }
+        return true;
     },
     /**
    * 银行卡号
