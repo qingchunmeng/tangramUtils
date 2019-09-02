@@ -64,47 +64,4 @@ describe('validate', () => {
         expect(obj.isWindow(window)).toBeTruthy();
     });
 
-    //对比大于某个数字
-    test('greaterThan', () => {
-        expect(obj.greaterThan(2, 1)).toBeTruthy();
-        expect(!obj.greaterThan(2, 2)).toBeTruthy();
-    });
-    //对比小于某个数字
-    test('lessThan', () => {
-        expect(obj.lessThan(2, 3)).toBeTruthy();
-        expect(!obj.lessThan(2, 2)).toBeTruthy();
-    });
-    //数字，年份(1800-3000之间)
-    test('year', () => {
-        //expect(!obj.year(null)).toBeTruthy();
-        //expect(!obj.year(undefined)).toBeTruthy();
-        expect(!obj.year(' ')).toBeTruthy();
-        expect(!obj.year(1799)).toBeTruthy();
-        expect(!obj.year(3001)).toBeTruthy();
-        expect(obj.year(1800)).toBeTruthy();
-        expect(obj.year(3000)).toBeTruthy();
-        expect(obj.year(2000)).toBeTruthy();
-    });
-    // 特殊号码，校验身份证
-    test('identityCard', () => {
-        //expect(!obj.identityCard(undefined)).toBeTruthy();
-        //expect(!obj.identityCard(' ')).toBeTruthy();
-        expect(!obj.identityCard('123')).toBeTruthy();
-        expect(!obj.identityCard(123)).toBeTruthy();
-        expect(!obj.identityCard([])).toBeTruthy();
-        expect(!obj.identityCard({})).toBeTruthy();
-        expect(!obj.identityCard(22345678901)).toBeTruthy();
-        expect(!obj.identityCard(421022122222220000)).toBeTruthy();
-        expect(obj.identityCard('411325199303242508')).toBeTruthy();
-        // expect(obj.identityCard(421022450101123)).toBeTruthy();
-        // expect(obj.identityCard('421022199303242508x')).toBeTruthy();
-    });
-    // 特殊字符-银行卡号
-    test('bankCardNumber', () => {
-        expect(obj.bankCardNumber('')).toBeTruthy();
-        expect(obj.bankCardNumber(null)).toBeTruthy();
-        expect(obj.bankCardNumber(undefined)).toBeTruthy();
-        expect(!obj.bankCardNumber(6216635555555555555)).toBeTruthy();
-
-    });
-})
+});
