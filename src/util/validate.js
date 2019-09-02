@@ -360,7 +360,7 @@ const validate = {
      * @param {*} val
      */
     isMobile(val) {
-        if (!val) {
+        if (val === '') {
             return true;
         }
         const reg = /^1\d{10}$/;
@@ -372,7 +372,7 @@ const validate = {
    * @returns {boolean}
    */
     mobile: (val) => {
-        if (!val) {
+        if (val === '') {
             return true;
         }
         const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9]|19[0-9]|166)\d{8}$/;
@@ -383,7 +383,7 @@ const validate = {
    * @param val
    */
     telOrPhone: (val) => {
-      if (!val) {
+      if (val === '') {
             return true;
       }
      // console.log(validate)
@@ -394,7 +394,7 @@ const validate = {
    * @param val
    */
     homeTel: (val) => {
-      if (!val) {
+      if (val === '') {
         return true;
       }
       const reg = /^(\d{3,4}(-)?)?[0-9]{7,8}$/;
@@ -405,7 +405,7 @@ const validate = {
    * @param val
    */
     phoneNum: (val) => {
-        if (!val) {
+        if (val === '') {
             return true;
         }
         const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9])((\*{4}\d{4})|(\d{8}))$/;
@@ -417,7 +417,7 @@ const validate = {
    * @returns {*}
    */
     isTelLoose(val) {
-        if (!val) {
+        if (val === '') {
             return true;
         }
         const reg = /^1\d{10}$/;
