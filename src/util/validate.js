@@ -13,13 +13,6 @@ const validate = {
         return arg === null || arg === undefined || arg === '';
     },
     /**
-     * 简单校验手机号，String(mobile)是1开头的11位数字返回true
-     * @param {*} mobile
-     */
-    isMobile(mobile) {
-        return /^1\d{10}$/.test(String(mobile));
-    },
-    /**
      * 微信中打开返回true
      */
     isWeiXin() {
@@ -240,60 +233,91 @@ const validate = {
         return val.indexOf('>') < 0 && val.indexOf('<') < 0;
     },
     /**
-   * 晚于某个日期
-   * @param date
-   */
-    afterDate: (val, date) => {
-        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
-        // 当天可选，置为 23:59:59
-            const currentDate = new Date(`${val}T23:59:59`);
-            return currentDate >= new Date(date);
+     * 判断是否是合法的时间
+     * @param {date} Date || String || Number
+     * @return {Boolean}
+     */
+    isValidDate: (date) => {
+        if (date instanceof Date) { // 如果是时间类型直接返回成功
+            return true;
         }
-        // 非时间类字段配置了该校验规则，不校验
-        return true;
+        if (typeof date !== 'string' && typeof date !== 'number') { // 不是数字或者字符串类型的输入 必然是非法时间
+            return false;
+        }
+        if (typeof date === 'string') {
+            return new Date(date).toDateString() !== 'Invalid Date';
+        }
+        return true; // 走到此时 必然为数字类型 数字类型必然返回true 只是时间可能转换到最早的时间戳定义时间
     },
     /**
-   * 早于某个日期
-   * @param date
-   */
-    beforeDate: (val, date) => {
-        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
-            const currentDate = new Date(`${val}T00:00:00`);
-            return currentDate <= new Date(date);
+     * 判断是否晚于某个日期
+     * @param {inputDate} Date || String || Number 输入时间
+     * @param {_afterDate} Date || String || Number 晚于的时间
+     * @return {Boolean}
+     */
+    afterDate: (inputDate, _afterDate) => {
+        const { isValidDate } = validate;
+        if (isValidDate(inputDate) && isValidDate(_afterDate)) { // 仅在合法日期时才进行比较
+            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const _aDate = _afterDate instanceof Date ? _afterDate : new Date(_afterDate);
+            const formatData = `${_aDate.getFullYear()}-${(`${_aDate.getMonth() + 1}`).padStart(2, '0')}-${(`${_aDate.getDate()}`).padStart(2, '0')}`;
+            return _iDate >= new Date(`${formatData}T00:00:00`);
         }
-        // 非时间类字段配置了该校验规则，不校验
-        return true;
+        return false;
     },
     /**
-   * 早于今天，或者不得晚于今天
-   * @param date
-   */
-    beforeToday: (val) => {
-        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
-            const date = new Date(`${val}T00:00:00`);
-            return date <= new Date();
+     * 判断是否早于某个日期
+     * @param {inputDate} Date || String || Number
+     * @param {_beforeDate} Date || String || Number
+     * @return {Boolean}
+     */
+    beforeDate: (inputDate, _beforeDate) => {
+        const { isValidDate } = validate;
+        if (isValidDate(inputDate) && isValidDate(_beforeDate)) { // 仅在合法日期时才进行比较
+            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const _bDate = _beforeDate instanceof Date ? _beforeDate : new Date(_beforeDate);
+            const formatDate = `${_bDate.getFullYear()}-${(`${_bDate.getMonth() + 1}`).padStart(2, '0')}-${(`${_bDate.getDate()}`).padStart(2, '0')}`;
+            return _iDate <= new Date(`${formatDate}T23:59:59`);
         }
-        // 非时间类字段配置了该校验规则，不校验
-        return true;
+        return false;
     },
     /**
-   * 晚于今天，或者不得早于今天
-   * @param val
-   */
-    afterToday: (val) => {
-        if (/\d{4}-\d{2}-\d{2}/.test(val)) {
-        // 当天可选，置为 23:59:59
-            const date = new Date(`${val}T23:59:59`);
-            return date >= new Date();
+     * 判断是否早于今天
+     * @param {inputDate} Date || String || Number
+     * @return {Boolean}
+     */
+    beforeToday: (inputDate) => {
+        const { isValidDate } = validate;
+        if (isValidDate(inputDate)) {
+            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const _date = new Date();
+            const today = `${_date.getFullYear()}-${(`${_date.getMonth() + 1}`).padStart(2, '0')}-${(`${_date.getDate()}`).padStart(2, '0')}`;
+            return _iDate <= new Date(`${today}T23:59:59`);
         }
-        // 非时间类字段配置了该校验规则，不校验
-        return true;
+        return false;
+    },
+    /**
+     * 判断是否晚于今天
+     * @param {inputDate} Date || String || Number
+     * @return {Boolean}
+     */
+    afterToday: (inputDate) => {
+        const { isValidDate } = validate;
+        if (isValidDate(inputDate)) {
+            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const _date = new Date();
+            const today = `${_date.getFullYear()}-${(`${_date.getMonth() + 1}`).padStart(2, '0')}-${(`${_date.getDate()}`).padStart(2, '0')}`;
+            return _iDate >= new Date(`${today}T00:00:00`);
+        }
+        return false;
     },
     /**
    * 合同号
+   *  @param {val} String
+    * @return {Boolean}
    */
     contractNumber: (val) => {
-        if (!val) {
+        if (!val || typeof val !== 'string') {
             return false;
         }
         if (/^C.{7}$/.test(val)) {
@@ -331,13 +355,21 @@ const validate = {
         }
     },
     /**
+     * 简单校验手机号，String(mobile)是1开头的11位数字返回true
+     * @param {*} val
+     */
+    isMobile(val) {
+        const reg = /^1\d{10}$/;
+        return reg.test(val);
+    },
+    /**
    * 手机号
    * @param val
    * @returns {boolean}
    */
     mobile: (val) => {
         if (!val) {
-            return true;
+            return false;
         }
         const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9]|19[0-9]|166)\d{8}$/;
         return reg.test(val);
@@ -348,9 +380,10 @@ const validate = {
    */
     telOrPhone: (val) => {
       if (!val) {
-            return true;
+            return false;
       }
-      return this.mobile(val) || this.homeTel(val);
+     // console.log(validate)
+      return validate.mobile(val) || validate.homeTel(val);
     },
     /**
    * 固话
@@ -358,7 +391,7 @@ const validate = {
    */
     homeTel: (val) => {
       if (!val) {
-        return true;
+        return false;
       }
       const reg = /^(\d{3,4}(-)?)?[0-9]{7,8}$/;
       return reg.test(val);
@@ -369,7 +402,7 @@ const validate = {
    */
     phoneNum: (val) => {
         if (!val) {
-            return true;
+            return false;
         }
         const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9])((\*{4}\d{4})|(\d{8}))$/;
         return reg.test(val);
@@ -381,11 +414,12 @@ const validate = {
    */
     isTelLoose(val) {
         if (!val) {
-            return true;
+            return false;
         }
         const reg = /^1\d{10}$/;
         return reg.test(val) || '电话格式不正确';
     },
 };
 
+// console.log(validate.afterDate('2019-03-02','2019-03-02T:23:59:59')) 
 export default validate;
