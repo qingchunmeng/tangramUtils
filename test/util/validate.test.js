@@ -18,10 +18,10 @@ describe('validate', () => {
     });
 
     test('isMobile', () => {
-        expect(!obj.isMobile()).toBeTruthy();
-        expect(!obj.isMobile('')).toBeTruthy();
-        expect(!obj.isMobile(null)).toBeTruthy();
-        expect(!obj.isMobile(undefined)).toBeTruthy();
+        expect(obj.isMobile()).toBeTruthy();
+        expect(obj.isMobile('')).toBeTruthy();
+        expect(obj.isMobile(null)).toBeTruthy();
+        expect(obj.isMobile(undefined)).toBeTruthy();
         expect(!obj.isMobile(' ')).toBeTruthy();
         expect(!obj.isMobile('123')).toBeTruthy();
         expect(!obj.isMobile(123)).toBeTruthy();
@@ -35,10 +35,10 @@ describe('validate', () => {
     });
 
     test('isTelLoose', () => {
-        expect(!obj.isTelLoose()).toBeTruthy();
-        expect(!obj.isTelLoose('')).toBeTruthy();
-        expect(!obj.isTelLoose(null)).toBeTruthy();
-        expect(!obj.isTelLoose(undefined)).toBeTruthy();
+        expect(obj.isTelLoose()).toBeTruthy();
+        expect(obj.isTelLoose('')).toBeTruthy();
+        expect(obj.isTelLoose(null)).toBeTruthy();
+        expect(obj.isTelLoose(undefined)).toBeTruthy();
         expect(obj.isTelLoose(' ')).toBe('电话格式不正确');
         expect(obj.isTelLoose('123')).toBe('电话格式不正确');
         expect(obj.isTelLoose(123)).toBe('电话格式不正确');
@@ -52,12 +52,12 @@ describe('validate', () => {
     });
 
     test('mobile', () => {
-        expect(!obj.mobile()).toBeTruthy();
-        expect(!obj.mobile(0)).toBeTruthy();
-        expect(!obj.mobile(NaN)).toBeTruthy();
-        expect(!obj.mobile('')).toBeTruthy();
-        expect(!obj.mobile(null)).toBeTruthy();
-        expect(!obj.mobile(undefined)).toBeTruthy();
+        expect(obj.mobile()).toBeTruthy();
+        expect(obj.mobile(0)).toBeTruthy();
+        expect(obj.mobile(NaN)).toBeTruthy();
+        expect(obj.mobile('')).toBeTruthy();
+        expect(obj.mobile(null)).toBeTruthy();
+        expect(obj.mobile(undefined)).toBeTruthy();
         expect(!obj.mobile(' ')).toBeTruthy();
         expect(!obj.mobile('123')).toBeTruthy();
         expect(!obj.mobile(123)).toBeTruthy();
@@ -84,10 +84,10 @@ describe('validate', () => {
 
     //判断测试是否是固话
  test('homeTel', () => {
-    expect(!obj.homeTel()).toBeTruthy();
-    expect(!obj.homeTel('')).toBeTruthy();
-    expect(!obj.homeTel(null)).toBeTruthy();
-    expect(!obj.homeTel(undefined)).toBeTruthy();
+    expect(obj.homeTel()).toBeTruthy();
+    expect(obj.homeTel('')).toBeTruthy();
+    expect(obj.homeTel(null)).toBeTruthy();
+    expect(obj.homeTel(undefined)).toBeTruthy();
     expect(!obj.homeTel(' ')).toBeTruthy();
     expect(!obj.homeTel('123')).toBeTruthy();
     expect(!obj.homeTel(123)).toBeTruthy();
@@ -115,10 +115,10 @@ describe('validate', () => {
 
 //判断测试是否是中间为****格式的手机号
 test('phoneNum', () => {
-    expect(!obj.phoneNum()).toBeTruthy();
-    expect(!obj.phoneNum('')).toBeTruthy();
-    expect(!obj.phoneNum(null)).toBeTruthy();
-    expect(!obj.phoneNum(undefined)).toBeTruthy();
+    expect(obj.phoneNum()).toBeTruthy();
+    expect(obj.phoneNum('')).toBeTruthy();
+    expect(obj.phoneNum(null)).toBeTruthy();
+    expect(obj.phoneNum(undefined)).toBeTruthy();
     expect(!obj.phoneNum(' ')).toBeTruthy();
     expect(!obj.phoneNum('123')).toBeTruthy();
     expect(!obj.phoneNum(123)).toBeTruthy();
@@ -162,12 +162,12 @@ test('phoneNum', () => {
 
 //判断测试是否为电话号码或座机
 test('telOrPhone', () => {
-        expect(!obj.telOrPhone()).toBeTruthy();
-        expect(!obj.telOrPhone(0)).toBeTruthy();
-        expect(!obj.telOrPhone(NaN)).toBeTruthy();
-        expect(!obj.telOrPhone('')).toBeTruthy();
-        expect(!obj.telOrPhone(null)).toBeTruthy();
-        expect(!obj.telOrPhone(undefined)).toBeTruthy();
+        expect(obj.telOrPhone()).toBeTruthy();
+        expect(obj.telOrPhone(0)).toBeTruthy();
+        expect(obj.telOrPhone(NaN)).toBeTruthy();
+        expect(obj.telOrPhone('')).toBeTruthy();
+        expect(obj.telOrPhone(null)).toBeTruthy();
+        expect(obj.telOrPhone(undefined)).toBeTruthy();
         expect(!obj.telOrPhone(' ')).toBeTruthy();
         expect(!obj.telOrPhone('123')).toBeTruthy();
         expect(!obj.telOrPhone(123)).toBeTruthy();
