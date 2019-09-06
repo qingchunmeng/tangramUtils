@@ -71,7 +71,7 @@ const validate = {
             return true;
         }
 
-        return this.minValue(val, minValue) && this.maxValue(val, maxValue);
+        return validate.minValue(val, minValue) && validate.maxValue(val, maxValue);
     },
     /**
    * 正整数
@@ -79,6 +79,26 @@ const validate = {
    * @returns {boolean}
    */
     positiveInteger: (val) => {
+        const reg = /(^[1-9]+)([0-9]*)$/;
+        let flag = true;
+        // 兼容非必填的情况
+        if (!val) {
+            return true;
+        }
+        // 兼容非必填的情况
+        if (isNaN(val)) {
+            flag = false;
+        } else if (!reg.test(val)) {
+            flag = false;
+        }
+        return flag;
+    },
+    /**
+   * 正整数
+   * @param val
+   * @returns {boolean}
+   */
+    nonNegativeInteger: (val) => {
         const reg = /(^[1-9]\d*$)|0/;
         let flag = true;
         // 兼容非必填的情况
@@ -99,6 +119,22 @@ const validate = {
    * @returns {boolean}
    */
     positiveFloat: (val) => {
+        const reg = /(^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$)|(^[1-9]\d*$)/;
+        let flag = true;
+        // 兼容非必填的情况
+        if (!val) {
+            return true;
+        }
+        // 兼容非必填的情况
+        if (isNaN(val)) {
+            flag = false;
+        } else if (!reg.test(val)) {
+            flag = false;
+        }
+        return flag;
+    },
+    // 大于等于0的浮点数
+    nonNegative: (val) => {
         const reg = /(^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$)|(^[1-9]\d*$)|0/;
         let flag = true;
         // 兼容非必填的情况
@@ -113,10 +149,6 @@ const validate = {
         }
         return flag;
     },
-    // 和positiveFloat的功能相似
-    // nonNegative: (val) => {
-    //
-    // },
     /**
    * 最小不能小于多少,或者是大于XXX
    * @param val
@@ -336,9 +368,9 @@ const validate = {
         if (!val) {
             return true;
         }
-        if (val.length != 15 && val.length != 18) {
-            return false;
-        }
+        // if (val.length != 15 && val.length != 18) {
+        //     return false;
+        // }
 
         if (!reg.test(val)) {
             return false;

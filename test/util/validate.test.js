@@ -334,7 +334,8 @@ test('telOrPhone', () => {
         expect(obj.dataRange(2,[2,8])).toBeTruthy();
         expect(obj.dataRange(5,[2,8])).toBeTruthy();
         expect(!obj.dataRange(20,[2,8])).toBeTruthy();
-        expect(!obj.dataRange('3',[2,8])).toBeTruthy();
+        expect(obj.dataRange(20,[2,8])).toBeFalsy();
+        expect(obj.dataRange('3',[2,8])).toBeTruthy();
         expect(!obj.dataRange('A',[2,800])).toBeTruthy();
     });
 
@@ -364,12 +365,45 @@ test('telOrPhone', () => {
         expect(!obj.positiveFloat('ll')).toBeTruthy();
         expect(!obj.positiveFloat({})).toBeTruthy();
         expect(!obj.positiveFloat(-2)).toBeTruthy();
-        expect(!obj.positiveFloat(5)).toBeTruthy();
+        expect(obj.positiveFloat(5)).toBeTruthy();
         expect(obj.positiveFloat(20.5)).toBeTruthy();
-        expect(!obj.positiveFloat('3')).toBeTruthy();
+        expect(obj.positiveFloat('3')).toBeTruthy();
         expect(!obj.positiveFloat('A')).toBeTruthy();
         expect(!obj.positiveFloat('...')).toBeTruthy();
     })
+  
+  test('nonNegativeInteger', () => {
+    expect(obj.nonNegativeInteger('')).toBeTruthy();
+    expect(obj.nonNegativeInteger(null)).toBeTruthy();
+    expect(obj.nonNegativeInteger(undefined)).toBeTruthy();
+    expect(obj.nonNegativeInteger(0)).toBeTruthy();
+    expect(!obj.nonNegativeInteger('ll')).toBeTruthy();
+    expect(!obj.nonNegativeInteger({})).toBeTruthy();
+    expect(!obj.nonNegativeInteger(-2)).toBeTruthy();
+    expect(obj.nonNegativeInteger(5)).toBeTruthy();
+    expect(obj.nonNegativeInteger(20.5)).toBeFalsy();
+    expect(!obj.nonNegativeInteger('3')).toBeTruthy();
+    expect(!obj.nonNegativeInteger('A')).toBeTruthy();
+    expect(!obj.nonNegativeInteger('@')).toBeTruthy();
+    expect(!obj.nonNegativeInteger('*')).toBeTruthy();
+    expect(!obj.nonNegativeInteger('^')).toBeTruthy();
+    
+    
+  });
+  
+  test('nonNegative', () => {
+    expect(obj.nonNegative('')).toBeTruthy();
+    expect(obj.nonNegative(null)).toBeTruthy();
+    expect(obj.nonNegative(undefined)).toBeTruthy();
+    expect(!obj.nonNegative('ll')).toBeTruthy();
+    expect(!obj.nonNegative({})).toBeTruthy();
+    expect(!obj.nonNegative(-2)).toBeTruthy();
+    expect(obj.nonNegative(5)).toBeTruthy();
+    expect(obj.nonNegative(20.5)).toBeTruthy();
+    expect(obj.nonNegative('3')).toBeTruthy();
+    expect(!obj.nonNegative('A')).toBeTruthy();
+    expect(!obj.nonNegative('...')).toBeTruthy();
+  })
 
     test('minValue', () => {
         expect(obj.minValue('',3)).toBeTruthy();
@@ -379,12 +413,12 @@ test('telOrPhone', () => {
         expect(!obj.minValue('ll',6)).toBeTruthy();
         expect(!obj.minValue({},'a')).toBeTruthy();
         expect(!obj.minValue(-2,5)).toBeTruthy();
-        expect(!obj.minValue(5,3)).toBeTruthy();
+        expect(obj.minValue(5,3)).toBeTruthy();
         expect(obj.minValue(20.5,0.5)).toBeTruthy();
-        expect(obj.minValue(20,50)).toBeTruthy();
+        expect(!obj.minValue(20,50)).toBeTruthy();
         expect(!obj.minValue('3',4)).toBeTruthy();
         expect(!obj.minValue('A','a')).toBeTruthy();
-        expect(!obj.minValue('a','A')).toBeTruthy();
+        expect(obj.minValue('a','A')).toBeTruthy();
     })
 
     test('maxValue', () => {
@@ -398,17 +432,19 @@ test('telOrPhone', () => {
         expect(obj.maxValue(20.5,20.5)).toBeTruthy();
         expect(!obj.maxValue('3',-3)).toBeTruthy();
         expect(!obj.maxValue('A',5)).toBeTruthy();
-        expect(!obj.maxValue('A','a')).toBeTruthy();
+        expect(obj.maxValue('A','a')).toBeTruthy();
         expect(!obj.maxValue('a','A')).toBeTruthy();
     })
 
     //对比大于某个数字
     test('greaterThan', () => {
+        expect(obj.greaterThan()).toBeTruthy();
         expect(obj.greaterThan(2, 1)).toBeTruthy();
         expect(!obj.greaterThan(2, 2)).toBeTruthy();
     })
     //对比小于某个数字
     test('lessThan', () => {
+        expect(obj.lessThan()).toBeTruthy();
         expect(obj.lessThan(2, 3)).toBeTruthy();
         expect(!obj.lessThan(2, 2)).toBeTruthy();
     })
@@ -425,15 +461,16 @@ test('telOrPhone', () => {
     })
     // 特殊号码，校验身份证
     test('identityCard', () => {
-        //expect(!obj.identityCard(undefined)).toBeTruthy();
-        //expect(!obj.identityCard(' ')).toBeTruthy();
+        expect(obj.identityCard(undefined)).toBeTruthy();
+        expect(obj.identityCard('')).toBeTruthy();
         expect(!obj.identityCard('123')).toBeTruthy();
         expect(!obj.identityCard(123)).toBeTruthy();
         expect(!obj.identityCard([])).toBeTruthy();
         expect(!obj.identityCard({})).toBeTruthy();
         expect(!obj.identityCard(22345678901)).toBeTruthy();
         expect(!obj.identityCard(421022122222220000)).toBeTruthy();
-        expect(obj.identityCard('411325199303242508')).toBeTruthy();
+        expect(obj.identityCard(421022122222220000)).toBeFalsy();
+        expect(obj.identityCard(411325199303242508)).toBeTruthy();
         // expect(obj.identityCard(421022450101123)).toBeTruthy();
         // expect(obj.identityCard('421022199303242508x')).toBeTruthy();
     })
