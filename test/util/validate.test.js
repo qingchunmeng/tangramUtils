@@ -343,13 +343,13 @@ test('telOrPhone', () => {
         expect(obj.positiveInteger('')).toBeTruthy();
         expect(obj.positiveInteger(null)).toBeTruthy();
         expect(obj.positiveInteger(undefined)).toBeTruthy();
-        expect(!obj.positiveInteger(0)).toBeTruthy();
+        expect(obj.positiveInteger(0)).toBeFalsy();
         expect(!obj.positiveInteger('ll')).toBeTruthy();
         expect(!obj.positiveInteger({})).toBeTruthy();
         expect(!obj.positiveInteger(-2)).toBeTruthy();
         expect(obj.positiveInteger(5)).toBeTruthy();
         expect(!obj.positiveInteger(20.5)).toBeTruthy();
-        expect(!obj.positiveInteger('3')).toBeTruthy();
+        expect(obj.positiveInteger('3')).toBeTruthy();
         expect(!obj.positiveInteger('A')).toBeTruthy();
         expect(!obj.positiveInteger('@')).toBeTruthy();
         expect(!obj.positiveInteger('*')).toBeTruthy();
@@ -360,6 +360,7 @@ test('telOrPhone', () => {
 
     test('positiveFloat', () => {
         expect(obj.positiveFloat('')).toBeTruthy();
+        expect(obj.positiveFloat(0)).toBeFalsy();
         expect(obj.positiveFloat(null)).toBeTruthy();
         expect(obj.positiveFloat(undefined)).toBeTruthy();
         expect(!obj.positiveFloat('ll')).toBeTruthy();
@@ -373,6 +374,7 @@ test('telOrPhone', () => {
     })
   
   test('nonNegativeInteger', () => {
+    
     expect(obj.nonNegativeInteger('')).toBeTruthy();
     expect(obj.nonNegativeInteger(null)).toBeTruthy();
     expect(obj.nonNegativeInteger(undefined)).toBeTruthy();
@@ -381,8 +383,8 @@ test('telOrPhone', () => {
     expect(!obj.nonNegativeInteger({})).toBeTruthy();
     expect(!obj.nonNegativeInteger(-2)).toBeTruthy();
     expect(obj.nonNegativeInteger(5)).toBeTruthy();
-    expect(obj.nonNegativeInteger(20.5)).toBeFalsy();
-    expect(!obj.nonNegativeInteger('3')).toBeTruthy();
+    expect(obj.nonNegativeInteger(20.8)).toBeFalsy();
+    expect(obj.nonNegativeInteger('3')).toBeTruthy();
     expect(!obj.nonNegativeInteger('A')).toBeTruthy();
     expect(!obj.nonNegativeInteger('@')).toBeTruthy();
     expect(!obj.nonNegativeInteger('*')).toBeTruthy();
@@ -450,9 +452,10 @@ test('telOrPhone', () => {
     })
     //数字，年份(1800-3000之间)
     test('year', () => {
-        //expect(!obj.year(null)).toBeTruthy();
-        //expect(!obj.year(undefined)).toBeTruthy();
-        expect(!obj.year(' ')).toBeTruthy();
+        expect(obj.year()).toBeTruthy();
+        expect(obj.year(undefined)).toBeTruthy();
+        expect(obj.year('')).toBeTruthy();
+        expect(!obj.year('s234')).toBeTruthy();
         expect(!obj.year(1799)).toBeTruthy();
         expect(!obj.year(3001)).toBeTruthy();
         expect(obj.year(1800)).toBeTruthy();
@@ -484,6 +487,8 @@ test('telOrPhone', () => {
     })
 
     test('equal', () => {
+        expect(obj.equal(undefined, null)).toBeFalsy();
+        expect(obj.equal({x:undefined}, null)).toBeFalsy();
         expect(obj.equal(123, 123)).toBeTruthy();
         expect(obj.equal(123, 321)).toBeFalsy();
         expect(obj.equal(123, '123')).toBeFalsy();

@@ -79,10 +79,10 @@ const validate = {
    * @returns {boolean}
    */
     positiveInteger: (val) => {
-        const reg = /(^[1-9]+)([0-9]*)$/;
+        const reg = /^[1-9]\d*$/;
         let flag = true;
         // 兼容非必填的情况
-        if (!val) {
+        if (!val && val !== 0) {
             return true;
         }
         // 兼容非必填的情况
@@ -99,7 +99,7 @@ const validate = {
    * @returns {boolean}
    */
     nonNegativeInteger: (val) => {
-        const reg = /(^[1-9]\d*$)|0/;
+        const reg = /(^[1-9]\d*$)|(0$)/;
         let flag = true;
         // 兼容非必填的情况
         if (!val) {
@@ -122,7 +122,7 @@ const validate = {
         const reg = /(^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$)|(^[1-9]\d*$)/;
         let flag = true;
         // 兼容非必填的情况
-        if (!val) {
+        if (!val && val !== 0) {
             return true;
         }
         // 兼容非必填的情况
