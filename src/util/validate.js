@@ -368,9 +368,9 @@ const validate = {
         if (!val) {
             return true;
         }
-        // if (val.length != 15 && val.length != 18) {
-        //     return false;
-        // }
+        if (val.toString().length != 15 && val.toString().length != 18) {
+            return false;
+        }
 
         if (!reg.test(val)) {
             return false;
@@ -386,6 +386,10 @@ const validate = {
         if (!val) {
             return true;
         }
+        if (val.toString().length != 16 && val.toString().length != 19) {
+            return false;
+        }
+        return true;
     },
     /**
      * 简单校验手机号，String(mobile)是1开头的11位数字返回true

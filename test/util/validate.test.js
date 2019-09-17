@@ -372,9 +372,9 @@ test('telOrPhone', () => {
         expect(!obj.positiveFloat('A')).toBeTruthy();
         expect(!obj.positiveFloat('...')).toBeTruthy();
     })
-  
+
   test('nonNegativeInteger', () => {
-    
+
     expect(obj.nonNegativeInteger('')).toBeTruthy();
     expect(obj.nonNegativeInteger(null)).toBeTruthy();
     expect(obj.nonNegativeInteger(undefined)).toBeTruthy();
@@ -389,10 +389,10 @@ test('telOrPhone', () => {
     expect(!obj.nonNegativeInteger('@')).toBeTruthy();
     expect(!obj.nonNegativeInteger('*')).toBeTruthy();
     expect(!obj.nonNegativeInteger('^')).toBeTruthy();
-    
-    
+
+
   });
-  
+
   test('nonNegative', () => {
     expect(obj.nonNegative('')).toBeTruthy();
     expect(obj.nonNegative(null)).toBeTruthy();
@@ -482,8 +482,8 @@ test('telOrPhone', () => {
         expect(obj.bankCardNumber('')).toBeTruthy();
         expect(obj.bankCardNumber(null)).toBeTruthy();
         expect(obj.bankCardNumber(undefined)).toBeTruthy();
-        expect(!obj.bankCardNumber(6216635555555555555)).toBeTruthy();
-
+        expect(obj.bankCardNumber(6216635555555555555)).toBeTruthy();
+        expect(obj.bankCardNumber(62166355555555555551)).toBeFalsy();
     })
 
     test('equal', () => {
