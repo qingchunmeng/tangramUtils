@@ -17,7 +17,7 @@ const Compute = {
         nums.forEach((item) => {
             count += Math.round(Number(item || 0) * times);
         });
-        return count / times;
+        return Number((count / times).toFixed(precision));
     },
     /**
      * @param {array} nums 数字数组
@@ -30,7 +30,7 @@ const Compute = {
         for (let i = 0; i < nums.length; i++) {
             count -= Math.round(Number(nums[i + 1] || 0) * times);
         }
-        return count / times;
+        return Number((count / times).toFixed(precision));
     },
 };
 
