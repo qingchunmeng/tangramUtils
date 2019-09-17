@@ -1,5 +1,5 @@
 /**
- * @file 获取阶段时间处理相关Util
+ * @file 数字加减法，精度处理
  * @author lihaixu@ke.com
  * @date 2019/9/17 15:38
  */
