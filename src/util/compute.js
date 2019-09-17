@@ -7,8 +7,8 @@
 const Compute = {
     /**
      * 浮点数转整数，加法运算
-     * @param {array} nums 数字数组
-     * @param {number} precision 精度 默认保留两位小数
+     * @param {array} nums 数字数组 eg:[0.1, 0.2, 0.3]
+     * @param {number} precision 精度 默认保留两位小数 eg:2
      * @returns {number} 返回加法的最终结果
      */
     add: (nums, precision = 2) => {
@@ -20,8 +20,8 @@ const Compute = {
         return Number((count / times).toFixed(precision));
     },
     /**
-     * @param {array} nums 数字数组
-     * @param {number} precision 精度 默认保留两位小数
+     * @param {array} nums 数字数组 eg:[0.1, 0.2, 0.3]
+     * @param {number} precision 精度 默认保留两位小数 eg:2
      * @returns {number} 返回减法的最终结果
      */
     subtract: (nums, precision = 2) => {
