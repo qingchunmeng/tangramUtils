@@ -19,7 +19,7 @@ const Compute = {
         });
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
-            console.warn(`计算结果与实际精度不符，已经保留了${precision}位小数`);
+            console.warn(`由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`);
         }
         return Number(result.toFixed(precision));
     },
@@ -36,7 +36,7 @@ const Compute = {
         }
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
-            console.warn(`计算结果与实际精度不符，已经保留了${precision}位小数`);
+            console.warn(`由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`);
         }
         return Number(result.toFixed(precision));
     },
