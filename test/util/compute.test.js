@@ -34,7 +34,7 @@ describe('debounce', () => {
     test('Compute [0.008, 0.09], 3', () => {
         expect(Compute.subtract([0.008, 0.09], 3)).toEqual(-0.082);
     });
-    test('Compute [0.008, 0.09], 3', () => {
+    test('Compute [0.008, 0.09], 2', () => {
         expect(Compute.subtract([0.008, 0.009], 2)).toEqual(-0.00);
     });
 });

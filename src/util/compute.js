@@ -17,7 +17,11 @@ const Compute = {
         nums.forEach((item) => {
             count += Math.round(Number(item || 0) * times);
         });
-        return Number((count / times).toFixed(precision));
+        const result = count / times;
+        if (result.toString().split('.')[1].length > precision) {
+            console.warn(`计算结果与实际精度不符，已经保留了${precision}位小数`);
+        }
+        return Number(result.toFixed(precision));
     },
     /**
      * @param {array} nums 数字数组 eg:[0.1, 0.2, 0.3]
@@ -30,7 +34,11 @@ const Compute = {
         for (let i = 0; i < nums.length; i++) {
             count -= Math.round(Number(nums[i + 1] || 0) * times);
         }
-        return Number((count / times).toFixed(precision));
+        const result = count / times;
+        if (result.toString().split('.')[1].length > precision) {
+            console.warn(`计算结果与实际精度不符，已经保留了${precision}位小数`);
+        }
+        return Number(result.toFixed(precision));
     },
 };
 
