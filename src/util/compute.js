@@ -15,7 +15,7 @@ const Compute = {
         const times = 10 ** precision;
         let count = 0;
         nums.forEach((item) => {
-            count += Math.round(Number(item || 0) * times);
+            count += Number(item || 0) * times;
         });
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
@@ -32,7 +32,7 @@ const Compute = {
         const times = 10 ** precision;
         let count = nums[0] * times;
         for (let i = 0; i < nums.length; i++) {
-            count -= Math.round(Number(nums[i + 1] || 0) * times);
+            count -= Number(nums[i + 1] || 0) * times;
         }
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {

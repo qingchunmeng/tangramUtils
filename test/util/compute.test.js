@@ -10,6 +10,9 @@ describe('debounce', () => {
     test('Compute [0.1, 0.1]', () => {
         expect(Compute.add([0.1, 0.2], 2)).toEqual(0.30);
     });
+    test('Compute [0.001, 0.005]', () => {
+        expect(Compute.add([0.001, 0.005], 2)).toEqual(0.01);
+    });
     test('Compute [0.1, 0.2, 0.3], 2', () => {
         expect(Compute.add([0.1, 0.2, 0.3], 2)).toEqual(0.60);
     });
