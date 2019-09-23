@@ -4,7 +4,7 @@
  * @date 2019/9/17 15:38
  */
 
-const Compute = {
+const compute = {
     /**
      * 浮点数转整数，加法运算
      * @param {array} nums 数字数组 eg:[0.1, 0.2, 0.3]
@@ -42,4 +42,4 @@ const Compute = {
     },
 };
 
-export default Compute;
+export default compute;

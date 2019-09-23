@@ -9,7 +9,7 @@ import validate from './validate.js';
 import dict from './dict.js';
 import cookie from './cookie.js';
 import share from './share.js';
-import Compute from './compute.js';
+import compute from './compute.js';
 
 export default {
     debounce,
@@ -23,5 +23,5 @@ export default {
     moment,
     cookie,
     share,
-    Compute,
+    compute,
 };
