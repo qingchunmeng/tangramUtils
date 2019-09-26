@@ -6,12 +6,12 @@
 const gulp = require('gulp');
 
 const babel = require('gulp-babel');
-const minify = require('gulp-minify');
 const less = require('gulp-less');
+const revCollector = require('gulp-rev-collector');
+
 
 const del = require('del');
 const path = require('path');
-const minifyCss = require('gulp-minify-css');
 
 const {
     src, task, series, parallel,
@@ -21,14 +21,6 @@ function clean() {
     return del(['./lib']);
 }
 
-function complieJs() {
-    src('src/**/*.js')
-        .pipe(babel({
-            presets: ['@babel/env'],
-        }))
-        // .pipe(minify())
-        .pipe(gulp.dest('lib'));
-}
 
 function complieCss() {
     src('src/**/*.less')
@@ -36,6 +28,16 @@ function complieCss() {
             paths: [path.join(__dirname, 'src', 'includes')],
         }))
         // .pipe(minifyCss())
+        .pipe(gulp.dest('lib'));
+}
+
+function complieJs() {
+    src(['gulp.json', 'src/**/*.js'])
+        .pipe(revCollector())
+        .pipe(babel({
+            presets: ['@babel/env'],
+        }))
+    // .pipe(minify())
         .pipe(gulp.dest('lib'));
 }
 
