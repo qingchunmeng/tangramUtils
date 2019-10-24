@@ -10,6 +10,7 @@
 // 需要进行测试
 import Dialog from '../../dialog/js/index';
 import Loading from '../../loading/js/index';
+import 'whatwg-fetch';
 
 class FetchClass {
     constructor(url, opt) {
