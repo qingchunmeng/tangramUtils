@@ -403,6 +403,18 @@ const validate = {
         return reg.test(val);
     },
     /**
+     * 手机号
+     * @param val
+     * @returns {boolean}
+    */
+    phone: (val) => {
+        if (val === '') {
+            return true;
+        }
+        const reg = /^(1[3-9])\d{9}$/;
+        return reg.test(val);
+    },
+    /**
    * 手机号
    * @param val
    * @returns {boolean}
@@ -457,7 +469,7 @@ const validate = {
             return true;
         }
         const reg = /^1\d{10}$/;
-        return reg.test(val) || '电话格式不正确';
+        return reg.test(val);
     },
 };
 
