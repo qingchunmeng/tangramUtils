@@ -93,6 +93,8 @@ describe('validate', () => {
         expect(!obj.phone(123)).toBeTruthy();
         expect(!obj.phone([])).toBeTruthy();
         expect(!obj.phone({})).toBeTruthy();
+        expect(!obj.phone(10345678901)).toBeTruthy();
+        expect(!obj.phone(11345678901)).toBeTruthy();
         expect(!obj.phone(22345678901)).toBeTruthy();
         expect(!obj.phone(123456789012)).toBeTruthy();
         expect(obj.phone(15426789012)).toBeTruthy();
