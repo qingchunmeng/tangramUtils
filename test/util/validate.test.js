@@ -45,6 +45,7 @@ describe('validate', () => {
         // expect(obj.isTelLoose({})).toBe('电话格式不正确');
         // expect(obj.isTelLoose(22345678901)).toBe('电话格式不正确');
         // expect(obj.isTelLoose(123456789012)).toBe('电话格式不正确');
+        expect(obj.isTelLoose('')).toBeTruthy();
         expect(obj.isTelLoose(12345678901)).toBeTruthy();
         expect(obj.isTelLoose('12345678901')).toBeTruthy();
         // expect(obj.isTelLoose(' 12345678901')).toBe('电话格式不正确');
@@ -626,5 +627,24 @@ test('telOrPhone', () => {
         expect(obj.illegalChar(undefined)).toBeTruthy();
         expect(obj.illegalChar([])).toBeTruthy();
         expect(obj.illegalChar({})).toBeTruthy();
+    })
+
+    test('isHanZi', () => {
+        expect(obj.isHanZi(123)).toBeFalsy();
+        expect(obj.isHanZi('小123')).toBeFalsy();
+        expect(obj.isHanZi('123小')).toBeFalsy();
+        expect(obj.isHanZi('{')).toBeFalsy();
+        expect(obj.isHanZi('!')).toBeFalsy();
+        expect(obj.isHanZi('$')).toBeFalsy();
+        expect(obj.isHanZi('>')).toBeFalsy();
+        expect(obj.isHanZi('a')).toBeFalsy();
+        expect(obj.isHanZi(undefined)).toBeFalsy();
+        expect(obj.isHanZi(null)).toBeFalsy();
+        expect(obj.isHanZi([])).toBeFalsy();
+        expect(obj.isHanZi({})).toBeFalsy();
+        expect(obj.isHanZi('')).toBeTruthy();
+        expect(obj.isHanZi('小')).toBeTruthy();
+        expect(obj.isHanZi('小明')).toBeTruthy();
+        expect(obj.isHanZi('小明爱唱歌')).toBeTruthy();
     })
 });

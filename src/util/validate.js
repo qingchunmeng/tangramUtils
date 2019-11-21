@@ -471,6 +471,18 @@ const validate = {
         const reg = /^1\d{10}$/;
         return reg.test(val);
     },
+    /**
+     * 验证所有的字符是否都是汉字(可为空)
+     * @param val
+     * @returns {*}
+     */
+    isHanZi(val) {
+        if (val === '') {
+            return true;
+        }
+        const reg = /^[\u4E00-\u9FA5]+$/;
+        return reg.test(val);
+    }
 };
 
 // console.log(validate.afterDate('2019-03-02','2019-03-02T:23:59:59'))
