@@ -195,6 +195,35 @@ const dom = {
             console.log(e);
         }
     },
+    addClass: (target, className) => {
+        if (!target || target.length == 0) {
+            return;
+        }
+        if (target.length > 0) {
+            target.forEach((node) => {
+                dom.addClass(node, className);
+            });
+            return;
+        }
+        let classNameArray = (target.getAttribute('class') || '').split(/\s+/);
+        classNameArray = classNameArray.filter(key => key != className);
+        classNameArray.push(className);
+        target.setAttribute('class', classNameArray.join(' '));
+    },
+    removeClass: (target, className) => {
+        if (!target || target.length == 0) {
+            return;
+        }
+        if (target.length > 0) {
+            target.forEach((node) => {
+                dom.removeClass(node, className);
+            });
+            return;
+        }
+        let classNameArray = (target.getAttribute('class') || '').split(/\s+/);
+        classNameArray = classNameArray.filter(key => key != className);
+        target.setAttribute('class', classNameArray.join(' '));
+    },
 };
 
 export default dom;
