@@ -67,10 +67,10 @@ class M {
 
     close() {
         if (this.hasShow) {
-            this.spinContainer.remove();
-            this.elem.classList.remove('fetch-spin-nested-loading');
-            this.elem.classList.remove('fetch-spin-loading');
-            // this.spinContainer.style.display = 'none';
+            // this.spinContainer.remove();
+            // this.elem.classList.remove('fetch-spin-nested-loading');
+            // this.elem.classList.remove('fetch-spin-loading');
+            this.spinContainer.style.display = 'none';
         }
     }
 }

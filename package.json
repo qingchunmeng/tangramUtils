@@ -1,14 +1,12 @@
 {
   "name": "@jiaoyi/tangram",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "",
   "main": "lib/index.js",
   "files": [
     "lib"
   ],
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack --config ./webpack.config.js",
     "precommit": "lint-staged",
     "test": "jest  --watchAll --coverage",
     "prepub": "./node_modules/.bin/gulp build",
