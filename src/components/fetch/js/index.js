@@ -214,6 +214,7 @@ class FetchClass {
 
           }, this.defaultConfig, options, {
             headers: {
+                ...options.headers,
               'X-Requested-With': 'XMLHttpRequest',
               Accept: 'application/json',
             },
