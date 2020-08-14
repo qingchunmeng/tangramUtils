@@ -7,7 +7,7 @@ const env = {
     },
 
     isDev: () => {
-        const isTest = window.location.href.indexOf('test'); // 测试环境
+        const isTest = !!window.location.href.indexOf('test'); // 测试环境
         return isTest;
     },
 };

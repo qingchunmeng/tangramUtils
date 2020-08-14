@@ -74,7 +74,7 @@ const waterMark = {
             settings.container.insertBefore(watermarkDiv, settings.container.firstChild);
         }
         // 增加开发环节和线上环境的判断
-        if (env.isProd) {
+        if (env.isProd()) {
             const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
             if (MutationObserver) {
                 let mo = new MutationObserver((() => {
