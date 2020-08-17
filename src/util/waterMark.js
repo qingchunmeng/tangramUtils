@@ -31,9 +31,12 @@ const waterMark = {
 
                     const output = Object(target);
                     for (let index = 1; index < arguments.length; index++) {
+                        // eslint-disable-next-line prefer-rest-params
                         const source = arguments[index];
                         if (source !== undefined && source !== null) {
+                            // eslint-disable-next-line no-restricted-syntax
                             for (const nextKey in source) {
+                                // eslint-disable-next-line no-prototype-builtins
                                 if (source.hasOwnProperty(nextKey)) {
                                     output[nextKey] = source[nextKey];
                                 }
