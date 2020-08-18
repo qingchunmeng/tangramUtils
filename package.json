@@ -1,6 +1,6 @@
 {
-  "name": "@jiaoyi/tangram",
-  "version": "0.3.5",
+  "name": "@jiaoyi/tangram-water",
+  "version": "0.0.1",
   "description": "",
   "main": "lib/index.js",
   "files": [

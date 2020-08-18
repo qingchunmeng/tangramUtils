@@ -15,11 +15,11 @@ const waterMark = {
             height: '150px',
             textAlign: 'center',
             textBaseline: 'middle',
-            font: '20px Microsoft Yahei',
+            font: '14px Microsoft Yahei',
             fillStyle: 'rgba(170, 170, 170, 0.4)',
             content: '保密水印',
-            rotate: '10',
-            zIndex: 9999,
+            rotate: '-10',
+            zIndex: 9999999999,
         };
         // object.assign兼容性解决
         if (typeof Object.assign != 'function') {
@@ -59,6 +59,9 @@ const waterMark = {
             return;
         }
         // 如果不支持point-event 可以直接返回
+        if (!('point-event' in document.documentElement.style)) {
+            return;
+        }
         ctx.textAlign = settings.textAlign;
         ctx.textBaseline = settings.textBaseline;
         ctx.font = settings.font;
@@ -71,7 +74,7 @@ const waterMark = {
         let styleStr = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;background-repeat:repeat;';
         styleStr = `${styleStr}z-index:${settings.zIndex};`;
         styleStr = `${styleStr}background-image:url(${base64Url})`;
-        watermarkDiv.setAttribute('style', settings.styleStr);
+        watermarkDiv.setAttribute('style', styleStr);
         watermarkDiv.classList.add('__wm');
         if (!__wm) {
             settings.container.insertBefore(watermarkDiv, settings.container.firstChild);
