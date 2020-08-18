@@ -1,6 +1,6 @@
 {
-  "name": "@jiaoyi/tangram-water",
-  "version": "0.0.1",
+  "name": "@jiaoyi/tangram",
+  "version": "0.3.5-beta1",
   "description": "",
   "main": "lib/index.js",
   "files": [
@@ -10,7 +10,8 @@
     "precommit": "lint-staged",
     "test": "jest  --watchAll --coverage",
     "prepub": "./node_modules/.bin/gulp build",
-    "pub": "npm run prepub && npm publish"
+    "pub": "npm run prepub && npm publish",
+    "pubBeta": "npm run prepub && npm publish --tag beta"
   },
   "lint-staged": {
     "*.js": [
