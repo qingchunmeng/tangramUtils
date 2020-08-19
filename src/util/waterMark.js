@@ -11,14 +11,14 @@ const waterMark = {
     __waterDocument: (settings) => {
         const defaultSettings = {
             container: document.body,
-            width: '200px',
-            height: '150px',
+            width: '400px',
+            height: '250px',
             textAlign: 'center',
             textBaseline: 'middle',
             font: '14px Microsoft Yahei',
-            fillStyle: 'rgba(170, 170, 170, 0.4)',
+            fillStyle: 'rgba(0, 0, 0, 0.06)',
             content: '保密水印',
-            rotate: '-10',
+            rotate: '-30',
             zIndex: 9999999999,
         };
         // object.assign兼容性解决
@@ -58,16 +58,17 @@ const waterMark = {
             console.error('this browser is not support canvas.');
             return;
         }
-        // 如果不支持point-event 可以直接返回
-        if (!('point-event' in document.documentElement.style)) {
+        // 如果不支持point-event 可以直接返回不添加水印
+        if (!('pointerEvents' in document.documentElement.style)) {
             return;
         }
         ctx.textAlign = settings.textAlign;
         ctx.textBaseline = settings.textBaseline;
         ctx.font = settings.font;
         ctx.fillStyle = settings.fillStyle;
+        ctx.translate(parseFloat(settings.width) / 2, parseFloat(settings.height) / 2);
         ctx.rotate(Math.PI / 180 * settings.rotate);
-        ctx.fillText(settings.content, parseFloat(settings.width) / 2, parseFloat(settings.height) / 2);
+        ctx.fillText(settings.content, 0, 0);
         const base64Url = canvas.toDataURL();
         const __wm = document.querySelector('.__wm');
         const watermarkDiv = __wm || document.createElement('div');
