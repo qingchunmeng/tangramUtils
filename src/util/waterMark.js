@@ -19,7 +19,9 @@ const waterMark = {
             fillStyle: 'rgba(0, 0, 0, 0.06)',
             content: '保密水印',
             rotate: '-30',
-            zIndex: 9999999999,
+            zIndex: 999999,
+            // 控制层级 优先级最高
+            translateZ: '3px',
         };
         // object.assign兼容性解决
         if (typeof Object.assign != 'function') {
@@ -74,6 +76,7 @@ const waterMark = {
         const watermarkDiv = __wm || document.createElement('div');
         let styleStr = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;background-repeat:repeat;';
         styleStr = `${styleStr}z-index:${settings.zIndex};`;
+        styleStr = `${styleStr}transform:translateZ(${settings.translateZ});`;
         styleStr = `${styleStr}background-image:url(${base64Url})`;
         watermarkDiv.setAttribute('style', styleStr);
         watermarkDiv.classList.add('__wm');
