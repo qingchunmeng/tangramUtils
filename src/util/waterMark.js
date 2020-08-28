@@ -21,6 +21,7 @@ const waterMark = {
             fillStyle: 'rgba(0, 0, 0, 0.06)',
             content: '保密水印',
             rotate: '-30',
+            space: 30, // 同行同列的位置差
             zIndex: 999999,
             // 控制层级 优先级最高
             translateZ: '3px',
@@ -76,7 +77,8 @@ const waterMark = {
         for (let i = col; i >= 0; i--) {
             for (let j = 0; j <= row; j++) {
                 ctx.save();
-                ctx.translate(i * 30 + j * settings.colWidth, (col - i) * settings.rowHeight + j * 30);
+                // eslint-disable-next-line max-len
+                ctx.translate(i * settings.space + j * settings.colWidth, (col - i) * settings.rowHeight + j * settings.space);
                 ctx.rotate(Math.PI / 180 * settings.rotate);
                 ctx.fillText(settings.content, 0, 0);
                 ctx.restore();
