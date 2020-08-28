@@ -105,7 +105,7 @@ const waterMark = {
                         // 避免一直触发
                         mo.disconnect();
                         mo = null;
-                        waterMark.__waterDocument(settings && JSON.parse(JSON.stringify(settings)));
+                        waterMark.waterDocument(settings);
                     }
                 }));
                 mo.observe(settings.container, {
@@ -202,7 +202,7 @@ const waterMark = {
                         // 避免一直触发
                         mo.disconnect();
                         mo = null;
-                        waterMark.__waterDocument(settings && JSON.parse(JSON.stringify(settings)));
+                        waterMark.__waterDocument(settings);
                     }
                 }));
                 mo.observe(settings.container, {
