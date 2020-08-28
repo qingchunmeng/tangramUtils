@@ -1,5 +1,5 @@
 const env = {
-    isProd: () => !env.isDev && !env.isTest,
+    isProd: () => !env.isDev() && !env.isTest(),
 
     isTest: () => {
         const hasPort = !!window.location.port; // 开发环境

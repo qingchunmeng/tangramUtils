@@ -11,8 +11,8 @@ const waterMark = {
     waterDocument: (settings) => {
         const defaultSettings = {
             container: document.body,
-            width: '2000',
-            height: '1000',
+            width: window.screen.width,
+            height: window.screen.height,
             colWidth: '200',
             rowHeight: '200',
             textAlign: 'center',
@@ -21,6 +21,7 @@ const waterMark = {
             fillStyle: 'rgba(0, 0, 0, 0.06)',
             content: '保密水印',
             rotate: '-30',
+            zIndex: 999999,
             // 控制层级 优先级最高
             translateZ: '3px',
         };
@@ -71,7 +72,8 @@ const waterMark = {
         ctx.fillStyle = settings.fillStyle;
         const row = settings.width / settings.colWidth;
         const col = settings.height / settings.rowHeight;
-        for (let i = col; i >= 0; i--) { // 添加横竖不对齐的水印
+        // 添加横竖不对齐的水印
+        for (let i = col; i >= 0; i--) {
             for (let j = 0; j <= row; j++) {
                 ctx.save();
                 ctx.translate(i * 30 + j * settings.colWidth, (col - i) * settings.rowHeight + j * 30);
@@ -84,6 +86,7 @@ const waterMark = {
         const __wm = document.querySelector('.__wm');
         const watermarkDiv = __wm || document.createElement('div');
         let styleStr = 'position:fixed;width:100%;height:100%;pointer-events:none;background-repeat:no-repeat;';
+        styleStr = `${styleStr}z-index:${settings.zIndex};`;
         styleStr = `${styleStr}transform:translateZ(${settings.translateZ});`;
         styleStr = `${styleStr}background-image:url(${base64Url})`;
         watermarkDiv.setAttribute('style', styleStr);
