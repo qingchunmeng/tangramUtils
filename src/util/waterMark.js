@@ -71,8 +71,8 @@ const waterMark = {
         ctx.textBaseline = settings.textBaseline;
         ctx.font = settings.font;
         ctx.fillStyle = settings.fillStyle;
-        const row = settings.width / settings.colWidth;
-        const col = settings.height / settings.rowHeight;
+        const col = settings.width / settings.colWidth;
+        const row = settings.height / settings.rowHeight;
         // 添加横竖不对齐的水印
         for (let i = col; i >= 0; i--) {
             for (let j = 0; j <= row; j++) {
