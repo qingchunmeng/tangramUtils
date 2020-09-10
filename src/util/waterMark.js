@@ -26,34 +26,7 @@ const waterMark = {
             // 控制层级 优先级最高
             translateZ: '3px',
         };
-        // object.assign兼容性解决
-        if (typeof Object.assign != 'function') {
-            (function () {
-                Object.assign = function (target) {
-                    if (target === undefined || target === null) {
-                        throw new TypeError('Cannot convert undefined or null to object');
-                    }
-
-                    const output = Object(target);
-                    for (let index = 1; index < arguments.length; index++) {
-                        // eslint-disable-next-line prefer-rest-params
-                        const source = arguments[index];
-                        if (source !== undefined && source !== null) {
-                            // eslint-disable-next-line no-restricted-syntax
-                            for (const nextKey in source) {
-                                // eslint-disable-next-line no-prototype-builtins
-                                if (source.hasOwnProperty(nextKey)) {
-                                    output[nextKey] = source[nextKey];
-                                }
-                            }
-                        }
-                    }
-                    return output;
-                };
-            }());
-        }
-
-        settings = Object.assign(defaultSettings, settings);
+        settings = { ...defaultSettings, ...settings };
 
         const canvas = document.createElement('canvas');
         canvas.setAttribute('width', settings.width);
