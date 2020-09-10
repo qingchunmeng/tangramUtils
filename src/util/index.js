@@ -10,6 +10,8 @@ import dict from './dict.js';
 import cookie from './cookie.js';
 import share from './share.js';
 import compute from './compute.js';
+import env from './env.js';
+import waterMark from './waterMark.js';
 
 export default {
     debounce,
@@ -24,4 +26,6 @@ export default {
     cookie,
     share,
     compute,
+    env,
+    waterMark,
 };
