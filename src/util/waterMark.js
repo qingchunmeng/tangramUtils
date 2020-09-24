@@ -8,7 +8,7 @@ import env from './env.js';
 
 
 const waterMark = {
-    waterDocument: (settings) => {
+    waterDocument: settings => {
         const defaultSettings = {
             container: document.body,
             width: window.screen.width,
@@ -24,7 +24,7 @@ const waterMark = {
             space: 30, // 同行同列的位置差
             zIndex: 999999,
             // 控制层级 优先级最高
-            translateZ: '3px',
+            translateZ: '3px'
         };
         settings = { ...defaultSettings, ...settings };
 
@@ -86,10 +86,10 @@ const waterMark = {
                 mo.observe(settings.container, {
                     attributes: true,
                     subtree: true,
-                    childList: true,
+                    childList: true
                 });
             }
         }
-    },
+    }
 };
 export default waterMark;

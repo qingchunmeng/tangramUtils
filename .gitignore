@@ -1,14 +1,22 @@
+*.DS_Store
+/node_modules
+
 .project
 .projectile
-/node_modules/*
-/dist/*
-*.DS_Store
+
+
+# vscode
 .idea
-te.iml
-dist
-libraries
+
+# demo
 *.demo.js
-config/mock.js
-start.sh
+
+# jest
 output.log
 coverage
+
+# Eslint
+ESLintReport.html
+
+# build
+/lib/

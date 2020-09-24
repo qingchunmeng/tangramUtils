@@ -9,6 +9,6 @@ const env = {
     isTest: () => {
         const isTest = !!window.location.origin.includes('test'); // 测试环境
         return isTest;
-    },
+    }
 };
 export default env;

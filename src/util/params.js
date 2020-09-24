@@ -3,16 +3,69 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 16:33
  */
+
+import { isNull, isUndefined, flatten } from 'lodash';
+import { isEmptyString } from './types';
+
+// 将 query 变成对象
+export const queryParse = (queryString = '') => {
+    let query;
+    if (queryString.startsWith('?')) {
+        query = queryString.substring(1);
+    } else {
+        query = queryString;
+    }
+    if (isEmptyString(query)) {
+        return {};
+    }
+    return query.split('&').reduce((prev, cur) => {
+        const [k, v = null] = cur.split('=');
+        const val = isNull(v) ? v : decodeURIComponent(v);
+        if (isUndefined(prev[k])) {
+            prev[k] = val;
+        } else {
+            prev[k] = flatten([prev[k], val]);
+        }
+        return prev;
+    }, {});
+};
+
+// 将 对象 变成 query
+export const queryStringify = (args = {}) => {
+    return Object.entries(args || {})
+        .reduce((prev, cur) => {
+            const [k, v] = cur;
+            if (isUndefined(v)) {
+                return prev;
+            }
+            if (isNull(v)) {
+                prev.push(k);
+            } else {
+                const list = flatten([v])
+                    .filter(v2 => {
+                        return !isUndefined(v2);
+                    })
+                    .map(v2 => {
+                        const val = encodeURIComponent(v2);
+                        return isNull(v2) ? k : [k, val].join('=');
+                    });
+                prev.push(...list);
+            }
+            return prev;
+        }, [])
+        .join('&');
+};
+
 const params = {
     /**
      * 将查询参数解析成对象
      * @param {String} search eg. "?a=1&b=2"
      * @return {Object} eg. { a: 1, b: 2 }
      */
-    getParams: (search) => {
+    getParams: search => {
         const _params = {};
         const arr = search ? search.slice(1).split('&') : [];
-        arr.forEach((item) => {
+        arr.forEach(item => {
             const a = item.split('=');
             _params[decodeURIComponent(a[0])] = a.length > 1 ? decodeURIComponent(a[1]) : '';
         });
@@ -24,9 +77,9 @@ const params = {
      * @param {Object} _params
      * @return {String}
      */
-    getSearch: (_params) => {
+    getSearch: _params => {
         let search = '?';
-        Object.keys(_params).forEach((key) => {
+        Object.keys(_params).forEach(key => {
             search += `${encodeURIComponent(key)}=${encodeURIComponent(_params[key] ? _params[key].toString() : '')}&`;
         });
 
@@ -37,7 +90,13 @@ const params = {
     /**
      * 解析 window.location.search 参数为对象
      */
-    getQuery: () => params.getParams(window.location.search),
+    getQuery: () => {
+        return params.getParams(window.location.search);
+    }
 };
 
-export default params;
+export default {
+    queryParse,
+    queryStringify,
+    ...params
+};

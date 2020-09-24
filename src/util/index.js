@@ -13,6 +13,17 @@ import compute from './compute.js';
 import env from './env.js';
 import waterMark from './waterMark.js';
 
+import * as decimal from './decimal';
+import * as dev from './dev';
+import * as enums from './enums';
+import * as formatters from './formatters';
+import * as numeral from './numeral';
+import * as route from './route';
+import * as rules from './rules';
+import * as string from './string';
+import * as time from './time';
+import * as types from './types';
+
 export default {
     debounce,
     dict,
@@ -28,4 +39,14 @@ export default {
     compute,
     env,
     waterMark,
+    decimal,
+    dev,
+    enums,
+    formatters,
+    numeral,
+    route,
+    rules,
+    string,
+    time,
+    types
 };
