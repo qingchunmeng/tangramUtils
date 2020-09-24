@@ -7,7 +7,7 @@ const env = {
     },
 
     isTest: () => {
-        const isTest = !!window.location.href.includes('test'); // 测试环境
+        const isTest = !!window.location.origin.includes('test'); // 测试环境
         return isTest;
     },
 };
