@@ -1,6 +1,6 @@
 {
   "name": "@jiaoyi/tangram",
-  "version": "0.3.10",
+  "version": "0.3.12",
   "description": "",
   "main": "lib/index.js",
   "files": [
