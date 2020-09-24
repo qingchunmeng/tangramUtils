@@ -8,13 +8,13 @@ import env from './env.js';
 
 
 const waterMark = {
-    waterDocument: (settings) => {
+    waterDocument: settings => {
         const defaultSettings = {
             container: document.body,
             width: window.screen.width,
             height: window.screen.height,
-            colWidth: '200',
-            rowHeight: '200',
+            colWidth: 200,
+            rowHeight: 200,
             textAlign: 'center',
             textBaseline: 'middle',
             font: '14px Microsoft Yahei',
@@ -24,36 +24,9 @@ const waterMark = {
             space: 30, // 同行同列的位置差
             zIndex: 999999,
             // 控制层级 优先级最高
-            translateZ: '3px',
+            translateZ: '3px'
         };
-        // object.assign兼容性解决
-        if (typeof Object.assign != 'function') {
-            (function () {
-                Object.assign = function (target) {
-                    if (target === undefined || target === null) {
-                        throw new TypeError('Cannot convert undefined or null to object');
-                    }
-
-                    const output = Object(target);
-                    for (let index = 1; index < arguments.length; index++) {
-                        // eslint-disable-next-line prefer-rest-params
-                        const source = arguments[index];
-                        if (source !== undefined && source !== null) {
-                            // eslint-disable-next-line no-restricted-syntax
-                            for (const nextKey in source) {
-                                // eslint-disable-next-line no-prototype-builtins
-                                if (source.hasOwnProperty(nextKey)) {
-                                    output[nextKey] = source[nextKey];
-                                }
-                            }
-                        }
-                    }
-                    return output;
-                };
-            }());
-        }
-
-        settings = Object.assign(defaultSettings, settings);
+        settings = { ...defaultSettings, ...settings };
 
         const canvas = document.createElement('canvas');
         canvas.setAttribute('width', settings.width);
@@ -113,10 +86,10 @@ const waterMark = {
                 mo.observe(settings.container, {
                     attributes: true,
                     subtree: true,
-                    childList: true,
+                    childList: true
                 });
             }
         }
-    },
+    }
 };
 export default waterMark;

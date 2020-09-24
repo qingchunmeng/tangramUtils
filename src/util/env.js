@@ -1,14 +1,14 @@
 const env = {
     isProd: () => !env.isDev() && !env.isTest(),
 
-    isTest: () => {
+    isDev: () => {
         const hasPort = !!window.location.port; // 开发环境
         return hasPort;
     },
 
-    isDev: () => {
-        const isTest = !!window.location.href.indexOf('test'); // 测试环境
+    isTest: () => {
+        const isTest = !!window.location.origin.includes('test'); // 测试环境
         return isTest;
-    },
+    }
 };
 export default env;
