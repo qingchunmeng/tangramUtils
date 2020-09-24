@@ -3,7 +3,151 @@
  * @author mengqingchun002@ke.com
  * @date 2019/4/16 16:29
  */
+
+import { kebabCase, isNumber, isObject, flattenDeep, uniq } from 'lodash';
+import { stringifyUrl } from './route';
+import { isEmptyObject } from './types';
 import validate from './validate.js';
+
+// 给元素批量设置属性
+const setAttrs = (ele, attrs = {}) => {
+    Object.entries(attrs).forEach(([k, v]) => {
+        ele.setAttribute(k, v);
+    });
+};
+
+// 下载 blob
+const downloadBlob = (blob, options = {}) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(blob);
+    fileReader.onload = e => {
+        const elmentA = document.createElement('a');
+        const href = e.target.result;
+        setAttrs(elmentA, { ...options, href });
+        document.body.appendChild(elmentA);
+        elmentA.click();
+        document.body.removeChild(elmentA);
+    };
+};
+
+// 下载文件
+const download = (url = '', params = {}) => {
+    const elmentA = document.createElement('a');
+    const href = stringifyUrl(url, params);
+    setAttrs(elmentA, { href, download: href, target: '_blank' });
+    elmentA.click();
+};
+
+// 当值为数字时, 加上单位 `px` 的css属性
+const DefaultUnitsPxProperties = ['font-size', 'margin', 'padding', 'border'];
+
+// margin, padding, border
+['top', 'right', 'bottom', 'left'].forEach(v => {
+    DefaultUnitsPxProperties.push(v);
+    DefaultUnitsPxProperties.push(['margin', v].join('-'));
+    DefaultUnitsPxProperties.push(['margin', v].join('-'));
+    DefaultUnitsPxProperties.push(['border', v, 'width'].join('-'));
+});
+
+// max min
+['width', 'height'].forEach(v => {
+    DefaultUnitsPxProperties.push(v);
+    DefaultUnitsPxProperties.push(['max', v].join('-'), ['min', v].join('-'));
+});
+
+// 给cssom加上单位px
+const convertCssom = (cssom = {}) => {
+    return Object.entries(cssom).reduce((prev, [k, v]) => {
+        const key = kebabCase(k);
+        // 对于一些特定属性, 当值为数字时, 加上单位 px
+        if (isNumber(v) && DefaultUnitsPxProperties.includes(key)) {
+            prev[key] = `${v}px`;
+        } else {
+            prev[key] = v;
+        }
+        return prev;
+    }, {});
+};
+
+// 给元素批量设置样式
+const setStyle = (ele, cssom) => {
+    const computedCssom = convertCssom(cssom);
+    Object.entries(computedCssom).forEach(([k, v]) => {
+        ele.style[k] = v;
+    });
+};
+
+// 获取 cssText
+const getCssText = (cssom = {}) => {
+    if (isEmptyObject(cssom)) {
+        return '';
+    }
+    const computedCssom = convertCssom(cssom);
+    const cssText = Object.entries(computedCssom)
+        .reduce((prev, [k, v]) => {
+            prev.push([k, v].join(': '));
+            return prev;
+        }, [])
+        .join('; ');
+    return [cssText, ';'].join('');
+};
+
+// 获取字符串在浏览器中所占的长度
+const getWordWidth = (word = '', cssom = {}) => {
+    const eleSpan = document.createElement('span');
+    const defaultCssom = { visibility: 'hidden', whiteSpace: 'nowrap', fontSize: 14 };
+    eleSpan.style.cssText = getCssText({
+        ...defaultCssom,
+        ...cssom
+    });
+    document.body.appendChild(eleSpan);
+    eleSpan.innerText = word;
+    const width = eleSpan.offsetWidth;
+    document.body.removeChild(eleSpan);
+    return Math.ceil(Number.parseFloat(width));
+};
+
+// 复制文本
+const copyText = (text = '') => {
+    const input = document.createElement('input');
+    document.body.appendChild(input);
+    input.setAttribute('value', text);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+};
+
+// 轮子王: https://www.npmjs.com/package/classnames
+const classNames = (...args) => {
+    const classNameList = [];
+    flattenDeep([args]).forEach(v => {
+        if (isObject(v)) {
+            Object.entries(v).forEach(([k2, v2]) => {
+                if (v2) {
+                    classNameList.push(k2);
+                }
+            });
+        } else {
+            classNameList.push(String(v || '').trim());
+        }
+    });
+    return uniq(classNameList.filter(Boolean)).join(' ');
+};
+
+// 给 className 加后缀
+const suffixClassNames = (baseClassName = '', suffixConfig = {}, config = {}) => {
+    const computedConfig = {
+        separator: '-',
+        ...config
+    };
+    const classNameList = [baseClassName];
+    Object.entries(suffixConfig).forEach(([k, v]) => {
+        if (v) {
+            classNameList.push([baseClassName, k].join(computedConfig.separator));
+        }
+    });
+    return classNames(classNameList);
+};
 
 const dom = {
     /**
@@ -19,7 +163,7 @@ const dom = {
             return {
                 remove() {
                     target.removeEventListener(eventType, callback, false);
-                },
+                }
             };
         }
         if (target.attachEvent) {
@@ -27,7 +171,7 @@ const dom = {
             return {
                 remove() {
                     target.detachEvent(`on${eventType}`, callback);
-                },
+                }
             };
         }
     },
@@ -49,18 +193,14 @@ const dom = {
 
         return false;
     },
-    on: () => {
-
-    },
-    off: () => {
-
-    },
+    on: () => {},
+    off: () => {},
     /**
      * document元素方法兼容
      * @param {String} attr - 方法名称
      * @return {Number}
      */
-    getDocumentAttr: (attr) => {
+    getDocumentAttr: attr => {
         if (!attr) {
             console.log('请传递attr属性');
             return false;
@@ -74,13 +214,14 @@ const dom = {
      * @param {Node} elem - dom元素
      * @return {Number}
      */
-    scrollWidth: (elem) => {
+    scrollWidth: elem => {
         if (!elem) {
             console.log('请传递dom元素');
             return false;
         }
 
-        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+        if (validate.isWindow(elem) || elem.nodeType === 9) {
+            // 如果是窗口对象, 或者document对象
             return dom.getDocumentAttr('scrollWidth');
         }
 
@@ -91,13 +232,14 @@ const dom = {
      * @param {Node} elem - dom元素
      * @return {Number}
      */
-    scrollHeight: (elem) => {
+    scrollHeight: elem => {
         if (!elem) {
             console.log('请传递dom元素');
             return false;
         }
 
-        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+        if (validate.isWindow(elem) || elem.nodeType === 9) {
+            // 如果是窗口对象, 或者document对象
             return dom.getDocumentAttr('scrollHeight');
         }
 
@@ -108,13 +250,14 @@ const dom = {
      * @param {Node} elem - dom元素
      * @return {Number}
      */
-    clientWidth: (elem) => {
+    clientWidth: elem => {
         if (!elem) {
             console.log('请传递dom元素');
             return false;
         }
 
-        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+        if (validate.isWindow(elem) || elem.nodeType === 9) {
+            // 如果是窗口对象, 或者document对象
             return dom.getDocumentAttr('clientWidth');
         }
 
@@ -125,37 +268,36 @@ const dom = {
      * @param {Node} elem - dom元素
      * @return {Number}
      */
-    clientHeight: (elem) => {
+    clientHeight: elem => {
         if (!elem) {
             console.log('请传递dom元素');
             return false;
         }
 
-        if (validate.isWindow(elem) || elem.nodeType === 9) { // 如果是窗口对象, 或者document对象
+        if (validate.isWindow(elem) || elem.nodeType === 9) {
+            // 如果是窗口对象, 或者document对象
             return dom.getDocumentAttr('clientHeight');
         }
 
         return elem.clientHeight;
     },
-    offsetWidth: () => {
-
-    },
-    offsetHeight: () => {
-
-    },
+    offsetWidth: () => {},
+    offsetHeight: () => {},
     /**
      * 获取window元素宽度
      * @param {Node} elem - dom元素
      * @return {Number}
      */
-    windowWidth: (elem) => {
+    windowWidth: elem => {
         if (!elem) elem = window;
 
-        if (validate.isWindow(elem)) { // 如果是window元素
+        if (validate.isWindow(elem)) {
+            // 如果是window元素
             return elem.document.documentElement.clientWidth;
         }
 
-        if (elem.nodeType === 9) { // 如果是document元素
+        if (elem.nodeType === 9) {
+            // 如果是document元素
             return dom.getDocumentAttr('clientWidth');
         }
 
@@ -166,21 +308,23 @@ const dom = {
      * @param {Node} elem - dom元素
      * @return {Number}
      */
-    windowHeight: (elem) => {
+    windowHeight: elem => {
         if (!elem) elem = window;
 
-        if (validate.isWindow(elem)) { // 如果是window元素
+        if (validate.isWindow(elem)) {
+            // 如果是window元素
             return elem.document.documentElement.clientHeight;
         }
 
-        if (elem.nodeType === 9) { // 如果是document元素
+        if (elem.nodeType === 9) {
+            // 如果是document元素
             return dom.getDocumentAttr('clientHeight');
         }
 
         return elem.clientHeight;
     },
     // 修改document.title的方法,兼容ios下微信浏览器setTitle
-    setTitle: (title) => {
+    setTitle: title => {
         document.title = title;
         try {
             const $iframe = document.createElement('iframe');
@@ -200,7 +344,7 @@ const dom = {
             return;
         }
         if (target.length > 0) {
-            target.forEach((node) => {
+            target.forEach(node => {
                 dom.addClass(node, className);
             });
             return;
@@ -215,7 +359,7 @@ const dom = {
             return;
         }
         if (target.length > 0) {
-            target.forEach((node) => {
+            target.forEach(node => {
                 dom.removeClass(node, className);
             });
             return;
@@ -223,7 +367,19 @@ const dom = {
         let classNameArray = (target.getAttribute('class') || '').split(/\s+/);
         classNameArray = classNameArray.filter(key => key != className);
         target.setAttribute('class', classNameArray.join(' '));
-    },
+    }
 };
 
-export default dom;
+export default {
+    setAttrs,
+    downloadBlob,
+    download,
+    convertCssom,
+    setStyle,
+    getCssText,
+    getWordWidth,
+    copyText,
+    classNames,
+    suffixClassNames,
+    ...dom
+};

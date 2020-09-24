@@ -6,7 +6,7 @@
 
 import { pick } from 'lodash';
 import { isNullOrUndefined, isEmptyObject } from './types';
-import { queryParse, queryStringify } from './qs';
+import { queryParse, queryStringify } from './params';
 
 export const getParams = (str, key) => {
     const params = queryParse(str);

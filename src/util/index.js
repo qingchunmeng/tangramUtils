@@ -18,7 +18,6 @@ import * as dev from './dev';
 import * as enums from './enums';
 import * as formatters from './formatters';
 import * as numeral from './numeral';
-import * as qs from './qs';
 import * as route from './route';
 import * as rules from './rules';
 import * as string from './string';
@@ -45,10 +44,9 @@ export default {
     enums,
     formatters,
     numeral,
-    qs,
     route,
     rules,
     string,
     time,
-    types,
+    types
 };
