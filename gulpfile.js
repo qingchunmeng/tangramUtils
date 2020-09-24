@@ -14,7 +14,7 @@ const del = require('del');
 const path = require('path');
 
 const {
-    src, task, series, parallel,
+    src, task, series, parallel
 } = gulp;
 
 function clean() {
@@ -25,7 +25,7 @@ function clean() {
 function complieCss() {
     src('src/**/*.less')
         .pipe(less({
-            paths: [path.join(__dirname, 'src', 'includes')],
+            paths: [path.join(__dirname, 'src', 'includes')]
         }))
         // .pipe(minifyCss())
         .pipe(gulp.dest('lib'));
@@ -36,8 +36,9 @@ function complieJs() {
         .pipe(revCollector())
         .pipe(babel({
             presets: ['@babel/env'],
+            plugins: ['@babel/plugin-proposal-class-properties']
         }))
-    // .pipe(minify())
+        // .pipe(minify())
         .pipe(gulp.dest('lib'));
 }
 
