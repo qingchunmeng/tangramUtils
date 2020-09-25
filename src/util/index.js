@@ -12,6 +12,7 @@ import share from './share.js';
 import compute from './compute.js';
 import env from './env.js';
 import waterMark from './waterMark.js';
+import logError from './logError';
 
 import * as decimal from './decimal';
 import * as dev from './dev';
@@ -48,5 +49,6 @@ export default {
     rules,
     string,
     time,
-    types
+    types,
+    logError
 };
