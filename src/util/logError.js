@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-09-25 11:34:12
- * @LastEditTime: 2020-09-25 15:44:32
+ * @LastEditTime: 2020-09-25 17:02:17
  * @LastEditors: Please set LastEditors
  * @Description: 错误日志上报，优先上报灯塔（report_为前缀的错误），灯塔不存在时会上报至罗盘（事件Id为'20619'）
  */
@@ -29,12 +29,15 @@ export default function (error, errorInfo) {
         } else if (win.$ULOG) {
             try {
                 win.$ULOG.send('20619', {
+                    pid: 'nts_pc_errorcatch',
                     action: {
-                        error_message: JSON.stringify(errorInfo) // 对应罗盘维度‘错误信息’
+                        error_message: error,
+                        error_info: JSON.stringify(errorInfo) // 对应罗盘维度‘错误信息’
                     }
                 });
             } catch (e) {
                 win.$ULOG.send('20619', {
+                    pid: 'nts_pc_errorcatch',
                     action: {
                         error_message: `上报错误时报错：${e.message}` // 对应罗盘维度‘错误信息’
                     }
