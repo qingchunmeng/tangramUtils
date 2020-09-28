@@ -6,7 +6,7 @@
  */
 import html2canvas from 'html2canvas';
 
-const htmlToImg = async (domId, options = {}) => {
+export const htmlToImg = (domId, options = {}) => {
     const dom = document.getElementById(domId);
     const domHeight = dom.scrollHeight;
     let config = { // 设置一个默认的配置
@@ -22,8 +22,13 @@ const htmlToImg = async (domId, options = {}) => {
         scrollY: -window.scrollY
     };
     config = Object.assign(config, options);
-    const res = await html2canvas(dom, config);
-    return res.toDataURL('image/jpg');
+    return new Promise((resolve, reject) => {
+        html2canvas(dom, config).then(res => {
+            resolve(res.toDataURL('image/jpg'));
+        }).catch(e => {
+            reject(e);
+        });
+    });
 };
 
-export default htmlToImg;
+export default html2canvas;
