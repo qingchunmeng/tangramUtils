@@ -1,6 +1,6 @@
 {
   "name": "@jiaoyi/tangram",
-  "version": "0.3.13-beta",
+  "version": "0.3.13-beta-2",
   "description": "公共集成解决方案",
   "main": "lib/index.js",
   "files": [
