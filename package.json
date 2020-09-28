@@ -10,7 +10,6 @@
     "precommit": "lint-staged",
     "test": "jest  --watchAll --coverage",
     "build": "npx gulp build",
-    "publish": "npm publish",
     "publish-beta": "npm publish --tag beta",
     "prepublishOnly": "npm run build",
     "lint": "npx eslint --ext .ts,.tsx,.js,.jsx,.vue -f html -o ESLintReport.html"
