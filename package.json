@@ -1,85 +1,109 @@
 {
-  "name": "@jiaoyi/tangram",
-  "version": "0.3.13",
-  "description": "公共集成解决方案",
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
-  "scripts": {
-    "precommit": "lint-staged",
-    "test": "jest  --watchAll --coverage",
-    "build": "npx gulp build",
-    "publish-beta": "npm publish --tag beta",
-    "prepublishOnly": "npm run build",
-    "lint": "npx eslint --ext .ts,.tsx,.js,.jsx,.vue -f html -o ESLintReport.html"
-  },
-  "lint-staged": {
-    "*.js": [
-      "sh ./eslint.sh",
-      "git add"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://git.lianjia.com/transaction/Tangram"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-es2015": "^7.0.0-beta.53",
-    "@babel/preset-stage-0": "^7.0.0",
-    "@babel/preset-stage-1": "^7.0.0",
-    "@babel/preset-stage-2": "^7.0.0",
-    "babel-jest": "^24.8.0",
-    "del": "^4.1.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-formatter-html": "^2.0.3",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-less": "^4.0.1",
-    "gulp-minify": "^3.1.0",
-    "gulp-minify-css": "^1.2.4",
-    "husky": "^0.14.3",
-    "jest": "^24.8.0",
-    "lint-staged": "^7.2.0",
-    "regenerator-runtime": "^0.13.2",
-    "watcher-lessc": "^0.2.0",
-    "webpack-dev-server": "^3.1.3"
-  },
-  "dependencies": {
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.4",
-    "babel-register": "^6.26.0",
-    "bundle-loader": "^0.5.6",
-    "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^0.28.11",
-    "eslint": "^5.2.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.11",
-    "gulp-rev-collector": "^1.3.1",
-    "html-webpack-plugin": "^3.2.0",
-    "less": "^2.7.3",
-    "html2canvas": "1.0.0-rc.4",
-    "less-loader": "^4.1.0",
-    "lodash": "^4.17.5",
-    "mini-css-extract-plugin": "^0.4.0",
-    "moment": "^2.24.0",
-    "postcss-scss": "^1.0.5",
-    "style-loader": "^0.20.3",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1",
-    "webpack-manifest-plugin": "^2.0.3",
-    "whatwg-fetch": "^3.0.0"
-  }
+    "name": "@jiaoyi/tangram",
+    "version": "0.3.13",
+    "description": "公共集成解决方案",
+    "author": "mengqingchun002@ke.com",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "http://git.lianjia.com/transaction/Tangram"
+    },
+    "scripts": {
+        "commit": "npx git-cz",
+        "test": "jest  --watchAll --coverage",
+        "build": "npx gulp build",
+        "release:patch": "standard-version --release-as patch",
+        "release:minor": "standard-version --release-as minor",
+        "release:major": "standard-version --release-as major",
+        "release": "npm publish && git push && git push --follow-tags origin",
+        "publish-beta": "npm publish --tag beta",
+        "prepublishOnly": "npm run build",
+        "prettier": "npx prettier --write",
+        "lint": "npx eslint --ext .ts,.tsx,.js,.jsx,.vue -f html -o ESLintReport.html"
+    },
+    "dependencies": {
+        "html2canvas": "1.0.0-rc.4",
+        "lodash": "^4.17.5",
+        "moment": "^2.24.0",
+        "whatwg-fetch": "^3.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
+        "@babel/plugin-proposal-decorators": "^7.4.4",
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/preset-env": "^7.4.5",
+        "@babel/preset-es2015": "^7.0.0-beta.53",
+        "@babel/preset-stage-0": "^7.0.0",
+        "@babel/preset-stage-1": "^7.0.0",
+        "@babel/preset-stage-2": "^7.0.0",
+        "@jiaoyi/config": "^0.1.5",
+        "@jiaoyi/flow": "^0.1.4",
+        "babel-jest": "^24.8.0",
+        "babel-loader": "^7.1.4",
+        "babel-register": "^6.26.0",
+        "bundle-loader": "^0.5.6",
+        "clean-webpack-plugin": "^0.1.19",
+        "css-loader": "^0.28.11",
+        "del": "^4.1.1",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "file-loader": "^1.1.11",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-clean": "^0.4.0",
+        "gulp-less": "^4.0.1",
+        "gulp-minify": "^3.1.0",
+        "gulp-minify-css": "^1.2.4",
+        "gulp-rev-collector": "^1.3.1",
+        "html-webpack-plugin": "^3.2.0",
+        "jest": "^24.8.0",
+        "less": "^2.7.3",
+        "less-loader": "^4.1.0",
+        "mini-css-extract-plugin": "^0.4.0",
+        "postcss-scss": "^1.0.5",
+        "regenerator-runtime": "^0.13.2",
+        "style-loader": "^0.20.3",
+        "watcher-lessc": "^0.2.0",
+        "webpack": "^4.20.2",
+        "webpack-cli": "^3.1.1",
+        "webpack-dev-server": "^3.1.3",
+        "webpack-manifest-plugin": "^2.0.3"
+    },
+    "lint-staged": {
+        "linters": {
+            "*.{ts,tsx,js,jsx,vue,css,less,scss,sass,json,md}": [
+                "prettier --write",
+                "git add"
+            ],
+            "*.{ts,tsx,js,jsx,vue}": [
+                "eslint -f table",
+                "git add"
+            ]
+        },
+        "ignore": [
+            "CHANGELOG.md"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -e $GIT_PARAMS",
+            "pre-commit": [
+                "lint-staged"
+            ]
+        }
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    }
 }
