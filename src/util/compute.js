@@ -14,12 +14,14 @@ const compute = {
     add: (nums, precision = 2) => {
         const times = 10 ** precision;
         let count = 0;
-        nums.forEach((item) => {
+        nums.forEach(item => {
             count += Number(item || 0) * times;
         });
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
-            console.warn(`由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`);
+            console.warn(
+                `由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`
+            );
         }
         return Number(result.toFixed(precision));
     },
@@ -36,10 +38,12 @@ const compute = {
         }
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
-            console.warn(`由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`);
+            console.warn(
+                `由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`
+            );
         }
         return Number(result.toFixed(precision));
-    },
+    }
 };
 
 export default compute;

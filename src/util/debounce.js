@@ -20,10 +20,10 @@ export default function debounce(handle, options) {
         isFront = true,
         timeGap = 100,
         isReset = false,
-        isPromise = false, // isPromise: true 其他参数失效
+        isPromise = false // isPromise: true 其他参数失效
     } = options;
     if (typeof handle !== 'function') {
-        throw new TypeError('The debounce\'s first argument is not a function!');
+        throw new TypeError("The debounce's first argument is not a function!");
     }
 
     return function (...args) {
@@ -31,7 +31,7 @@ export default function debounce(handle, options) {
             if (isReset && !isPromise) {
                 timeoutID && clearTimeout(timeoutID);
                 if (isFront) {
-                    timeoutID = setTimeout(() => timeoutID = '', timeGap);
+                    timeoutID = setTimeout(() => (timeoutID = ''), timeGap);
                 } else {
                     timeoutID = setTimeout(() => handle.apply(this, args), timeGap);
                 }
@@ -41,15 +41,17 @@ export default function debounce(handle, options) {
         timeoutID = true;
         if (isPromise) {
             const promise = handle.apply(this, args);
-            if (promise instanceof Promise) { // 如果返回 promise，异步结束重置 timeoutID = ''
-                promise.then(() => timeoutID = '');
-            } else { // 如果返回非 promise，直接重置 timeoutID = ''
+            if (promise instanceof Promise) {
+                // 如果返回 promise，异步结束重置 timeoutID = ''
+                promise.then(() => (timeoutID = ''));
+            } else {
+                // 如果返回非 promise，直接重置 timeoutID = ''
                 timeoutID = '';
             }
             return;
         }
         if (isFront) {
-            timeoutID = setTimeout(() => timeoutID = '', timeGap);
+            timeoutID = setTimeout(() => (timeoutID = ''), timeGap);
             return handle.apply(this, args);
         }
         timeoutID = setTimeout(() => {

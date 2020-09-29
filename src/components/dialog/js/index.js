@@ -15,22 +15,25 @@ const defaultOptions = {
     btns: {
         cancel: {
             text: '取消',
-            handler() {
-            },
+            handler() {}
         },
         confirm: {
             text: '确定',
             handler() {
                 // console.info('confirm');
-            },
-        },
-    },
+            }
+        }
+    }
 };
 
 class M {
     constructor() {
         // 动画函数数组
-        this.animaArr = [['fadeIn', 'fadeOut'], ['slideDown', 'slideUp'], ['scaleIn', 'scaleOut']];
+        this.animaArr = [
+            ['fadeIn', 'fadeOut'],
+            ['slideDown', 'slideUp'],
+            ['scaleIn', 'scaleOut']
+        ];
         // 当前动画类型
         this.currAnimation = 0;
         // 是否打开点击遮罩层关闭弹窗
@@ -42,10 +45,10 @@ class M {
     }
 
     /**
-   * 生成按钮模版
-   * @param btns 按钮的配置信息
-   * @returns {string} 返回生成的按钮模版
-   */
+     * 生成按钮模版
+     * @param btns 按钮的配置信息
+     * @returns {string} 返回生成的按钮模版
+     */
     generateBtns(btns) {
         let btnsTpl = '';
         // TODO 这里需要修改为根据数据对象生成按钮
@@ -57,20 +60,22 @@ class M {
             /* eslint-disable */
             btnsTpl += `<button class="fetch-btn fetch-cancel-btn" data-btn-type="cancel">${btns.cancel.text}</button>`;
         }
-        Object.keys(btns).forEach((o) => {
+        Object.keys(btns).forEach(o => {
             if (o != 'confirm' && o != 'cancel') {
                 /* eslint-disable */
-                btnsTpl += `<button class="fetch-btn ${btns[o].cls}" data-btn-type="${o}">${btns[o].text || '自定义2'}</button>`;
+                btnsTpl += `<button class="fetch-btn ${btns[o].cls}" data-btn-type="${o}">${
+                    btns[o].text || '自定义2'
+                }</button>`;
             }
         });
         return btnsTpl;
     }
 
     /**
-   * 编译生成弹窗的模版信息
-   * @param options 弹窗的配置信息
-   * @returns {string} 生成弹窗的模版
-   */
+     * 编译生成弹窗的模版信息
+     * @param options 弹窗的配置信息
+     * @returns {string} 生成弹窗的模版
+     */
     complie(options) {
         const btnTpl = this.generateBtns(options.btns);
         const tpl = `<div class="fetch-dialog-wrapper fadeIn">
@@ -80,7 +85,9 @@ class M {
                                   <div class="fetch-btn-close">×</div>
                               </div>
                               <div class="fetch-body">
-                                  <span class= "${options.cls}"}><i class="fetch-icon fetch-icon-${options.cls}"></i></span>
+                                  <span class= "${options.cls}"}><i class="fetch-icon fetch-icon-${
+            options.cls
+        }"></i></span>
                                   <div class="fetch-content">
                                     ${options.content}
                                   </div>
@@ -94,18 +101,18 @@ class M {
     }
 
     /**
-    * 获取所需的节点信息
-    */
+     * 获取所需的节点信息
+     */
     getElement() {
         this.elem = document.querySelector('.fetch-dialog-wrapper');
         this.dialog = document.querySelector('.fetch-dialog');
     }
 
     /**
-   * 显示dialog组件
-   * @param options 弹窗的配置信息
-   * @returns {*} 当前的dialog节点
-   */
+     * 显示dialog组件
+     * @param options 弹窗的配置信息
+     * @returns {*} 当前的dialog节点
+     */
     show(options) {
         // 默认参数
         const {
@@ -115,7 +122,7 @@ class M {
             // cls = '',
             // btns = defaultOptions.btns,
             shadeClose = true,
-            animation = 1,
+            animation = 1
         } = options;
 
         this.options = Object.assign({}, this.options, options);
@@ -125,9 +132,12 @@ class M {
         // 给当前动画类型赋值
         this.currAnimation = animation;
         this.shadeClose = shadeClose;
-        const config = Object.assign({
-            skinClass,
-        }, options);
+        const config = Object.assign(
+            {
+                skinClass
+            },
+            options
+        );
 
         // 最终生成的HTML
         const html = this.complie(config);
@@ -156,50 +166,50 @@ class M {
 
         // 最终移除
         setTimeout(() => {
-          this.dialog.classList.remove(`${this.animaArr[this.currAnimation][1]}`);
-          // 移除弹窗组件
+            this.dialog.classList.remove(`${this.animaArr[this.currAnimation][1]}`);
+            // 移除弹窗组件
             this.elem.parentNode.remove();
             this.elem = undefined;
         }, 200);
     }
 
     /**
-   * 显示普通的提示信息
-   * @param {Object} options 一系列配置信息
-   */
+     * 显示普通的提示信息
+     * @param {Object} options 一系列配置信息
+     */
     info(options) {
         this.show(Object.assign({ cls: 'info' }, options));
     }
 
     /**
-    * 显示成功的提示信息
-    * @param {Object} options 一系列配置信息
-    */
+     * 显示成功的提示信息
+     * @param {Object} options 一系列配置信息
+     */
     success(options) {
         this.show(Object.assign({ cls: 'success' }, options));
     }
 
     /**
-    * 显示警告提示信息
-    * @param {Object} options 一系列配置信息
-    */
+     * 显示警告提示信息
+     * @param {Object} options 一系列配置信息
+     */
     warning(options) {
         this.show(Object.assign({ cls: 'warning' }, options));
     }
 
     /**
-    * 显示错误提示信息
-    * @param {Object} options 一系列配置信息
-    */
+     * 显示错误提示信息
+     * @param {Object} options 一系列配置信息
+     */
     error(options) {
         this.show(Object.assign({ cls: 'error' }, options));
     }
 
     /**
-    * 绑定事件
-    */
+     * 绑定事件
+     */
     bindEvent() {
-        document.body.addEventListener('click', (e) => {
+        document.body.addEventListener('click', e => {
             const target = e.target || e.srcElement;
             // 是否开启点击遮罩关闭
             if (this.shadeClose) {
@@ -241,7 +251,7 @@ const dialog = (function (options) {
         warning(opt) {
             const config = Object.assign({}, data, opt);
             instance.warning(config);
-        },
+        }
     };
-}());
+})();
 export default dialog;

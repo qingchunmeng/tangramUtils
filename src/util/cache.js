@@ -5,14 +5,13 @@
  */
 
 const cache = {
-
     /**
      * 获取localStorage中的数据
      * @param key localStorage中的key
      * 使用方法
      * get('test') // 获取localStorage中key为'test'的值
      */
-    get: (key) => {
+    get: key => {
         const value = window.localStorage.getItem(key);
         return value && JSON.parse(value);
     },
@@ -34,7 +33,7 @@ const cache = {
      * 使用方法
      * remove('test') // 移除localStorage中key为'test'的值
      */
-    remove: (key) => {
+    remove: key => {
         window.localStorage.removeItem(key);
     },
 
@@ -44,7 +43,7 @@ const cache = {
      * 使用方法
      * getFromSession('test') // 获取sessionStorage中key为'test'的值
      */
-    getFromSession: (key) => {
+    getFromSession: key => {
         const value = window.sessionStorage.getItem(key);
         return value && JSON.parse(value);
     },
@@ -66,10 +65,9 @@ const cache = {
      * 使用方法
      * removeFromSession('test') // 移除sessionStorage中key为'test'的值
      */
-    removeFromSession: (key) => {
+    removeFromSession: key => {
         window.sessionStorage.removeItem(key);
-    },
-
+    }
 };
 
 export default cache;

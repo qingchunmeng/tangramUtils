@@ -1,11 +1,9 @@
-
 /**
  * @file 增加水印的Util
  * @author songbei002@ke.com
  * @date 2020/8/14
  */
 import env from './env.js';
-
 
 const waterMark = {
     waterDocument: settings => {
@@ -51,8 +49,11 @@ const waterMark = {
             for (let j = 0; j <= row; j++) {
                 ctx.save();
                 // eslint-disable-next-line max-len
-                ctx.translate(i * settings.space + j * settings.colWidth, (col - i) * settings.rowHeight + j * settings.space);
-                ctx.rotate(Math.PI / 180 * settings.rotate);
+                ctx.translate(
+                    i * settings.space + j * settings.colWidth,
+                    (col - i) * settings.rowHeight + j * settings.space
+                );
+                ctx.rotate((Math.PI / 180) * settings.rotate);
                 ctx.fillText(settings.content, 0, 0);
                 ctx.restore();
             }
@@ -73,7 +74,7 @@ const waterMark = {
         if (env.isProd()) {
             const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
             if (MutationObserver) {
-                let mo = new MutationObserver((() => {
+                let mo = new MutationObserver(() => {
                     const __wmDiv = document.querySelector('.__wm');
                     // 只在__wmDiv元素变动才重新调用 __canvasWM
                     if ((__wmDiv && __wmDiv.getAttribute('style') !== styleStr) || !__wmDiv) {
@@ -82,7 +83,7 @@ const waterMark = {
                         mo = null;
                         waterMark.waterDocument(settings);
                     }
-                }));
+                });
                 mo.observe(settings.container, {
                     attributes: true,
                     subtree: true,

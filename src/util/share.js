@@ -19,7 +19,8 @@
 import validate from './validate.js';
 
 // 分享配置异常提示
-const errorTip = '分享配置应为一个配置对象,包括分享回调链接link，分享标题title，分享描述信息description，分享时展示的小图标imgUrl';
+const errorTip =
+    '分享配置应为一个配置对象,包括分享回调链接link，分享标题title，分享描述信息description，分享时展示的小图标imgUrl';
 
 /* eslint-disable no-undef */
 const share = {
@@ -44,7 +45,7 @@ const share = {
             imgUrl: ''  // 分享图片
         };
      */
-    setJsbridgeShare: (config) => {
+    setJsbridgeShare: config => {
         if (typeof $ljBridge == 'undefined' || !$ljBridge) {
             throw new Error('没有检测到$ljBridge');
         }
@@ -52,16 +53,17 @@ const share = {
             throw new Error(errorTip);
         }
         const url = `${config.link}&psource=share_link`;
-        $ljBridge && $ljBridge.ready((bridge) => {
-            bridge.setRightButton('["share"]');
-            const shareconfig = {
-                articleTitle: config.title,
-                articleDiscription: config.description,
-                requestUrl: url,
-                headImageUrl: config.imgUrl,
-            };
-            bridge.setShareConfigWithString(JSON.stringify(shareconfig));
-        });
+        $ljBridge &&
+            $ljBridge.ready(bridge => {
+                bridge.setRightButton('["share"]');
+                const shareconfig = {
+                    articleTitle: config.title,
+                    articleDiscription: config.description,
+                    requestUrl: url,
+                    headImageUrl: config.imgUrl
+                };
+                bridge.setShareConfigWithString(JSON.stringify(shareconfig));
+            });
     },
     /**
      * 分享信息设置，微信、link统一入口
@@ -73,7 +75,7 @@ const share = {
             imgUrl: ''  // 分享图片
         };
      */
-    setShareInfo: (config) => {
+    setShareInfo: config => {
         if (!config) {
             throw new Error(errorTip);
         }
@@ -83,7 +85,7 @@ const share = {
                 url: `${config.link}&psource=share_wx`,
                 shareTitle: config.title,
                 descContent: config.description,
-                imgUrl: config.imgUrl,
+                imgUrl: config.imgUrl
             };
             typeof weixinUtil != 'undefined' && weixinUtil.setWinxinConfig(weixinShareConfig);
         } else if (share.isInAppAsyn()) {
@@ -100,24 +102,24 @@ const share = {
             imgUrl: ''  // 分享图片
         };
         */
-    actionShare: (config) => {
+    actionShare: config => {
         if (!config) {
             throw new Error(errorTip);
         }
         if (share.isInAppAsyn()) {
-            $ljBridge.ready((bridge) => {
+            $ljBridge.ready(bridge => {
                 const url = `${config.link}&psource=share_link`;
                 const shareconfig = {
                     articleTitle: config.title,
                     articleDiscription: config.description,
                     requestUrl: url,
                     smsContent: url,
-                    headImageUrl: config.imgUrl,
+                    headImageUrl: config.imgUrl
                 };
                 bridge.actionShareWithString(JSON.stringify(shareconfig));
             });
         }
-    },
+    }
 };
 export default share;
 /* eslint-enable */
