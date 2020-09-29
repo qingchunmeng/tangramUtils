@@ -16,14 +16,10 @@
         "release": "npm publish && git push && git push --follow-tags origin",
         "publish-beta": "npm publish --tag beta",
         "prepublishOnly": "npm run build",
-        "lint": "npx eslint --ext .ts,.tsx,.js,.jsx,.vue -f html -o ESLintReport.html",
-        "prettier": "npx prettier --write"
+        "prettier": "npx prettier --write",
+        "lint": "npx eslint --ext .ts,.tsx,.js,.jsx,.vue -f html -o ESLintReport.html"
     },
     "lint-staged": {
-        "*.js": [
-            "sh ./eslint.sh",
-            "git add"
-        ],
         "linters": {
             "*.{ts,tsx,js,jsx,vue,css,less,scss,sass,json,md}": [
                 "prettier --write",
