@@ -14,7 +14,9 @@
  * 注意：isPromise: true 其他参数失效
  * @return {Function}
  */
-export default function debounce(handle, options) {
+
+// eslint-disable-next-line sonarjs/cognitive-complexity
+export default function (handle, options) {
     let timeoutID = '';
     const {
         isFront = true,
@@ -29,9 +31,13 @@ export default function debounce(handle, options) {
     return function (...args) {
         if (timeoutID) {
             if (isReset && !isPromise) {
-                timeoutID && clearTimeout(timeoutID);
+                if (timeoutID) {
+                    clearTimeout(timeoutID);
+                }
                 if (isFront) {
-                    timeoutID = setTimeout(() => (timeoutID = ''), timeGap);
+                    timeoutID = setTimeout(() => {
+                        timeoutID = '';
+                    }, timeGap);
                 } else {
                     timeoutID = setTimeout(() => handle.apply(this, args), timeGap);
                 }
@@ -43,7 +49,9 @@ export default function debounce(handle, options) {
             const promise = handle.apply(this, args);
             if (promise instanceof Promise) {
                 // 如果返回 promise，异步结束重置 timeoutID = ''
-                promise.then(() => (timeoutID = ''));
+                promise.then(() => {
+                    timeoutID = '';
+                });
             } else {
                 // 如果返回非 promise，直接重置 timeoutID = ''
                 timeoutID = '';
@@ -51,7 +59,10 @@ export default function debounce(handle, options) {
             return;
         }
         if (isFront) {
-            timeoutID = setTimeout(() => (timeoutID = ''), timeGap);
+            timeoutID = setTimeout(() => {
+                timeoutID = '';
+            }, timeGap);
+            // eslint-disable-next-line consistent-return
             return handle.apply(this, args);
         }
         timeoutID = setTimeout(() => {

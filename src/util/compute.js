@@ -19,6 +19,7 @@ const compute = {
         });
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
+            // eslint-disable-next-line no-console
             console.warn(
                 `由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`
             );
@@ -38,6 +39,7 @@ const compute = {
         }
         const result = count / times;
         if (result.toString().split('.')[1].length > precision) {
+            // eslint-disable-next-line no-console
             console.warn(
                 `由于参数的实际精度与传入的精度参数不符，导致计算结果与实际精度不符，目前结果保留了${precision}位小数`
             );

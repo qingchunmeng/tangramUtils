@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-duplicated-branches */
+
 /**
  * @file 数据、环境检测校验相关Util
  * @author mengqingchun002@ke.com
@@ -86,7 +88,7 @@ const validate = {
             return true;
         }
         // 兼容非必填的情况
-        if (isNaN(val)) {
+        if (Number.Number.isNaN(val)) {
             flag = false;
         } else if (!reg.test(val)) {
             flag = false;
@@ -106,7 +108,7 @@ const validate = {
             return true;
         }
         // 兼容非必填的情况
-        if (isNaN(val)) {
+        if (Number.isNaN(val)) {
             flag = false;
         } else if (!reg.test(val)) {
             flag = false;
@@ -126,7 +128,7 @@ const validate = {
             return true;
         }
         // 兼容非必填的情况
-        if (isNaN(val)) {
+        if (Number.isNaN(val)) {
             flag = false;
         } else if (!reg.test(val)) {
             flag = false;
@@ -142,7 +144,7 @@ const validate = {
             return true;
         }
         // 兼容非必填的情况
-        if (isNaN(val)) {
+        if (Number.isNaN(val)) {
             flag = false;
         } else if (!reg.test(val)) {
             flag = false;
@@ -185,7 +187,7 @@ const validate = {
         if (!val) {
             return true;
         }
-        if (isNaN(val)) {
+        if (Number.isNaN(val)) {
             flag = false;
         } else if (val > 3000 || val < 1800) {
             flag = false;
@@ -293,13 +295,13 @@ const validate = {
         const { isValidDate } = validate;
         if (isValidDate(inputDate) && isValidDate(_afterDate)) {
             // 仅在合法日期时才进行比较
-            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
-            const _aDate = _afterDate instanceof Date ? _afterDate : new Date(_afterDate);
-            const formatData = `${_aDate.getFullYear()}-${`${_aDate.getMonth() + 1}`.padStart(
+            const iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const aDate = _afterDate instanceof Date ? _afterDate : new Date(_afterDate);
+            const formatData = `${aDate.getFullYear()}-${`${aDate.getMonth() + 1}`.padStart(
                 2,
                 '0'
-            )}-${`${_aDate.getDate()}`.padStart(2, '0')}`;
-            return _iDate >= new Date(`${formatData}T00:00:00`);
+            )}-${`${aDate.getDate()}`.padStart(2, '0')}`;
+            return iDate >= new Date(`${formatData}T00:00:00`);
         }
         return false;
     },
@@ -313,13 +315,13 @@ const validate = {
         const { isValidDate } = validate;
         if (isValidDate(inputDate) && isValidDate(_beforeDate)) {
             // 仅在合法日期时才进行比较
-            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
-            const _bDate = _beforeDate instanceof Date ? _beforeDate : new Date(_beforeDate);
-            const formatDate = `${_bDate.getFullYear()}-${`${_bDate.getMonth() + 1}`.padStart(
+            const iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const bDate = _beforeDate instanceof Date ? _beforeDate : new Date(_beforeDate);
+            const formatDate = `${bDate.getFullYear()}-${`${bDate.getMonth() + 1}`.padStart(
                 2,
                 '0'
-            )}-${`${_bDate.getDate()}`.padStart(2, '0')}`;
-            return _iDate <= new Date(`${formatDate}T23:59:59`);
+            )}-${`${bDate.getDate()}`.padStart(2, '0')}`;
+            return iDate <= new Date(`${formatDate}T23:59:59`);
         }
         return false;
     },
@@ -331,13 +333,13 @@ const validate = {
     beforeToday: inputDate => {
         const { isValidDate } = validate;
         if (isValidDate(inputDate)) {
-            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
-            const _date = new Date();
-            const today = `${_date.getFullYear()}-${`${_date.getMonth() + 1}`.padStart(
+            const iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const nowDate = new Date();
+            const today = `${nowDate.getFullYear()}-${`${nowDate.getMonth() + 1}`.padStart(
                 2,
                 '0'
-            )}-${`${_date.getDate()}`.padStart(2, '0')}`;
-            return _iDate <= new Date(`${today}T23:59:59`);
+            )}-${`${nowDate.getDate()}`.padStart(2, '0')}`;
+            return iDate <= new Date(`${today}T23:59:59`);
         }
         return false;
     },
@@ -349,13 +351,13 @@ const validate = {
     afterToday: inputDate => {
         const { isValidDate } = validate;
         if (isValidDate(inputDate)) {
-            const _iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
-            const _date = new Date();
-            const today = `${_date.getFullYear()}-${`${_date.getMonth() + 1}`.padStart(
+            const iDate = inputDate instanceof Date ? inputDate : new Date(inputDate);
+            const nowDate = new Date();
+            const today = `${nowDate.getFullYear()}-${`${nowDate.getMonth() + 1}`.padStart(
                 2,
                 '0'
-            )}-${`${_date.getDate()}`.padStart(2, '0')}`;
-            return _iDate >= new Date(`${today}T00:00:00`);
+            )}-${`${nowDate.getDate()}`.padStart(2, '0')}`;
+            return iDate >= new Date(`${today}T00:00:00`);
         }
         return false;
     },

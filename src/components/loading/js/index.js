@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 /**
  * @file fetch loading
  * @author mengqingchun002@ke.com

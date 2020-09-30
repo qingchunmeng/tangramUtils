@@ -6,7 +6,8 @@
 import env from './env.js';
 
 const waterMark = {
-    waterDocument: settings => {
+    // eslint-disable-next-line sonarjs/cognitive-complexity
+    waterDocument: setting => {
         const defaultSettings = {
             container: document.body,
             width: window.screen.width,
@@ -24,13 +25,15 @@ const waterMark = {
             // 控制层级 优先级最高
             translateZ: '3px'
         };
-        settings = { ...defaultSettings, ...settings };
+
+        const settings = { ...defaultSettings, ...setting };
 
         const canvas = document.createElement('canvas');
         canvas.setAttribute('width', settings.width);
         canvas.setAttribute('height', settings.height);
         const ctx = canvas.getContext('2d');
         if (ctx === null) {
+            // eslint-disable-next-line no-console
             console.error('this browser is not support canvas.');
             return;
         }
@@ -59,15 +62,15 @@ const waterMark = {
             }
         }
         const base64Url = canvas.toDataURL();
-        const __wm = document.querySelector('.__wm');
-        const watermarkDiv = __wm || document.createElement('div');
+        const wm = document.querySelector('.__wm');
+        const watermarkDiv = wm || document.createElement('div');
         let styleStr = 'position:fixed;width:100%;height:100%;pointer-events:none;background-repeat:no-repeat;';
         styleStr = `${styleStr}z-index:${settings.zIndex};`;
         styleStr = `${styleStr}transform:translateZ(${settings.translateZ});`;
         styleStr = `${styleStr}background-image:url(${base64Url})`;
         watermarkDiv.setAttribute('style', styleStr);
         watermarkDiv.classList.add('__wm');
-        if (!__wm) {
+        if (!wm) {
             settings.container.insertBefore(watermarkDiv, settings.container.firstChild);
         }
         // 增加开发环节和线上环境的判断
@@ -75,9 +78,9 @@ const waterMark = {
             const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
             if (MutationObserver) {
                 let mo = new MutationObserver(() => {
-                    const __wmDiv = document.querySelector('.__wm');
+                    const wmDiv = document.querySelector('.__wm');
                     // 只在__wmDiv元素变动才重新调用 __canvasWM
-                    if ((__wmDiv && __wmDiv.getAttribute('style') !== styleStr) || !__wmDiv) {
+                    if ((wmDiv && wmDiv.getAttribute('style') !== styleStr) || !wmDiv) {
                         // 避免一直触发
                         mo.disconnect();
                         mo = null;

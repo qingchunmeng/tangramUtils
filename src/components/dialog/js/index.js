@@ -39,7 +39,7 @@ class M {
         // 是否打开点击遮罩层关闭弹窗
         this.shadeClose = false;
         // 弹窗配置
-        this.options = Object.assign({}, defaultOptions);
+        this.options = { ...defaultOptions };
         // 绑定事件
         this.bindEvent();
     }

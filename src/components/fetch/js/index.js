@@ -12,6 +12,8 @@ import Dialog from '../../dialog/js/index';
 import Loading from '../../loading/js/index';
 import 'whatwg-fetch';
 
+const headersAccept = 'application/json';
+
 class FetchClass {
     constructor(url, opt) {
         this.init(url, opt);
@@ -23,7 +25,7 @@ class FetchClass {
         this.opt = opt;
         if (Object.prototype.toString.call(url) === '[object Object]') {
             const urlConfig = url.url;
-            const options = Object.assign({}, url);
+            const options = { ...url };
             delete options.url;
             this.url = urlConfig;
             this.opt = options;
@@ -36,8 +38,7 @@ class FetchClass {
             credentials: 'include',
             // TODO 考虑是否需要在头部加入cookie 和 Authorization（用来处理身份认证），可以参考zlFetch库，github
             headers: {
-                Accept: 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                Accept: headersAccept
             }
         };
     }
@@ -219,7 +220,7 @@ class FetchClass {
                 headers: {
                     ...options.headers,
                     'X-Requested-With': 'XMLHttpRequest',
-                    Accept: 'application/json'
+                    Accept: headersAccept
                 },
                 body: formData
             });
@@ -276,7 +277,7 @@ class FetchClass {
                         // TODO 需要将处理成功的所有方法放在一块儿
                         // data = self.success(contentType, res);
                         // TODO 此处需要区分每一种response.status
-                        if (contentType.includes('application/json')) {
+                        if (contentType.includes(headersAccept)) {
                             // return self.handleJSONResponse(res)
                             data = self.handleJSONResponse(res);
                         } else if (contentType.includes('text/html')) {

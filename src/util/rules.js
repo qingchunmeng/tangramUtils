@@ -121,6 +121,7 @@ class ValidatorRules {
         return {
             required: true,
             message: `请选择${text}`,
+            // eslint-disable-next-line sonarjs/no-identical-functions
             transform(value) {
                 if (isUndefined(value)) {
                     return '';

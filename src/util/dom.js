@@ -174,6 +174,9 @@ const dom = {
                 }
             };
         }
+        return {
+            remove() {}
+        };
     },
 
     /**
@@ -202,6 +205,7 @@ const dom = {
      */
     getDocumentAttr: attr => {
         if (!attr) {
+            // eslint-disable-next-line no-console
             console.log('请传递attr属性');
             return false;
         }
@@ -216,6 +220,7 @@ const dom = {
      */
     scrollWidth: elem => {
         if (!elem) {
+            // eslint-disable-next-line no-console
             console.log('请传递dom元素');
             return false;
         }
@@ -234,6 +239,7 @@ const dom = {
      */
     scrollHeight: elem => {
         if (!elem) {
+            // eslint-disable-next-line no-console
             console.log('请传递dom元素');
             return false;
         }
@@ -252,6 +258,7 @@ const dom = {
      */
     clientWidth: elem => {
         if (!elem) {
+            // eslint-disable-next-line no-console
             console.log('请传递dom元素');
             return false;
         }
@@ -270,6 +277,7 @@ const dom = {
      */
     clientHeight: elem => {
         if (!elem) {
+            // eslint-disable-next-line no-console
             console.log('请传递dom元素');
             return false;
         }
@@ -289,7 +297,10 @@ const dom = {
      * @return {Number}
      */
     windowWidth: elem => {
-        if (!elem) elem = window;
+        if (!elem) {
+            // eslint-disable-next-line no-param-reassign
+            elem = window;
+        }
 
         if (validate.isWindow(elem)) {
             // 如果是window元素
@@ -309,7 +320,10 @@ const dom = {
      * @return {Number}
      */
     windowHeight: elem => {
-        if (!elem) elem = window;
+        if (!elem) {
+            // eslint-disable-next-line no-param-reassign
+            elem = window;
+        }
 
         if (validate.isWindow(elem)) {
             // 如果是window元素
@@ -329,13 +343,14 @@ const dom = {
         try {
             const $iframe = document.createElement('iframe');
             $iframe.src = 'https://mat1.gtimg.com/finance/images/stock/p/app_find/0aeaebc1d193ebf5.png';
-            $iframe.onload = function () {
+            $iframe.onload = () => {
                 setTimeout(() => {
                     document.body.removeChild($iframe);
                 }, 0);
             };
             document.body.append($iframe);
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.log(e);
         }
     },

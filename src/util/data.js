@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 /**
  * @file 数据处理相关Util
  * @author mengqingchun002@ke.com
@@ -52,7 +54,7 @@ const data = {
      * 返回一个 1.2~3.5 的小数
      */
     randomNum: (lower, upper, floating) => {
-        if (upper === undefined || typeof upper == 'boolean') {
+        if (upper === undefined || typeof upper === 'boolean') {
             if (lower === undefined) {
                 // 两个值都没有，给一个默认值
                 lower = 0;
@@ -67,7 +69,7 @@ const data = {
         // 强制类型控制
         lower = Number(lower);
         upper = Number(upper);
-        if (isNaN(lower) || isNaN(upper)) {
+        if (Number.isNaN(lower) || Number.isNaN(upper)) {
             return 0;
         }
         // 强制大小控制
