@@ -5,18 +5,18 @@
  */
 const file = {
     /**
-    * 下载
-    * @param  {String} url 目标文件地址
-    * @param  {String} filename 想要保存的文件名称
-    */
+     * 下载
+     * @param  {String} url 目标文件地址
+     * @param  {String} filename 想要保存的文件名称
+     */
     downloadRename: (url, filename) => {
         /**
-        * 获取 blob
-        * @param  {String} url 目标文件地址
-        * @return {Promise}
-        */
+         * 获取 blob
+         * @param  {String} url 目标文件地址
+         * @return {Promise}
+         */
         function getBlob(_url) {
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
                 const xhr = new XMLHttpRequest();
 
                 xhr.open('GET', _url, true);
@@ -32,10 +32,10 @@ const file = {
         }
 
         /**
-        * 保存
-        * @param  {Blob} blob
-        * @param  {String} filename 想要保存的文件名称
-        */
+         * 保存
+         * @param  {Blob} blob
+         * @param  {String} filename 想要保存的文件名称
+         */
         function saveAs(blob, _filename) {
             if (window.navigator.msSaveOrOpenBlob) {
                 navigator.msSaveBlob(blob, _filename);
@@ -57,11 +57,10 @@ const file = {
             }
         }
 
-        getBlob(url).then((blob) => {
+        getBlob(url).then(blob => {
             saveAs(blob, filename);
         });
-    },
-
+    }
 };
 
 export default file;

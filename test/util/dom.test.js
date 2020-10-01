@@ -5,14 +5,7 @@
  */
 import dom from '../../src/util/dom';
 
-const {
-    scrollWidth,
-    scrollHeight,
-    clientWidth,
-    clientHeight,
-    windowWidth,
-    windowHeight,
-} = dom;
+const { scrollWidth, scrollHeight, clientWidth, clientHeight, windowWidth, windowHeight } = dom;
 
 /* eslint-disable */
 describe('scrollWidth', () => {
@@ -24,14 +17,13 @@ describe('scrollWidth', () => {
     });
     test('普通dom元素document-scrollWidth-value', () => {
         document.body.innerHTML =
-        '<div id="main" style="width:100px;overflow: auto;">' +
-        '  <div style="width: 200px;"></div>' +
-        '</div>';
-        const el = document.getElementById("main");
+            '<div id="main" style="width:100px;overflow: auto;">' + '  <div style="width: 200px;"></div>' + '</div>';
+        const el = document.getElementById('main');
 
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientWidth默认是0
-        Object.defineProperty(el, 'scrollWidth', {get: function() {
+        Object.defineProperty(el, 'scrollWidth', {
+            get: function () {
                 return 100;
             }
         });
@@ -48,14 +40,13 @@ describe('scrollHeight', () => {
     });
     test('普通dom元素document-scrollHeight-value', () => {
         document.body.innerHTML =
-        '<div id="main" style="height:100px;overflow: auto;">' +
-        '  <div style="hegiht: 200px;"></div>' +
-        '</div>';
-        const el = document.getElementById("main");
+            '<div id="main" style="height:100px;overflow: auto;">' + '  <div style="hegiht: 200px;"></div>' + '</div>';
+        const el = document.getElementById('main');
 
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientWidth默认是0
-        Object.defineProperty(el, 'scrollHeight', {get: function() {
+        Object.defineProperty(el, 'scrollHeight', {
+            get: function () {
                 return 100;
             }
         });
@@ -71,14 +62,13 @@ describe('clientWidth', () => {
         expect(clientWidth()).toEqual(false);
     });
     test('普通dom元素document-clientWidth-value', () => {
-        document.body.innerHTML =
-        '<div id="main" style="width:100px;overflow: auto;">' +
-        '</div>';
-        const el = document.getElementById("main");
+        document.body.innerHTML = '<div id="main" style="width:100px;overflow: auto;">' + '</div>';
+        const el = document.getElementById('main');
 
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientWidth默认是0
-        Object.defineProperty(el, 'clientWidth', {get: function() {
+        Object.defineProperty(el, 'clientWidth', {
+            get: function () {
                 return 100;
             }
         });
@@ -94,14 +84,13 @@ describe('clientHeight', () => {
         expect(clientHeight()).toEqual(false);
     });
     test('普通dom元素document-clientHeight-value', () => {
-        document.body.innerHTML =
-        '<div id="main" style="height:100px;overflow: auto;">' +
-        '</div>';
-        const el = document.getElementById("main");
+        document.body.innerHTML = '<div id="main" style="height:100px;overflow: auto;">' + '</div>';
+        const el = document.getElementById('main');
 
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientHeight默认是0
-        Object.defineProperty(el, 'clientHeight', {get: function() {
+        Object.defineProperty(el, 'clientHeight', {
+            get: function () {
                 return 100;
             }
         });
@@ -117,14 +106,13 @@ describe('windowWidth', () => {
         expect(windowWidth()).toEqual(0);
     });
     test('如果传递dom元素返回document-clientWidth-value', () => {
-        document.body.innerHTML =
-        '<div id="main" style="width:100px;overflow: auto;">' +
-        '</div>';
-        const el = document.getElementById("main");
+        document.body.innerHTML = '<div id="main" style="width:100px;overflow: auto;">' + '</div>';
+        const el = document.getElementById('main');
 
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：windowWidth默认是0
-        Object.defineProperty(el, 'clientWidth', {get: function() {
+        Object.defineProperty(el, 'clientWidth', {
+            get: function () {
                 return 100;
             }
         });
@@ -140,14 +128,13 @@ describe('windowHeight', () => {
         expect(windowHeight()).toEqual(0);
     });
     test('如果传递dom元素返回document-clientWidth-value', () => {
-        document.body.innerHTML =
-        '<div id="main" style="width:100px;overflow: auto;">' +
-        '</div>';
-        const el = document.getElementById("main");
+        document.body.innerHTML = '<div id="main" style="width:100px;overflow: auto;">' + '</div>';
+        const el = document.getElementById('main');
 
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：windowHeight默认是0
-        Object.defineProperty(el, 'clientHeight', {get: function() {
+        Object.defineProperty(el, 'clientHeight', {
+            get: function () {
                 return 100;
             }
         });

@@ -12,14 +12,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = {
     mode: 'production',
     entry: {
-        index: './src/index.js',
+        index: './src/index.js'
     },
     output: {
         publicPath: '',
         filename: 'js/[name].[chunkhash].js',
         chunkFilename: 'js/[name].[chunkhash].js',
         crossOriginLoading: 'anonymous',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist')
     },
     optimization: {
         splitChunks: {
@@ -36,14 +36,14 @@ const config = {
                     name: 'common',
                     chunks: 'all',
                     minChunks: 2,
-                    reuseExistingChunk: true,
-                },
-            },
-        },
+                    reuseExistingChunk: true
+                }
+            }
+        }
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[contenthash].css',
+            filename: 'css/[name].[contenthash].css'
         }),
         // new HtmlWebpackPlugin({
         //     title: '外部资源整合数据管理后台',
@@ -54,8 +54,8 @@ const config = {
         // }),
         new CleanWebpackPlugin(['dist']),
         new ManifestPlugin({
-            fileName: 'cdnResource.json',
-        }),
+            fileName: 'cdnResource.json'
+        })
     ],
     module: {
         rules: [
@@ -66,10 +66,10 @@ const config = {
                     {
                         loader: 'css-loader',
                         options: {
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                        },
-                    },
-                ],
+                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.less$/,
@@ -82,11 +82,11 @@ const config = {
                             modules: true,
                             import: true,
                             importLoaders: 1,
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                        },
+                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        }
                     },
-                    { loader: 'less-loader' },
-                ],
+                    { loader: 'less-loader' }
+                ]
             },
             {
                 test: /\.js$/,
@@ -94,26 +94,24 @@ const config = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [
-                            'env', 'es2015',
-                        ],
-                    },
-                },
+                        presets: ['env', 'es2015']
+                    }
+                }
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: 'babel-loader'
                     },
                     {
                         loader: '@svgr/webpack',
                         options: {
                             babel: false,
-                            icon: true,
-                        },
-                    },
-                ],
+                            icon: true
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
@@ -125,18 +123,16 @@ const config = {
                         name() {
                             return 'images/[name].[ext]';
                         },
-                        publicPath: '/',
-                    },
-                },
+                        publicPath: '/'
+                    }
+                }
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader',
-                ],
-            },
-        ],
-    },
+                use: ['file-loader']
+            }
+        ]
+    }
     // resolve: {
     //     alias: {
     //         containers: path.join(paths.src, 'containers'),

@@ -1,12 +1,12 @@
-
 import share from '../../src/util/share';
 
-const errorTip = '分享配置应为一个配置对象,包括分享回调链接link，分享标题title，分享描述信息description，分享时展示的小图标imgUrl';
+const errorTip =
+    '分享配置应为一个配置对象,包括分享回调链接link，分享标题title，分享描述信息description，分享时展示的小图标imgUrl';
 const config = {
     description: 'desc', // 分享卡片描述
     title: 'title', // 标题
     link: 'http://ke.family.com', // 分享卡片点击跳转地址
-    imgUrl: '**', // 分享图片
+    imgUrl: '**' // 分享图片
 };
 /* eslint-disable */
 describe('validate', () => {
@@ -20,7 +20,7 @@ describe('validate', () => {
         window.$ljBridge = {};
         expect(!share.isInAppAsyn()).toBeTruthy();
         window.$ljBridge = {
-            webStatus : {}
+            webStatus: {}
         };
         expect(!share.isInAppAsyn()).toBeTruthy();
         window.$ljBridge.webStatus = {
@@ -37,12 +37,13 @@ describe('validate', () => {
         // 没有配置参数时，是否正常shrow error
         // 我们必须使用一个函数将将被测试的函数做一个包装,否则会因为函数抛出导致该断言失败
         function setShareInfoFn() {
-            share.setShareInfo()
-        };
+            share.setShareInfo();
+        }
         expect(setShareInfoFn).toThrow(errorTip);
 
         // 修改ua,成为微信环境
-        let ua = 'Mozilla/5.0 (Linux; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043622 Safari/537.36 MicroMessenger/6.6.1.1220(0x26060135) NetType/4G Language/zh_CN';
+        let ua =
+            'Mozilla/5.0 (Linux; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043622 Safari/537.36 MicroMessenger/6.6.1.1220(0x26060135) NetType/4G Language/zh_CN';
         Object.defineProperties(navigator, {
             userAgent: {
                 value: ua,
@@ -90,21 +91,21 @@ describe('validate', () => {
     });
 
     test('setJsbridgeShare', () => {
-       // 没有检测到$ljBridge，是否正常shrow error
+        // 没有检测到$ljBridge，是否正常shrow error
         // 我们必须使用一个函数将将被测试的函数做一个包装,否则会因为函数抛出导致该断言失败
         window.$ljBridge = null;
         function setJsbridgeShareFn() {
-            share.setJsbridgeShare()
-        };
+            share.setJsbridgeShare();
+        }
         expect(setJsbridgeShareFn).toThrow('没有检测到$ljBridge');
 
         // 没有配置参数时，是否正常shrow error
         window.$ljBridge = {
-            webStatus : {}
+            webStatus: {}
         };
         function setJsbridgeShareFn2() {
-            share.setJsbridgeShare()
-        };
+            share.setJsbridgeShare();
+        }
         expect(setJsbridgeShareFn2).toThrow(errorTip);
 
         // 在link里，没有参数
@@ -112,14 +113,14 @@ describe('validate', () => {
             isLinkApp: true
         };
         function setJsbridgeShareFn3() {
-            share.setJsbridgeShare()
-        };
+            share.setJsbridgeShare();
+        }
         expect(setJsbridgeShareFn3).toThrow(errorTip);
         // 在link里，有参数
         window.$ljBridge.webStatus = {
             isLinkApp: true
         };
-        window.$ljBridge.ready =  function(callback){
+        window.$ljBridge.ready = function (callback) {
             // var bridge = {
             //     setRightButton: mock.fn(),
             //     setShareConfigWithString: mock.fn()
@@ -132,8 +133,8 @@ describe('validate', () => {
             isDeyou: true
         };
         function setJsbridgeShareFn4() {
-            share.setJsbridgeShare()
-        };
+            share.setJsbridgeShare();
+        }
         expect(setJsbridgeShareFn4).toThrow(errorTip);
         // 在deyou里，有参数
         window.$ljBridge.webStatus = {
@@ -144,18 +145,18 @@ describe('validate', () => {
 
     test('actionShare', () => {
         function actionShareFn() {
-            share.actionShare()
-        };
+            share.actionShare();
+        }
         expect(actionShareFn).toThrow(errorTip);
 
         // 有配置，无jsbridge环境
-        share.actionShare(config)
+        share.actionShare(config);
 
         // 有配置，有jsbridge环境
         window.$ljBridge = {
-            webStatus : {}
+            webStatus: {}
         };
-        window.$ljBridge.ready =  function(callback){
+        window.$ljBridge.ready = function (callback) {
             callback && callback();
         };
         share.actionShare(config);
@@ -165,17 +166,17 @@ describe('validate', () => {
         };
         share.actionShare(config);
         function actionShareFn2() {
-            share.actionShare()
-        };
+            share.actionShare();
+        }
         expect(actionShareFn2).toThrow(errorTip);
-        
+
         window.$ljBridge.webStatus = {
             isDeyou: true
         };
         share.actionShare(config);
         function actionShareFn3() {
-            share.actionShare()
-        };
+            share.actionShare();
+        }
         expect(actionShareFn3).toThrow(errorTip);
 
         window.$ljBridge.webStatus = {
@@ -183,8 +184,8 @@ describe('validate', () => {
         };
         share.actionShare(config);
         function actionShareFn4() {
-            share.actionShare()
-        };
+            share.actionShare();
+        }
         expect(actionShareFn4).toThrow(errorTip);
     });
 });

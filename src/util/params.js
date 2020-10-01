@@ -63,24 +63,24 @@ const params = {
      * @return {Object} eg. { a: 1, b: 2 }
      */
     getParams: search => {
-        const _params = {};
+        const result = {};
         const arr = search ? search.slice(1).split('&') : [];
         arr.forEach(item => {
             const a = item.split('=');
-            _params[decodeURIComponent(a[0])] = a.length > 1 ? decodeURIComponent(a[1]) : '';
+            result[decodeURIComponent(a[0])] = a.length > 1 ? decodeURIComponent(a[1]) : '';
         });
-        return _params;
+        return result;
     },
 
     /**
      * 根据对象生产查询字符串
-     * @param {Object} _params
+     * @param {Object} data
      * @return {String}
      */
-    getSearch: _params => {
+    getSearch: data => {
         let search = '?';
-        Object.keys(_params).forEach(key => {
-            search += `${encodeURIComponent(key)}=${encodeURIComponent(_params[key] ? _params[key].toString() : '')}&`;
+        Object.keys(data).forEach(key => {
+            search += `${encodeURIComponent(key)}=${encodeURIComponent(data[key] ? data[key].toString() : '')}&`;
         });
 
         // -1 去掉最后一个 '&'

@@ -9,7 +9,8 @@ import html2canvas from 'html2canvas';
 export const htmlToImg = (domId, options = {}) => {
     const dom = document.getElementById(domId);
     const domHeight = dom.scrollHeight;
-    let config = { // 设置一个默认的配置
+    let config = {
+        // 设置一个默认的配置
         height: domHeight,
         width: dom.scrollWidth,
         useCORS: true,
@@ -23,11 +24,13 @@ export const htmlToImg = (domId, options = {}) => {
     };
     config = Object.assign(config, options);
     return new Promise((resolve, reject) => {
-        html2canvas(dom, config).then(res => {
-            resolve(res.toDataURL('image/jpg'));
-        }).catch(e => {
-            reject(e);
-        });
+        html2canvas(dom, config)
+            .then(res => {
+                resolve(res.toDataURL('image/jpg'));
+            })
+            .catch(e => {
+                reject(e);
+            });
     });
 };
 

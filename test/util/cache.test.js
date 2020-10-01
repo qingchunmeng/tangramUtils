@@ -6,14 +6,7 @@
 
 import cache from '../../src/util/cache';
 
-const {
-    get,
-    set,
-    remove,
-    getFromSession,
-    setToSession,
-    removeFromSession,
-} = cache;
+const { get, set, remove, getFromSession, setToSession, removeFromSession } = cache;
 
 /* eslint-disable */
 
@@ -29,7 +22,7 @@ describe('localStorage测试', () => {
         set(testKey, testValue);
         expect(get(testKey)).toEqual(testValue);
     });
-    
+
     test('清空localStorage中的值', () => {
         set(testKey, testValue);
         remove(testKey);
@@ -49,7 +42,7 @@ describe('sessionStorage测试', () => {
         setToSession(testSessionKey, testSessionValue);
         expect(getFromSession(testSessionKey)).toEqual(testSessionValue);
     });
-    
+
     test('清空localStorage中的值', () => {
         setToSession(testSessionKey, testSessionValue);
         removeFromSession(testSessionKey);

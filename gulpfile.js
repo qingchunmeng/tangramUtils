@@ -9,24 +9,22 @@ const babel = require('gulp-babel');
 const less = require('gulp-less');
 const revCollector = require('gulp-rev-collector');
 
-
 const del = require('del');
 const path = require('path');
 
-const {
-    src, task, series, parallel
-} = gulp;
+const { src, task, series, parallel } = gulp;
 
 function clean() {
     return del(['./lib']);
 }
 
-
 function complieCss() {
     src('src/**/*.less')
-        .pipe(less({
-            paths: [path.join(__dirname, 'src', 'includes')]
-        }))
+        .pipe(
+            less({
+                paths: [path.join(__dirname, 'src', 'includes')]
+            })
+        )
         // .pipe(minifyCss())
         .pipe(gulp.dest('lib'));
 }
@@ -34,14 +32,15 @@ function complieCss() {
 function complieJs() {
     src(['gulp.json', 'src/**/*.js'])
         .pipe(revCollector())
-        .pipe(babel({
-            presets: ['@babel/env'],
-            plugins: ['@babel/plugin-proposal-class-properties']
-        }))
+        .pipe(
+            babel({
+                presets: ['@babel/env'],
+                plugins: ['@babel/plugin-proposal-class-properties']
+            })
+        )
         // .pipe(minify())
         .pipe(gulp.dest('lib'));
 }
-
 
 task('clean', async () => clean());
 
@@ -49,7 +48,4 @@ task('complieCss', async () => complieCss());
 
 task('complieJs', async () => complieJs());
 
-task('build', series('clean', parallel(
-    'complieCss', 'complieJs'
-
-)));
+task('build', series('clean', parallel('complieCss', 'complieJs')));
