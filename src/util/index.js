@@ -12,7 +12,11 @@ import share from './share.js';
 import compute from './compute.js';
 import env from './env.js';
 import waterMark from './waterMark.js';
+<<<<<<< HEAD
 import logError from './logError';
+=======
+import html2canvas, { htmlToImg } from './html2canvasWechat';
+>>>>>>> eccae91eba4391fd9d365149c0a1c356275c2005
 
 import * as decimal from './decimal';
 import * as dev from './dev';
@@ -50,5 +54,10 @@ export default {
     string,
     time,
     types,
+<<<<<<< HEAD
     logError
+=======
+    htmlToImg,
+    html2canvas
+>>>>>>> eccae91eba4391fd9d365149c0a1c356275c2005
 };

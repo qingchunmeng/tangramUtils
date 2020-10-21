@@ -8,9 +8,7 @@ import cookie from '../../src/util/cookie';
 
 // console.log(cookie);
 
-const {
-    getSec,
-} = cookie;
+const { getSec } = cookie;
 /* eslint-disable */
 describe(getSec, () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
@@ -30,7 +28,6 @@ describe(getSec, () => {
     test('getSec 一天 为86400000毫秒', () => {
         expect(getSec('d1')).toBe(86400000);
     });
-
 
     test('getSec 1秒 为1000毫秒', () => {
         expect(getSec('s1')).toEqual(1000);

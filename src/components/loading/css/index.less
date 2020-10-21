@@ -17,11 +17,13 @@
         width: 100%;
         top: 0;
         background-color: #f0f0f0;
-        opacity: .5;
+        opacity: 0.5;
     }
 
     .fetch-spin {
-        font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+            'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol';
         font-size: 14px;
         font-varifetch: tabular-nums;
         line-height: 1.5;
@@ -34,9 +36,10 @@
         text-align: center;
         opacity: 0;
         position: absolute;
-        transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
-        transition: transform .3s cubic-bezier(.78, .14, .15, .86);
-        transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+        transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+            -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
         display: none;
     }
 
@@ -50,7 +53,7 @@
     }
 
     .fetch-spin-nested-loading {
-        >div {
+        > div {
             .fetch-spin {
                 display: block;
                 /* position: absolute; */
@@ -62,7 +65,7 @@
         }
     }
 
-    .fetch-spin-nested-loading>div>.fetch-spin {
+    .fetch-spin-nested-loading > div > .fetch-spin {
         display: block;
         /* position: absolute; */
         height: 100%;
@@ -71,11 +74,11 @@
         z-index: 4;
     }
 
-    .fetch-spin-nested-loading>div>.fetch-spin.fetch-spin-show-text .fetch-spin-dot {
+    .fetch-spin-nested-loading > div > .fetch-spin.fetch-spin-show-text .fetch-spin-dot {
         /* margin-top: -20px; */
     }
 
-    .fetch-spin-nested-loading>div>.fetch-spin .fetch-spin-dot {
+    .fetch-spin-nested-loading > div > .fetch-spin .fetch-spin-dot {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -105,15 +108,15 @@
     .fetch-spin-dot i:nth-child(2) {
         right: 0;
         top: 0;
-        -webkit-animation-delay: .4s;
-        animation-delay: .4s;
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
     }
 
     .fetch-spin-dot i:nth-child(3) {
         right: 0;
         bottom: 0;
-        -webkit-animation-delay: .8s;
-        animation-delay: .8s;
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s;
     }
 
     .fetch-spin-dot i:nth-child(4) {
@@ -128,18 +131,18 @@
         height: 9px;
         border-radius: 100%;
         background-color: #1890ff;
-        -webkit-transform: scale(.75);
-        transform: scale(.75);
+        -webkit-transform: scale(0.75);
+        transform: scale(0.75);
         display: block;
         position: absolute;
-        opacity: .3;
+        opacity: 0.3;
         -webkit-animation: 1s linear infinite alternate fetchSpinMove;
         animation: 1s linear infinite alternate fetchSpinMove;
         -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
     }
 
-    .fetch-spin-nested-loading>div>.fetch-spin .fetch-spin-text {
+    .fetch-spin-nested-loading > div > .fetch-spin .fetch-spin-text {
         position: absolute;
         top: 50%;
         width: 100%;
@@ -163,4 +166,3 @@
         transform: rotate(405deg);
     }
 }
-

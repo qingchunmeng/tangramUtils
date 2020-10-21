@@ -10,20 +10,22 @@ describe('debounce', () => {
     test('getParams ?tab=zaitudan&key=123', () => {
         expect(params.getParams('?tab=zaitudan&key=123')).toEqual({
             tab: 'zaitudan',
-            key: '123',
+            key: '123'
         });
     });
     test('getParams ?tab=zaitudan&key', () => {
         expect(params.getParams('?tab=zaitudan&key')).toEqual({
             tab: 'zaitudan',
-            key: '',
+            key: ''
         });
     });
     test('getSearch { tab: "zaitudan", key: 123 }', () => {
-        expect(params.getSearch({
-            tab: 'zaitudan',
-            key: 123,
-        })).toEqual('?tab=zaitudan&key=123');
+        expect(
+            params.getSearch({
+                tab: 'zaitudan',
+                key: 123
+            })
+        ).toEqual('?tab=zaitudan&key=123');
     });
     test('getSearch { a: false, b: 3 }', () => {
         expect(params.getSearch({ a: undefined, b: 3 })).toEqual('?a=&b=3');

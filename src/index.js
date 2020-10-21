@@ -3,9 +3,4 @@ import Fetch from './components/fetch/js/index.js';
 import Loading from './components/loading/js/index.js';
 import Util from './util/index.js';
 
-export {
-    Fetch,
-    Dialog,
-    Loading,
-    Util,
-};
+export { Fetch, Dialog, Loading, Util };

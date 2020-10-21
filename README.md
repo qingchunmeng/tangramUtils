@@ -1,4 +1,4 @@
-###  交易前端集成解决方案
+### 交易前端集成解决方案
 
 代码地址：
 
@@ -10,12 +10,10 @@
     2.dialog
     3.loading
     ……
-    
-    
+
+
     其中的样式部分采用less进行编写，使用的是less-loader
-    
-    
-  
+
 代码组织结构：
 
     --src   代码
@@ -33,53 +31,50 @@
            ……
            ……
       --index.js  集成解决方案的入口文件
-      
-                    
-             
+
 关于新增功能点代码结构组织的说明
-    
+
     1.首先创建一个代码该功能的文件夹，eg.demo
     2.在该文件（demo）下创建js,css,images文件夹,如果没有相关类型资源，可以不创建该类型的文件夹
-    3.js代码需要放在js文件夹下，less代码需要放在css文件夹下，图片资源需要放在images文件夹下   
+    3.js代码需要放在js文件夹下，less代码需要放在css文件夹下，图片资源需要放在images文件夹下
 
-    
 安装方法
 
     npm install @jiaoyi/tangram
-    
+
 各功能点的使用方法
 
-   1、fetch
+1、fetch
 
         import { Fetch } from '@jiaoyi/tangram';
-        
+
         // get请求
-            
+
             Fetch.get({
               url: '/test/list',   //请求的地址
               data: {              //请求的参数
-                appId: 111        
+                appId: 111
               }
             }).then(function (res) {
                     console.log('请求完成后想进行的其他的操作');
             });
-            
-            
+
+
         //post请求
-        
+
             Fetch.post({
                   url: '/test/list',
                   data: {
                     appId: 111,
                   }
                 }).then(function (res) {
-            			console.log('请求完成后想进行的其他的操作');
+                        console.log('请求完成后想进行的其他的操作');
                 });
-                
-                
+
+
         // 提交表单
-   
-   
+
+
             Fetch.post({
                   url: '/test/save',
                   data: {
@@ -90,16 +85,13 @@
                       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                   }
                 }).then(function (res) {
-            			console.log('请求完成后想进行的其他的操作');
+                        console.log('请求完成后想进行的其他的操作');
                 });
-                
-    
-    
-   2、 dialog的使用
-   
-   
+
+2、 dialog 的使用
+
     import { Dialog } from '@jiaoyi/tangram';
-    
+
     1.报错
     Dialog.error({
        title: '错误',                 //错误弹窗的标题
@@ -112,8 +104,8 @@
          }
        }
      });
-         
-     
+
+
     2.普通的提示信息
     Dialog.info({
         title: '错误',                 //提示弹窗的标题
@@ -126,8 +118,8 @@
           }
         }
       });
-              
-              
+
+
     3.成功提示的弹窗
     Dialog.success({
        title: '错误',                 //成功弹窗的标题
@@ -140,8 +132,8 @@
          }
        }
      });
-    
-    
+
+
     4. 警告类型的提示信息
     Dialog.warning({
        title: '错误',                 //警告弹窗的标题
@@ -154,6 +146,7 @@
          }
        }
      });
+<<<<<<< HEAD
                       
 
 
@@ -181,3 +174,24 @@
 ###  更新日志
 
   0.3.13-beta Util新增日志上报函数logError
+=======
+
+注意： 目前集成解决方案中的内容并没有 publish，引入的都是原始的组件库代码。因此需要在业务方的项目中对 webpack 做如下的配置：
+
+```js
+{
+   test: /\.less$/,
+   include: path.join(__dirname, '/node_modules/@jiaoyi'),
+   use: [{
+     loader: 'style-loader', // creates style nodes from JS strings
+   }, {
+     loader: 'css-loader', // translates CSS into CommonJS
+   }, {
+     loader: 'less-loader', // compiles Less to CSS
+     options: {
+       javascriptEnabled: true,
+     },
+   }],
+},
+```
+>>>>>>> eccae91eba4391fd9d365149c0a1c356275c2005

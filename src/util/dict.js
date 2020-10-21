@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
+
 /**
  *字典相关方法
  */
 const Dict = {
     getDictByType(code) {
-        if (!window._GLOBAL_DATA_.CONFIG_DATAV2 || typeof window._GLOBAL_DATA_.CONFIG_DATAV2[code] == 'undefined') {
+        if (!window._GLOBAL_DATA_.CONFIG_DATAV2 || typeof window._GLOBAL_DATA_.CONFIG_DATAV2[code] === 'undefined') {
             return [];
         }
         // 筛掉isValid为1的无效数据
@@ -39,19 +41,19 @@ const Dict = {
         return '';
     },
     getGlobalDictByType(code) {
-        if (!window._GLOBAL_DATA_ || typeof window._GLOBAL_DATA_[code] == 'undefined') {
+        if (!window._GLOBAL_DATA_ || typeof window._GLOBAL_DATA_[code] === 'undefined') {
             return [];
         }
         // 筛掉isValid为1的无效数据
         const rs = window._GLOBAL_DATA_[code] || [];
-        rs.map((item) => {
+        rs.map(item => {
             item.dictName = item.desc;
             item.dictCode = item.key;
 
             return item;
         });
         return rs.filter(item => !item.isValid);
-    },
+    }
 };
 
 export default Dict;
