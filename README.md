@@ -146,33 +146,6 @@
          }
        }
      });
-                      
-
-
-   
-   注意： 目前集成解决方案中的内容并没有publish，引入的都是原始的组件库代码。因此需要在业务方的项目中对webpack做如下的配置：
-   
- ```js
-    {
-        test: /\.less$/,
-        include: path.join(__dirname, '/node_modules/@jiaoyi'),
-        use: [{
-          loader: 'style-loader', // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS
-        }, {
-          loader: 'less-loader', // compiles Less to CSS
-          options: {
-            javascriptEnabled: true,
-          },
-        }],
-    },
-    
- ```
-
-###  更新日志
-
-  0.3.13-beta Util新增日志上报函数logError
 
 注意： 目前集成解决方案中的内容并没有 publish，引入的都是原始的组件库代码。因此需要在业务方的项目中对 webpack 做如下的配置：
 
@@ -192,3 +165,8 @@
    }],
 },
 ```
+
+###  更新日志
+
+  0.3.13-beta Util新增日志上报函数logError
+
