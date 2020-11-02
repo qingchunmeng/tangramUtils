@@ -1,10 +1,31 @@
-### 交易前端集成解决方案
+# 交易前端集成解决方案
 
 代码地址：
 
     http://git.lianjia.com/transaction/Tangram
 
-方案包括以下几个部分：
+# 发版
+
+## 测试版
+
+-   分支: 任意开发分支
+-   权限: 任意开发者
+-   版本号规范: x.y.z-beta-n
+-   步骤:
+    -   修改版本号
+    -   npm run publish-beta
+    -   版本号改回到之前的正式版, _改动不要提交_
+
+## 正式版
+
+-   分支: master
+-   权限: 仓库管理员【孟青春】
+-   版本号规范: 工具自动更新, 不可手动更改
+-   步骤:
+    -   npm run version:patch
+    -   npm run release
+
+# 方案包括以下几个部分：
 
     1.fetch
     2.dialog
