@@ -18,15 +18,12 @@ const { location = {} } = win;
  */
 export default function (error, errorInfo, errorName = 'report_error') {
     if (!error || typeof error !== 'string') {
-        console.warn('params type error: first param(error) mast be a string and not null');
         return;
     }
     const task = setTimeout(() => {
         const { href = '' } = location;
         if (win.dt && win.dt.notify) {
             win.dt.notify(`${errorName}_${error.substr(0, 170)}`, href.substr(0, 199), errorInfo);
-        } else {
-            console.error(error);
         }
         clearTimeout(task);
     }, 100);
