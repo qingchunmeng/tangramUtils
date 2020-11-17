@@ -16,14 +16,17 @@ const { location = {} } = win;
  * @param {string} errorName 错误名称
  * @param {object} errorInfo 堆栈的 info 对象
  */
-export default function (error, errorInfo, errorName = 'report_error') {
+export default function (error, errorInfo, errorName = 'REPORT_ERROR') {
     if (!error || typeof error !== 'string') {
+        console.error('logError func error: The first param(error) mast be a string and not null!');
         return;
     }
     const task = setTimeout(() => {
         const { href = '' } = location;
         if (win.dt && win.dt.notify) {
             win.dt.notify(`${errorName}_${error.substr(0, 170)}`, href.substr(0, 199), errorInfo);
+        } else {
+            console.error(`${errorName}_${error.substr(0, 170)}`);
         }
         clearTimeout(task);
     }, 100);
