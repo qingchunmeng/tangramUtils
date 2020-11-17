@@ -12,6 +12,7 @@ import share from './share.js';
 import compute from './compute.js';
 import env from './env.js';
 import waterMark from './waterMark.js';
+import logError from './logError';
 import html2canvas, { htmlToImg } from './html2canvasWechat';
 
 import * as decimal from './decimal';
@@ -50,6 +51,7 @@ export default {
     string,
     time,
     types,
+    logError,
     htmlToImg,
     html2canvas
 };
