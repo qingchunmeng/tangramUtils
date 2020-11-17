@@ -189,4 +189,4 @@
 
 ### 更新日志
 
-0.3.13-beta.02 Util 新增日志上报函数 logError
+0.3.16 Util 新增日志上报函数 logError
