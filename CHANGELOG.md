@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.17](http://git.lianjia.com/transaction/Tangram/compare/v0.3.15...v0.3.17) (2020-12-01)
+
+
+### Features
+
+* 添加异常日志上报方法 ([e74c0ce](http://git.lianjia.com/transaction/Tangram/commit/e74c0cec5856738ffdf96fb5e92ec88ce8fb1e4f))
+* 添加异常日志上报方法 ([fc2b116](http://git.lianjia.com/transaction/Tangram/commit/fc2b116e60c428d9572bdbe4cb71b9bec9ccd3c7))
+* 修改lock文件 ([178b91b](http://git.lianjia.com/transaction/Tangram/commit/178b91b397d507633582b606090a4e7037219033))
+* 优化logError方法，clearTimeout、删除上报埋点 ([9679a65](http://git.lianjia.com/transaction/Tangram/commit/9679a65854f7953765249f3e2d37d321664d0a54))
+* add beta version ([de4cd6b](http://git.lianjia.com/transaction/Tangram/commit/de4cd6bc8e81b8adfa30d991120e3aba43722108))
+* add beta version ([72668a1](http://git.lianjia.com/transaction/Tangram/commit/72668a18bf656b135ca0c0333035cbfb7df3cd0a))
+* remove console ([90ae6b4](http://git.lianjia.com/transaction/Tangram/commit/90ae6b41080b094b3296e9cad2f947b15573ba65))
+
+
+### Bug Fixes
+
+* 重大错误 Number.Number.isNaN => Number.isNaN ([aa0e475](http://git.lianjia.com/transaction/Tangram/commit/aa0e475818c3ceaffa347e515a569237f3c2d119))
+
 ### [0.3.16](http://git.lianjia.com/transaction/Tangram/compare/v0.3.15...v0.3.16) (2020-11-17)
 
 
