@@ -88,7 +88,7 @@ const validate = {
             return true;
         }
         // 兼容非必填的情况
-        if (Number.Number.isNaN(val)) {
+        if (Number.isNaN(val)) {
             flag = false;
         } else if (!reg.test(val)) {
             flag = false;
