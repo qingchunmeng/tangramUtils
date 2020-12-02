@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.18](http://git.lianjia.com/transaction/Tangram/compare/v0.3.17...v0.3.18) (2020-12-02)
+
+
+### Features
+
+* htmlToImg 第一个参数支持直接传入dom元素 ([259cd86](http://git.lianjia.com/transaction/Tangram/commit/259cd86b206ff9daee50a6031dec529a4c830ccf))
+
 ### [0.3.17](http://git.lianjia.com/transaction/Tangram/compare/v0.3.15...v0.3.17) (2020-12-01)
 
 
