@@ -15,7 +15,7 @@
         "commit": "npx git-cz",
         "test": "npx jest",
         "test:coverage": "npx jest  --coverage",
-        "test:watch": "jest --watchAll --coverage",
+        "test:watch": "npx jest --watchAll --coverage",
         "build": "npx gulp build",
         "version:patch": "standard-version --release-as patch",
         "version:minor": "standard-version --release-as minor",
