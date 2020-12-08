@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-identical-functions */
+
 import share from '../../src/util/share';
 
 const errorTip =
@@ -8,7 +10,7 @@ const config = {
     link: 'http://ke.family.com', // 分享卡片点击跳转地址
     imgUrl: '**' // 分享图片
 };
-/* eslint-disable */
+
 describe('validate', () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
     beforeEach(() => {
@@ -42,7 +44,7 @@ describe('validate', () => {
         expect(setShareInfoFn).toThrow(errorTip);
 
         // 修改ua,成为微信环境
-        let ua =
+        const ua =
             'Mozilla/5.0 (Linux; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043622 Safari/537.36 MicroMessenger/6.6.1.1220(0x26060135) NetType/4G Language/zh_CN';
         Object.defineProperties(navigator, {
             userAgent: {
@@ -54,7 +56,7 @@ describe('validate', () => {
         });
         share.setShareInfo(config);
         // 修改全局window
-        let mock = jest.fn();
+        const mock = jest.fn();
         window.weixinUtil = {
             setWinxinConfig: mock
         };
@@ -125,7 +127,9 @@ describe('validate', () => {
             //     setRightButton: mock.fn(),
             //     setShareConfigWithString: mock.fn()
             // };
-            callback && callback();
+            if (callback) {
+                callback();
+            }
         };
         share.setJsbridgeShare(config);
         // 在deyou里，无参数
@@ -157,7 +161,9 @@ describe('validate', () => {
             webStatus: {}
         };
         window.$ljBridge.ready = function (callback) {
-            callback && callback();
+            if (callback) {
+                callback();
+            }
         };
         share.actionShare(config);
 
