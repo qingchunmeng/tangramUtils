@@ -13,7 +13,8 @@
     },
     "scripts": {
         "commit": "npx git-cz",
-        "test": "jest --coverage",
+        "test": "npx jest",
+        "test:coverage": "npx jest  --coverage",
         "test:watch": "jest --watchAll --coverage",
         "build": "npx gulp build",
         "version:patch": "standard-version --release-as patch",
