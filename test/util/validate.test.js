@@ -496,7 +496,7 @@ describe('validate', () => {
         expect(obj.year()).toBeTruthy();
         expect(obj.year(undefined)).toBeTruthy();
         expect(obj.year('')).toBeTruthy();
-        expect(!obj.year('s234')).toBeTruthy();
+        expect(!obj.year('s234')).toBeFalsy();
         expect(!obj.year(1799)).toBeTruthy();
         expect(!obj.year(3001)).toBeTruthy();
         expect(obj.year(1800)).toBeTruthy();
