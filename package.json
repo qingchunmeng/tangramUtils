@@ -14,6 +14,7 @@
     "scripts": {
         "commit": "npx git-cz",
         "test": "jest  --watchAll --coverage",
+        "test-file": "jest /test/util/log.test.js",
         "build": "npx gulp build",
         "version:patch": "standard-version --release-as patch",
         "version:minor": "standard-version --release-as minor",

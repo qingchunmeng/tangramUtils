@@ -25,6 +25,7 @@ import * as rules from './rules';
 import * as string from './string';
 import * as time from './time';
 import * as types from './types';
+import * as log from './log';
 
 export default {
     debounce,
@@ -51,6 +52,7 @@ export default {
     string,
     time,
     types,
+    log,
     logError,
     htmlToImg,
     html2canvas
