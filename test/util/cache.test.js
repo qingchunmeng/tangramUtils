@@ -8,8 +8,6 @@ import cache from '../../src/util/cache';
 
 const { get, set, remove, getFromSession, setToSession, removeFromSession } = cache;
 
-/* eslint-disable */
-
 describe('localStorage测试', () => {
     const testKey = `test_key_${Math.random()}`;
     const testValue = `test_value_${Math.random()}`;

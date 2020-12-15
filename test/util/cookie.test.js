@@ -6,10 +6,8 @@
 
 import cookie from '../../src/util/cookie';
 
-// console.log(cookie);
-
 const { getSec } = cookie;
-/* eslint-disable */
+
 describe(getSec, () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
     beforeEach(() => {

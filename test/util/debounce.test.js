@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign,sonarjs/no-identical-functions */
+
 /**
  * @file debounce 单元测试文件
  * @author zhangwenjie009@ke.com
@@ -78,14 +80,15 @@ describe('debounce', () => {
     });
     test('{ isPromise: true }', async () => {
         let count = 1;
-        const add = n =>
-            new Promise(resolve => {
+        const add = n => {
+            return new Promise(resolve => {
                 // 模拟异步请求
                 setTimeout(() => {
                     count += n;
                     resolve();
                 }, 1000);
             });
+        };
         const debouncedAdd = debounce(add, { isPromise: true });
         debouncedAdd(2); // 发起异步请求
         debouncedAdd(4); // 异步请求执行中，该调用不会执行
