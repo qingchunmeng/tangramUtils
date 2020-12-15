@@ -174,7 +174,7 @@ class Log {
         preStyle, // 自定义输出样式，类似 css 样式
         env // 为 production 只输出 error 级别的日志
     }) {
-        this.console = console || window.console.bind(window);
+        this.console = console || window.console;
         this.preText = preText;
         this.preStyle = preStyle;
         this.env = env;
