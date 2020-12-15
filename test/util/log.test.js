@@ -1,9 +1,49 @@
 /**
  * @file log 单元测试文件
  */
-/* eslint-disable */
 
-import { Log, getDateString, getErrorStack, paddingString, parseDateStringTpl, parseKeyTpl, isEmpty } from '../../src/util/log';
+import {
+    Log,
+    getDateString,
+    getErrorStack,
+    paddingString,
+    parseDateStringTpl,
+    parseKeyTpl,
+    isEmpty,
+} from '../../src/util/log';
+
+describe('log Log', () => {
+
+    // 简单模拟 console 输出
+
+    function toString(...args) {
+        return args.reduce((init, curr) => init += curr, '');
+    }
+
+    Log.dt = { // mock
+        notify: toString,
+    };
+    Log.env = 'test';
+    const log = new Log({
+        console: { // mock
+            log: toString,
+            info: toString,
+            warn: toString,
+            error: toString,
+        },
+        preText: 'test log',
+    });
+    test('Log', () => {
+        expect(log.log('123456')).toContain('%ctest log <log>');
+        expect(log.info('123456')).toContain('%ctest log <info>');
+        expect(log.warn('123456')).toContain('%ctest log <warn>');
+        expect(log.error('123456')).toContain('%ctest log <error>');
+        expect(log.error('123456', 'abcdef')).toContain('123456abcdef');
+        expect(log.notify('errorName', 'url', 'extraInfo')).toContain('errorNameurlextraInfo');
+        Log.dt = null;
+        expect(log.notify('errorName', 'url', 'extraInfo')).toContain('dt notify 不可用');
+    });
+});
 
 describe('log isEmpty', () => {
     test('isEmpty', () => {
@@ -58,7 +98,7 @@ describe('log parseDateStringTpl', () => {
 describe('log parseKeyTpl', () => {
     test('parseKeyTpl', () => {
         expect(parseKeyTpl('${0}-${1}-${2} ${3}:${4}:${5}.${6}', testDateArr)).toEqual(timeStr);
-        expect(parseKeyTpl('${porp1}-${porp2}', { porp1: 'porp1 value', porp2: 'porp2 value'})).toEqual('porp1 value-porp2 value');
+        expect(parseKeyTpl('${porp1}-${porp2}', { porp1: 'porp1 value', porp2: 'porp2 value' })).toEqual('porp1 value-porp2 value');
     });
 });
 

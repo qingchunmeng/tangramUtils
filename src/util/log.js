@@ -17,7 +17,7 @@ function getErrorStack(err) {
         msg = msg || err.message || String(err);
     } catch (e) {
         msg = `getErrorStack: ${e.message}`;
-        window.console.error(msg, e);
+        console.error(msg, e);
     }
     return msg;
 }
@@ -159,7 +159,7 @@ function getDateString(formatter, date) {
 }
 
 /**
- * 自定义日志，用法同 window.console，基于 window.console 实现。
+ * 自定义日志，用法同 window.console，基于 console 实现。
  * 实现: log, info, warn, error, myLog(可调用window.console的其它方法)；
  * 其它功能：notify，利用灯塔上报自定义内容
  * eg:
@@ -169,10 +169,12 @@ function getDateString(formatter, date) {
  */
 class Log {
     constructor({
+        console,
         preText, // 自定义日志前缀，方便定位自己的log，比如文件名
         preStyle, // 自定义输出样式，类似 css 样式
         env // 为 production 只输出 error 级别的日志
     }) {
+        this.console = console || window.console.bind(window);
         this.preText = preText;
         this.preStyle = preStyle;
         this.env = env;
@@ -214,36 +216,36 @@ class Log {
                 if (type === 'error') {
                     const msgs = args.map(e => getErrorStack(e));
                     // 线上配合灯塔上报可读的错误信息
-                    window.console.error(msgs.join('; '));
+                    return this.console.error(msgs.join('; '));
                 }
                 return;
             }
             // 非生产环境打样有样式和自定义前缀的 log
-            window.console[type](
+            return this.console[type](
                 `%c${this.preText || ''} <${type}> ${getDateString('hh:mm:ss.ms')} => `,
                 this.getPreStyleString(),
                 ...args
             );
         } catch (e) {
             // just in case unsupported type
-            window.console.error(`Log Exception: unsupported type [${type}] ${args}`);
+            return this.console.error(`Log Exception: unsupported type [${type}] ${args}`);
         }
     }
 
     log(...args) {
-        this.myLog('log', ...args);
+        return this.myLog('log', ...args);
     }
 
     info(...args) {
-        this.myLog('info', ...args);
+        return this.myLog('info', ...args);
     }
 
     warn(...args) {
-        this.myLog('warn', ...args);
+        return this.myLog('warn', ...args);
     }
 
     error(...args) {
-        this.myLog('error', ...args);
+        return this.myLog('error', ...args);
     }
 
     /**
@@ -266,14 +268,14 @@ class Log {
             if (!dt || !dt.notify) {
                 throw new Error('dt notify 不可用');
             }
-            dt.notify(
+            return dt.notify(
                 String(errorName).substr(0, 199),
                 String(url || window.location.href).substr(0, 199),
                 extraInfo
             );
         } catch (e) {
             e.message += `${errorName} ${url} ${JSON.stringify(extraInfo)}`;
-            this.error(e);
+            return this.error(e);
         }
     }
 }
