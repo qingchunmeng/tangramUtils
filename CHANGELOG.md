@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
+* 新增自定义日志，集成灯塔notify上报自定义信息 ([43e2061](https://git.lianjia.com/transaction/Tangram/-/commit/43e20618574c9b95dc2d5b38fb2b8800e1b9603f))
+
+### Features
+
 * 删除分享方法的单测 ([de79309](http://git.lianjia.com/transaction/Tangram/commit/de79309ee9b5a94dbcaa7683bf3305cedaf1ed24))
 
 
