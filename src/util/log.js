@@ -47,7 +47,7 @@ function paddingString(value = '', width = 0, paddingChars = '0', paddingRight =
     // value 为 undefined | null 转为 '', 为其它值时先转字符串后去除前后空白字符
     let str = isEmpty(value) ? '' : String(value).replace(/^(\s*)|(\s*)$/g, '');
     const stringToPadding = isEmpty(paddingChars) ? '' : String(paddingChars);
-    const minLength = Number.isNaN(width) ? 0 : Math.abs(Number(width));
+    const minLength = window.isNaN(width) ? 0 : Math.abs(Number(width));
     let restPaddingLength = minLength - str.length;
     if (restPaddingLength < 1) {
         // 本身长度>=指定长度，返回字符串值
@@ -124,7 +124,7 @@ function parseDateStringTpl(tpl, args) {
 function getDateString(formatter, date) {
     let d = date;
     if (!(date instanceof Date)) {
-        d = Number.isNaN(date) ? new Date() : new Date(+date);
+        d = window.isNaN(date) ? new Date() : new Date(+date);
     }
     const year = paddingString(d.getFullYear(), 4);
     const month = paddingString(d.getMonth() + 1, 2);
