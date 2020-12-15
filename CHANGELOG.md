@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.19](http://git.lianjia.com/transaction/Tangram/compare/v0.3.18...v0.3.19) (2020-12-15)
+
+
+### Features
+
+* 删除分享方法的单测 ([de79309](http://git.lianjia.com/transaction/Tangram/commit/de79309ee9b5a94dbcaa7683bf3305cedaf1ed24))
+
+
+### Tests
+
+* 补全测试用例 ([c8f3e4b](http://git.lianjia.com/transaction/Tangram/commit/c8f3e4b5ed7aea2ed7bc03e421d76c466e83b744))
+
 ### [0.3.18](http://git.lianjia.com/transaction/Tangram/compare/v0.3.17...v0.3.18) (2020-12-02)
 
 
