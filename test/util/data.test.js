@@ -8,7 +8,6 @@ import data from '../../src/util/data';
 
 const { formatReturnValue, deepClone, randomNum, shouldFieldDisplay } = data;
 
-/* eslint-disable */
 describe('formatReturnValue', () => {
     test('格式化返回值', () => {
         expect(formatReturnValue('', '显示文案')).toEqual('');
@@ -40,7 +39,7 @@ describe('deepClone', () => {
         objects: { a: 0, b: 1, c: 2 },
         'objects with object values': { a: 'a', b: ['B'], c: { C: 1 }, d: { e: ['F'] } },
         null: null,
-        undefined: undefined,
+        undefined,
         'objects with null': { a: '123', b: { c: null } },
         'objects with undefined': { a: '123', b: { c: undefined } }
     };
@@ -137,6 +136,7 @@ describe('randomNum', () => {
 
 describe('shouldFieldDisplay', () => {
     // 后端给的页面配置
+    // eslint-disable-next-line no-unused-vars
     const fields = [
         {
             dataDict: '',

@@ -1,6 +1,7 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+
 import obj from '../../src/util/validate';
 
-/* eslint-disable */
 describe('validate', () => {
     // 每个测试用例执行前都会还原数据，所以下面两个测试可以通过。
 
@@ -115,7 +116,7 @@ describe('validate', () => {
         expect(obj.phone(15526789012)).toBeTruthy();
     });
 
-    //判断测试是否是固话
+    // 判断测试是否是固话
     test('homeTel', () => {
         expect(!obj.homeTel()).toBeTruthy();
         expect(obj.homeTel('')).toBeTruthy();
@@ -126,8 +127,8 @@ describe('validate', () => {
         expect(!obj.homeTel(123)).toBeTruthy();
         expect(!obj.homeTel([])).toBeTruthy();
         expect(!obj.homeTel({})).toBeTruthy();
-        expect(!obj.homeTel(345678901)).toBeTruthy(); //9位固话不存在
-        expect(!obj.homeTel(1234567890127)).toBeTruthy(); //13位固话不存在
+        expect(!obj.homeTel(345678901)).toBeTruthy(); // 9位固话不存在
+        expect(!obj.homeTel(1234567890127)).toBeTruthy(); // 13位固话不存在
         expect(!obj.homeTel('a010-67679910')).toBeTruthy();
         expect(!obj.homeTel('#010-67679910')).toBeTruthy();
         expect(!obj.homeTel('号010-67679910')).toBeTruthy();
@@ -142,11 +143,11 @@ describe('validate', () => {
         expect(obj.homeTel('044589832076')).toBeTruthy();
         expect(obj.homeTel('0278982076')).toBeTruthy();
         expect(obj.homeTel('04457323206')).toBeTruthy();
-        expect(obj.homeTel('67162855')).toBeTruthy(); //不带区号8位座机
-        expect(obj.homeTel('5982076')).toBeTruthy(); //不带区号7位座机
+        expect(obj.homeTel('67162855')).toBeTruthy(); // 不带区号8位座机
+        expect(obj.homeTel('5982076')).toBeTruthy(); // 不带区号7位座机
     });
 
-    //判断测试是否是中间为****格式的手机号
+    // 判断测试是否是中间为****格式的手机号
     test('phoneNum', () => {
         expect(!obj.phoneNum()).toBeTruthy();
         expect(obj.phoneNum('')).toBeTruthy();
@@ -192,7 +193,7 @@ describe('validate', () => {
         expect(!obj.phoneNum('19996267901')).toBeTruthy();
     });
 
-    //判断测试是否为电话号码或座机
+    // 判断测试是否为电话号码或座机
     test('telOrPhone', () => {
         expect(!obj.telOrPhone()).toBeTruthy();
         expect(!obj.telOrPhone(0)).toBeTruthy();
@@ -205,15 +206,15 @@ describe('validate', () => {
         expect(!obj.telOrPhone(123)).toBeTruthy();
         expect(!obj.telOrPhone([])).toBeTruthy();
         expect(!obj.telOrPhone({})).toBeTruthy();
-        expect(obj.telOrPhone(22345678901)).toBeTruthy(); //2开头的电话号码不存在但是座机可能存在
-        expect(obj.telOrPhone(123456789012)).toBeTruthy(); //12位的电话号码不存在但是座机可能存在
-        expect(obj.telOrPhone(15426789012)).toBeTruthy(); //154开头的电话号码不存在但是座机可能存在
-        expect(obj.telOrPhone(12345678901)).toBeTruthy(); //12开头的电话号码不存在但是座机可能存在
-        expect(obj.telOrPhone(11345678902)).toBeTruthy(); //11开头的电话号码不存在但是座机可能存在
-        expect(obj.telOrPhone(10345678921)).toBeTruthy(); //10开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone(22345678901)).toBeTruthy(); // 2开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone(123456789012)).toBeTruthy(); // 12位的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone(15426789012)).toBeTruthy(); // 154开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone(12345678901)).toBeTruthy(); // 12开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone(11345678902)).toBeTruthy(); // 11开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone(10345678921)).toBeTruthy(); // 10开头的电话号码不存在但是座机可能存在
         expect(!obj.telOrPhone(' 12345678901')).toBeTruthy();
-        expect(obj.telOrPhone('14667890173')).toBeTruthy(); //146开头的电话号码不存在但是座机可能存在
-        expect(obj.telOrPhone('16752378901')).toBeTruthy(); //167开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone('14667890173')).toBeTruthy(); // 146开头的电话号码不存在但是座机可能存在
+        expect(obj.telOrPhone('16752378901')).toBeTruthy(); // 167开头的电话号码不存在但是座机可能存在
         expect(obj.telOrPhone('13345678901')).toBeTruthy();
         expect(obj.telOrPhone('17345678901')).toBeTruthy();
         expect(obj.telOrPhone('18345678901')).toBeTruthy();
@@ -222,8 +223,8 @@ describe('validate', () => {
         expect(obj.telOrPhone('14567890173')).toBeTruthy();
         expect(obj.telOrPhone('14785678901')).toBeTruthy();
         expect(obj.telOrPhone(15526789012)).toBeTruthy();
-        expect(!obj.telOrPhone(345678901)).toBeTruthy(); //9位固话不存在
-        expect(!obj.telOrPhone(1234567890127)).toBeTruthy(); //13位固话不存在
+        expect(!obj.telOrPhone(345678901)).toBeTruthy(); // 9位固话不存在
+        expect(!obj.telOrPhone(1234567890127)).toBeTruthy(); // 13位固话不存在
         expect(!obj.telOrPhone('a010-67679910')).toBeTruthy();
         expect(!obj.telOrPhone('#010-67679910')).toBeTruthy();
         expect(!obj.telOrPhone('号010-67679910')).toBeTruthy();
@@ -237,8 +238,8 @@ describe('validate', () => {
         expect(obj.telOrPhone('044589832076')).toBeTruthy();
         expect(obj.telOrPhone('0278982076')).toBeTruthy();
         expect(obj.telOrPhone('04457323206')).toBeTruthy();
-        expect(obj.telOrPhone('67162855')).toBeTruthy(); //不带区号8位座机
-        expect(obj.telOrPhone('5982076')).toBeTruthy(); //不带区号7位座机
+        expect(obj.telOrPhone('67162855')).toBeTruthy(); // 不带区号8位座机
+        expect(obj.telOrPhone('5982076')).toBeTruthy(); // 不带区号7位座机
     });
 
     test('isWeiXin isAndroid isIOS', () => {
@@ -246,7 +247,7 @@ describe('validate', () => {
         expect(!obj.isAndroid()).toBeTruthy();
         expect(!obj.isIOS()).toBeTruthy();
         // 修改ua
-        let ua =
+        const ua =
             'Mozilla/5.0 (Linux; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043622 Safari/537.36 MicroMessenger/6.6.1.1220(0x26060135) NetType/4G Language/zh_CN';
         Object.defineProperties(navigator, {
             userAgent: {
@@ -478,24 +479,24 @@ describe('validate', () => {
         expect(!obj.maxValue('a', 'A')).toBeTruthy();
     });
 
-    //对比大于某个数字
+    // 对比大于某个数字
     test('greaterThan', () => {
         expect(obj.greaterThan()).toBeTruthy();
         expect(obj.greaterThan(2, 1)).toBeTruthy();
         expect(!obj.greaterThan(2, 2)).toBeTruthy();
     });
-    //对比小于某个数字
+    // 对比小于某个数字
     test('lessThan', () => {
         expect(obj.lessThan()).toBeTruthy();
         expect(obj.lessThan(2, 3)).toBeTruthy();
         expect(!obj.lessThan(2, 2)).toBeTruthy();
     });
-    //数字，年份(1800-3000之间)
+    // 数字，年份(1800-3000之间)
     test('year', () => {
         expect(obj.year()).toBeTruthy();
         expect(obj.year(undefined)).toBeTruthy();
         expect(obj.year('')).toBeTruthy();
-        expect(!obj.year('s234')).toBeTruthy();
+        expect(!obj.year('s234')).toBeFalsy();
         expect(!obj.year(1799)).toBeTruthy();
         expect(!obj.year(3001)).toBeTruthy();
         expect(obj.year(1800)).toBeTruthy();

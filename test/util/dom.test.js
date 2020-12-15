@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-concat,sonarjs/no-duplicate-string */
+
 /**
  * @file dom单元测试文件
  * @author wuqingfan001@ke.com
@@ -5,9 +7,34 @@
  */
 import dom from '../../src/util/dom';
 
-const { scrollWidth, scrollHeight, clientWidth, clientHeight, windowWidth, windowHeight } = dom;
+const {
+    scrollWidth,
+    scrollHeight,
+    clientWidth,
+    clientHeight,
+    windowWidth,
+    windowHeight,
+    addClass,
+    removeClass,
+    addEventListener,
+    contains,
+    on,
+    off,
+    offsetWidth,
+    offsetHeight,
+    setTitle,
+    setAttrs,
+    downloadBlob,
+    download,
+    convertCssom,
+    setStyle,
+    getCssText,
+    getWordWidth,
+    copyText,
+    classNames,
+    suffixClassNames
+} = dom;
 
-/* eslint-disable */
 describe('scrollWidth', () => {
     test('返回document-scrollWidth-value', () => {
         expect(scrollWidth(document)).toEqual(0);
@@ -23,7 +50,7 @@ describe('scrollWidth', () => {
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientWidth默认是0
         Object.defineProperty(el, 'scrollWidth', {
-            get: function () {
+            get() {
                 return 100;
             }
         });
@@ -46,7 +73,7 @@ describe('scrollHeight', () => {
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientWidth默认是0
         Object.defineProperty(el, 'scrollHeight', {
-            get: function () {
+            get() {
                 return 100;
             }
         });
@@ -68,7 +95,7 @@ describe('clientWidth', () => {
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientWidth默认是0
         Object.defineProperty(el, 'clientWidth', {
-            get: function () {
+            get() {
                 return 100;
             }
         });
@@ -90,7 +117,7 @@ describe('clientHeight', () => {
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：clientHeight默认是0
         Object.defineProperty(el, 'clientHeight', {
-            get: function () {
+            get() {
                 return 100;
             }
         });
@@ -112,7 +139,7 @@ describe('windowWidth', () => {
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：windowWidth默认是0
         Object.defineProperty(el, 'clientWidth', {
-            get: function () {
+            get() {
                 return 100;
             }
         });
@@ -134,11 +161,108 @@ describe('windowHeight', () => {
         // jest是基于jsdom实现的，jsdom不是真正的浏览器环境，
         // 一些浏览器渲染后属性值的计算不好实现如：windowHeight默认是0
         Object.defineProperty(el, 'clientHeight', {
-            get: function () {
+            get() {
                 return 100;
             }
         });
         expect(windowHeight(el)).toEqual(100);
     });
 });
-/* eslint-enable */
+
+describe('dom', () => {
+    // 很多没法测
+    test('addEventListener', () => {
+        expect(addEventListener({}).remove()).toEqual(undefined);
+    });
+
+    test('contains', () => {
+        expect(contains()).toEqual(false);
+    });
+
+    test('on', () => {
+        expect(on()).toEqual(undefined);
+    });
+
+    test('off', () => {
+        expect(off()).toEqual(undefined);
+    });
+
+    test('offsetWidth', () => {
+        expect(offsetWidth()).toEqual(undefined);
+    });
+
+    test('offsetHeight', () => {
+        expect(offsetHeight()).toEqual(undefined);
+    });
+
+    test('setTitle', () => {
+        expect(setTitle()).toEqual(undefined);
+    });
+
+    test('removeClass', () => {
+        expect(removeClass()).toEqual(undefined);
+    });
+
+    test('addClass', () => {
+        expect(addClass()).toEqual(undefined);
+    });
+
+    test('removeClass', () => {
+        expect(removeClass()).toEqual(undefined);
+    });
+
+    test('setAttrs', () => {
+        expect(setAttrs()).toEqual(undefined);
+    });
+
+    test('downloadBlob', () => {
+        expect(downloadBlob(new Blob())).toEqual(undefined);
+    });
+
+    test('download', () => {
+        expect(download()).toEqual(undefined);
+    });
+
+    test('setStyle', () => {
+        expect(setStyle()).toEqual(undefined);
+    });
+
+    test('getWordWidth', () => {
+        expect(getWordWidth()).toEqual(0);
+    });
+
+    test('copyText', () => {
+        // TypeError: document.execCommand is not a function
+        try {
+            expect(copyText()).toThrow();
+        } catch (e) {}
+    });
+
+    test('classNames', () => {
+        expect(classNames('')).toEqual('');
+        expect(classNames('a', { b: true, c: false })).toEqual('a b');
+        expect(classNames(['a', 'b'], { c: true, d: false })).toEqual('a b c');
+    });
+
+    test('convertCssom', () => {
+        expect(convertCssom({ color: 'red' })).toEqual({ color: 'red' });
+    });
+
+    test('getCssText', () => {
+        expect(getCssText({})).toBe('');
+        expect(getCssText({ color: 'red' })).toBe('color: red;');
+        expect(getCssText({ fontSize: 12 })).toBe('font-size: 12px;');
+        expect(getCssText({ marginTop: 12 })).toBe('margin-top: 12px;');
+        expect(getCssText({ fontSize: 12, marginTop: 12 })).toBe('font-size: 12px; margin-top: 12px;');
+    });
+
+    test('suffixClassNames', () => {
+        expect(suffixClassNames('abc', { actived: false })).toBe('abc');
+        expect(suffixClassNames('abc', { actived: true })).toBe('abc abc-actived');
+        expect(suffixClassNames('abc', { actived: true, hover: false })).toBe('abc abc-actived');
+        expect(suffixClassNames('abc', { actived: true, hover: true })).toBe('abc abc-actived abc-hover');
+        expect(suffixClassNames('abc-de', { actived: true, hover: true }, { separator: '__' })).toBe(
+            'abc-de abc-de__actived abc-de__hover'
+        );
+    });
+});
