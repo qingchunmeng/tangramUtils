@@ -46,7 +46,7 @@
         "@babel/preset-stage-1": "^7.0.0",
         "@babel/preset-stage-2": "^7.0.0",
         "@jiaoyi/config": "^0.1.9",
-        "@jiaoyi/flow": "^0.1.6",
+        "@jiaoyi/flow": "^0.1.8",
         "babel-jest": "^24.8.0",
         "babel-loader": "^7.1.4",
         "babel-register": "^6.26.0",
