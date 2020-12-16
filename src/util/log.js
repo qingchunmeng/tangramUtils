@@ -14,10 +14,10 @@ function getErrorStack(err) {
         } else if (err.error) {
             msg = err.error.stack;
         }
-        msg = msg || err.message || String(err);
+        msg = msg || err.message || JSON.stringify(err);
     } catch (e) {
-        msg = `getErrorStack: ${e.message}`;
-        console.error(msg, e);
+        msg = `getErrorStack: ${e.message}; ${err}`;
+        window.console.error(msg, e, err);
     }
     return msg;
 }
