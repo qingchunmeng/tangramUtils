@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.20](http://git.lianjia.com/transaction/Tangram/compare/v0.3.19...v0.3.20) (2020-12-16)
+
 ### [0.3.19](http://git.lianjia.com/transaction/Tangram/compare/v0.3.18...v0.3.19) (2020-12-15)
 
 
