@@ -68,6 +68,8 @@ describe('log getErrorStack', () => {
     test('getErrorStack', () => {
         expect(getErrorStack('errMsg')).toEqual('errMsg');
         expect(getErrorStack({ message: 'errMsg' })).toEqual('errMsg');
+        expect(getErrorStack({ msg: 'errMsg' })).toEqual('{"msg":"errMsg"}');
+        expect(getErrorStack([1, 2])).toEqual('[1,2]');
         expect(getErrorStack({ error: { stack: 'errMsg' } })).toEqual('errMsg');
         expect(getErrorStack({ stack: 'errMsg' })).toEqual('errMsg');
         expect(getErrorStack({ inspect: () => 'errMsg' })).toEqual('errMsg');
