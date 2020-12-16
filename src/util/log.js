@@ -14,7 +14,9 @@ function getErrorStack(err) {
         } else if (err.error) {
             msg = err.error.stack;
         }
-        msg = msg || err.message || JSON.stringify(err);
+        if (!msg) {
+            msg = err.message || (typeof err === 'string' ? err : JSON.stringify(err));
+        }
     } catch (e) {
         msg = `getErrorStack: ${e.message}; ${err}`;
         window.console.error(msg, e, err);
