@@ -66,13 +66,13 @@ describe('validate', () => {
         expect(!obj.mobile({})).toBeTruthy();
         expect(!obj.mobile(22345678901)).toBeTruthy();
         expect(!obj.mobile(123456789012)).toBeTruthy();
-        expect(!obj.mobile(15426789012)).toBeTruthy();
+        expect(obj.mobile(15426789012)).toBeTruthy();
         expect(!obj.mobile(12345678901)).toBeTruthy();
         expect(!obj.mobile(11345678902)).toBeTruthy();
         expect(!obj.mobile(10345678921)).toBeTruthy();
         expect(!obj.mobile(' 12345678901')).toBeTruthy();
-        expect(!obj.mobile('14667890173')).toBeTruthy();
-        expect(!obj.mobile('16752378901')).toBeTruthy();
+        expect(obj.mobile('14667890173')).toBeTruthy();
+        expect(obj.mobile('16752378901')).toBeTruthy();
         expect(obj.mobile('13345678901')).toBeTruthy();
         expect(obj.mobile('17345678901')).toBeTruthy();
         expect(obj.mobile('18345678901')).toBeTruthy();
