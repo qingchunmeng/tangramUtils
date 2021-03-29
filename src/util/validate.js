@@ -441,7 +441,7 @@ const validate = {
         if (val === '') {
             return true;
         }
-        const reg = /^(13[0-9]|14(5|7)|15(0|1|2|3|5|6|7|8|9)|18[0-9]|17[0-9]|19[0-9]|166)\d{8}$/;
+        const reg = /^(1[3-9])\d{9}$/;
         return reg.test(val);
     },
     /**
