@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.21](http://git.lianjia.com/transaction/Tangram/compare/v0.3.20...v0.3.21) (2021-03-29)
+
+
+### Features
+
+* 修改手机号校验规则 ([2be0d76](http://git.lianjia.com/transaction/Tangram/commit/2be0d762c019888ee734949b176dec110c547744))
+
 ### [0.3.20](http://git.lianjia.com/transaction/Tangram/compare/v0.3.19...v0.3.20) (2020-12-16)
 
 ### [0.3.19](http://git.lianjia.com/transaction/Tangram/compare/v0.3.18...v0.3.19) (2020-12-15)
