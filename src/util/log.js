@@ -194,12 +194,23 @@ class Log {
      */
     static dt = null;
 
-    getNewInstance(...args) {
-        return new Log(...args);
+    getNewInstance(config) {
+        // 属性复制一份自己，config 可以自定义覆盖
+        return new Log({
+            console: this.console,
+            preText: this.preText,
+            preStyle: this.preStyle,
+            env: this.env,
+            ...config
+        });
     }
 
     getEnv() {
         return this.env || Log.env;
+    }
+
+    setEnv(env) {
+        this.env = env || Log.env;
     }
 
     getPreStyleString() {
@@ -286,7 +297,6 @@ export default Log;
 
 export {
     Log,
-
     // 附带导出一些工具方法
     getErrorStack,
     isEmpty,
