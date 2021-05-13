@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.22](http://git.lianjia.com/transaction/Tangram/compare/v0.3.21...v0.3.22) (2021-05-13)
+
+
+### Features
+
+* 优化 log 的 env 设置：新增 setEnv 修改实例 env; getNewInstance 由创建新实例时默认使用想有实例的配置 ([ee0ae58](http://git.lianjia.com/transaction/Tangram/commit/ee0ae583b319b5309157d5a54e8425b0d2a0dd05))
+
 ### [0.3.21](http://git.lianjia.com/transaction/Tangram/compare/v0.3.20...v0.3.21) (2021-03-29)
 
 
