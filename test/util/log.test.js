@@ -9,29 +9,30 @@ import {
     paddingString,
     parseDateStringTpl,
     parseKeyTpl,
-    isEmpty,
+    isEmpty
 } from '../../src/util/log';
 
 describe('log Log', () => {
-
     // 简单模拟 console 输出
 
     function toString(...args) {
-        return args.reduce((init, curr) => init += curr, '');
+        return args.reduce((init, curr) => (init += curr), '');
     }
 
-    Log.dt = { // mock
-        notify: toString,
+    Log.dt = {
+        // mock
+        notify: toString
     };
     Log.env = 'test';
     const log = new Log({
-        console: { // mock
+        console: {
+            // mock
             log: toString,
             info: toString,
             warn: toString,
-            error: toString,
+            error: toString
         },
-        preText: 'test log',
+        preText: 'test log'
     });
     test('Log', () => {
         expect(log.log('123456')).toContain('%ctest log <log>');
@@ -42,6 +43,11 @@ describe('log Log', () => {
         expect(log.notify('errorName', 'url', 'extraInfo')).toContain('errorNameurlextraInfo');
         Log.dt = null;
         expect(log.notify('errorName', 'url', 'extraInfo')).toContain('dt notify 不可用');
+
+        const newInstance = log.getNewInstance({ preText: 'NewInstance preText' });
+        newInstance.setEnv('selfEnv');
+        expect(newInstance.getEnv()).toEqual('selfEnv');
+        expect(newInstance.log('123456')).toContain('NewInstance preText');
     });
 });
 
@@ -100,7 +106,9 @@ describe('log parseDateStringTpl', () => {
 describe('log parseKeyTpl', () => {
     test('parseKeyTpl', () => {
         expect(parseKeyTpl('${0}-${1}-${2} ${3}:${4}:${5}.${6}', testDateArr)).toEqual(timeStr);
-        expect(parseKeyTpl('${porp1}-${porp2}', { porp1: 'porp1 value', porp2: 'porp2 value' })).toEqual('porp1 value-porp2 value');
+        expect(parseKeyTpl('${porp1}-${porp2}', { porp1: 'porp1 value', porp2: 'porp2 value' })).toEqual(
+            'porp1 value-porp2 value'
+        );
     });
 });
 
@@ -110,6 +118,8 @@ describe('log getDateString', () => {
         expect(getDateString('yyyy-MM-dd hh:mm:ss.ms', testDate.getTime())).toEqual(timeStr);
         expect(getDateString('y年M月d日', testDate.getTime())).toEqual('2020年12月11日');
         expect(getDateString('${1}月${2}日 ${3}时', testDate.getTime())).toEqual('12月11日 09时');
-        expect(getDateString(args => `${args[1]}月${args[2]}日 ${parseInt(args[3])}时`, testDate.getTime())).toEqual('12月11日 9时');
+        expect(getDateString(args => `${args[1]}月${args[2]}日 ${parseInt(args[3])}时`, testDate.getTime())).toEqual(
+            '12月11日 9时'
+        );
     });
 });
