@@ -1,7 +1,5 @@
 /**
  * @desc 调试工具
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 import { random } from 'lodash';

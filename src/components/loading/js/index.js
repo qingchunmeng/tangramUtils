@@ -2,8 +2,6 @@
 
 /**
  * @file fetch loading
- * @author mengqingchun002@ke.com
- * @date 2019/3/28 07:06
  */
 
 import '../css/index.less';

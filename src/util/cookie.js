@@ -1,7 +1,5 @@
 /**
  * @file cookie操作
- * @author mengqingchun002@ke.com
- * @date 2019/3/29 07:52
  */
 
 const Cookie = {

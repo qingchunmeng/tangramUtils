@@ -1,7 +1,5 @@
 /**
  * @desc 数据格式化
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 import { isNumber } from 'lodash';

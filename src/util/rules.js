@@ -1,7 +1,5 @@
 /**
  * @desc 校验规则
- * @author fangtao04
- * @date   2020/04/07
  * async-validator: https://www.npmjs.com/package/async-validator
  */
 

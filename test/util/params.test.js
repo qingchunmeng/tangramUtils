@@ -1,7 +1,5 @@
 /**
  * @file params 单元测试文件
- * @author zhangwenjie009@ke.com
- * @date 2019/6/27 08:00
  */
 
 import params, { queryParse, queryStringify } from '../../src/util/params';

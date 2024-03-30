@@ -1,7 +1,5 @@
 /**
  * @file params 单元测试文件
- * @author lihaixu@ke.com
- * @date 2019/9/17 15:53
  */
 
 import compute from '../../src/util/compute';

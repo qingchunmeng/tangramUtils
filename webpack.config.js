@@ -133,16 +133,6 @@ const config = {
             }
         ]
     }
-    // resolve: {
-    //     alias: {
-    //         containers: path.join(paths.src, 'containers'),
-    //         components: path.join(paths.src, 'components'),
-    //         common: path.join(paths.src, 'common'),
-    //         util: path.join(paths.src, 'util'),
-    //         actions: path.join(paths.src, 'actions'),
-    //         reducer: path.join(paths.src, 'reducer'),
-    //     },
-    // },
 };
 
 module.exports = config;

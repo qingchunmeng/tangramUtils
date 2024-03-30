@@ -1,7 +1,5 @@
 /**
  * @file 增加水印的Util
- * @author songbei002@ke.com
- * @date 2020/8/14
  */
 import env from './env.js';
 

@@ -1,7 +1,5 @@
 /**
  * @file fetch请求
- * @author mengqingchun002@ke.com
- * @date 2019/3/7 21:26
  */
 // TODO 需要加上github上的polyfill
 // TODO 需要处理cors

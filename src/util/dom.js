@@ -1,7 +1,5 @@
 /**
  * @file DOM操作相关
- * @author mengqingchun002@ke.com
- * @date 2019/4/16 16:29
  */
 
 import { kebabCase, isNumber, isObject, flattenDeep, uniq } from 'lodash';

@@ -1,7 +1,5 @@
 /**
  * @file cookie单元测试文件
- * @author mengqingchun002@ke.com
- * @date 2019/5/25 17:35
  */
 
 import cookie from '../../src/util/cookie';

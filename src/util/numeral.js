@@ -1,7 +1,5 @@
 /**
  * @desc 数字格式化
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 // 千分位展示

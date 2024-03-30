@@ -1,4 +1,4 @@
-# 交易前端集成解决方案
+# 前端集成解决方案
 
 代码地址：
 
@@ -61,13 +61,13 @@
 
 安装方法
 
-    npm install @jiaoyi/tangram
+    npm install @nfe/tangramUtils
 
 各功能点的使用方法
 
 1、fetch
 
-        import { Fetch } from '@jiaoyi/tangram';
+        import { Fetch } from '@nfe/tangramUtils';
 
         // get请求
 
@@ -111,7 +111,7 @@
 
 2、 dialog 的使用
 
-    import { Dialog } from '@jiaoyi/tangram';
+    import { Dialog } from '@nfe/tangramUtils';
 
     1.报错
     Dialog.error({
@@ -173,7 +173,7 @@
 ```js
 {
    test: /\.less$/,
-   include: path.join(__dirname, '/node_modules/@jiaoyi'),
+   include: path.join(__dirname, '/node_modules/@nfe'),
    use: [{
      loader: 'style-loader', // creates style nodes from JS strings
    }, {

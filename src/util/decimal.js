@@ -1,7 +1,5 @@
 /**
  * @desc 浮点数四则运算
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 import { flatten } from 'lodash';

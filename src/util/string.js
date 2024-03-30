@@ -1,7 +1,5 @@
 /**
  * @desc 字符串处理
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 import { upperFirst, camelCase } from 'lodash';

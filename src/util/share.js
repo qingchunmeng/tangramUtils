@@ -11,9 +11,6 @@
  *  <script type="text/javascript" crossorigin="anonymous" src="http://s1.ljcdn.com/m-base/release/v04.2/asset/bridge_7bb77bfd09380a4e.js"></script>
     <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" crossorigin="anonymous" src="https://s1.ljcdn.com/transaction-public-static/weixinAuth/weixinUtil-1.0.0.js"></script>
-
- * @author xiaomin006@ke.com
- * @date 2019/5/7
  */
 
 import validate from './validate.js';

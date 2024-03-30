@@ -1,7 +1,5 @@
 /**
  * @file 数字加减法，精度处理
- * @author lihaixu@ke.com
- * @date 2019/9/17 15:38
  */
 
 const compute = {

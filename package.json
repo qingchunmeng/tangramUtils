@@ -1,15 +1,15 @@
 {
-    "name": "@jiaoyi/tangram",
-    "version": "0.3.22",
+    "name": "@nfe/tangramUtils",
+    "version": "0.0.1",
     "description": "公共集成解决方案",
-    "author": "mengqingchun002@ke.com",
+    "author": "meng_qing_chun@126.com",
     "main": "lib/index.js",
     "files": [
         "lib"
     ],
     "repository": {
         "type": "git",
-        "url": "http://git.lianjia.com/transaction/Tangram"
+        "url": "https://github.com/qingchunmeng/tangramUtils.git"
     },
     "scripts": {
         "commit": "npx git-cz",

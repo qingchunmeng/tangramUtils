@@ -1,7 +1,5 @@
 /**
  * @file 弹窗组件
- * @author mengqingchun002@ke.com
- * @date 2019/3/11 11:58
  */
 
 import '../css/index.less';

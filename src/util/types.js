@@ -1,7 +1,5 @@
 /**
  * @desc 数据类型
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 import { uniq, isNull, isUndefined, isFunction, isObject, isArray } from 'lodash';

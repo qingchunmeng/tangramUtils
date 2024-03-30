@@ -1,7 +1,5 @@
 /**
  * @file cookie单元测试文件
- * @author SONGXIAOYUE001@ke.com
- * @date 2019/6/9 22:39
  */
 
 import cache from '../../src/util/cache';

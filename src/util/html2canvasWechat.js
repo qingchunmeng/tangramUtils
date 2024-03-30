@@ -1,7 +1,4 @@
 /**
- * Copyright © 贝壳找房交易平台
- * User: lihaixu@ke.com
- * Date: 2020/9/27 8:50 下午
  * Desc: html2canvas的方法重新一些，为了使用1.0.0-rc.4版本，因为微信高版本下会有问题
  */
 import html2canvas from 'html2canvas';

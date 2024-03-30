@@ -1,7 +1,5 @@
 /**
  * @file data单元测试文件
- * @author gaorui@ke.com
- * @date 2019/6/14 16:00
  */
 
 import data from '../../src/util/data';

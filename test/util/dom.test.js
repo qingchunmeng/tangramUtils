@@ -1,10 +1,5 @@
 /* eslint-disable no-useless-concat,sonarjs/no-duplicate-string */
 
-/**
- * @file dom单元测试文件
- * @author wuqingfan001@ke.com
- * @date 2019/6/18 16:00
- */
 import dom from '../../src/util/dom';
 
 const {

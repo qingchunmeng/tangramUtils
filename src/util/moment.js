@@ -1,7 +1,5 @@
 /**
  * @file 获取阶段时间处理相关Util
- * @author gaorui@ke.com
- * @date 2019/4/26 16:33
  */
 
 import moment from 'moment';

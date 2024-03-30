@@ -1,7 +1,5 @@
 /**
  * @desc 路由相关处理
- * @author fangt11@ke.com
- * @date 2020-209-24
  */
 
 import { pick } from 'lodash';
